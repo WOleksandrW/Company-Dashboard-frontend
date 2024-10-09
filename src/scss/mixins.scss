@@ -1,0 +1,4 @@
+@mixin fontSettings($fSize: 1.6rem, $lHeight: 100%) {
+  font-size: $fSize;
+  line-height: $lHeight;
+}
