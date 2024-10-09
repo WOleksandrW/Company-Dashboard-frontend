@@ -7,3 +7,8 @@ export enum ERole {
   ADMIN = 'ADMIN',
   SUPER = 'SUPER-ADMIN'
 }
+
+export enum EOrder {
+  ASC = 'ASC',
+  DESC = 'DESC'
+}

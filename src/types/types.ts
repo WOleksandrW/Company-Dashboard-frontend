@@ -1,5 +1,11 @@
 import { TUser } from './TUser';
 
+export type TBaseDates = {
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+};
+
 export type TSignInBody = {
   email: TUser['email'];
   password: string;
