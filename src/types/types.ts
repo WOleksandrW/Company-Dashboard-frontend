@@ -1,3 +1,4 @@
+import { EOrder } from './enums';
 import { TUser } from './TUser';
 
 export type TBaseDates = {
@@ -14,3 +15,13 @@ export type TSignInBody = {
 export type TSignUpBody = {
   username: TUser['username'];
 } & TSignInBody;
+
+export type TGetAllCompanies = {
+  titleOrder?: EOrder;
+  serviceOrder?: EOrder;
+  limit?: number;
+  page?: number;
+  createdAt?: string;
+  capitalMin?: number;
+  capitalMax?: number;
+};

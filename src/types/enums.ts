@@ -1,5 +1,6 @@
 export enum EQueryKeys {
-  CURRENT_USER = 'curr-user'
+  CURRENT_USER = 'curr-user',
+  COMPANIES_LIST = 'companies list'
 }
 
 export enum ERole {

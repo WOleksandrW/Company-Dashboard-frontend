@@ -36,3 +36,9 @@ li {
   flex-direction: column;
   min-height: 100vh;
 }
+
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
