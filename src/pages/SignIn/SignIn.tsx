@@ -1,21 +1,35 @@
 import { useCallback } from 'react';
+import { useMutation } from 'react-query';
 import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import api from '../../api';
 import { AuthForm, TextLinkList } from '../../components';
 import { schemaSignIn } from '../../types/schema';
+import { TSignInBody } from '../../types/types';
 
 function SignIn() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(schemaSignIn)
   });
 
-  const onSubmit = useCallback((data: FieldValues) => {
-    console.log(data);
-  }, []);
+  const { mutateAsync } = useMutation((data: TSignInBody) => api.auth.login(data), {
+    onSuccess: (data) => {
+      console.log(data.data.access_token);
+    }
+  });
+
+  const onSubmit = useCallback(
+    async (data: FieldValues) => {
+      await mutateAsync(data as TSignInBody);
+      reset();
+    },
+    [mutateAsync, reset]
+  );
 
   return (
     <>

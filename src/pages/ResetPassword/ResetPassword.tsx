@@ -1,21 +1,35 @@
 import { useCallback } from 'react';
+import { useMutation } from 'react-query';
 import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import api from '../../api';
 import { AuthForm, TextLinkList } from '../../components';
 import { schemaResetPassword } from '../../types/schema';
+import { TSignInBody } from '../../types/types';
 
 function ResetPassword() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(schemaResetPassword)
   });
 
-  const onSubmit = useCallback((data: FieldValues) => {
-    console.log(data);
-  }, []);
+  const { mutateAsync } = useMutation((data: TSignInBody) => api.auth.resetPassword(data), {
+    onSuccess: (data) => {
+      console.log(data);
+    }
+  });
+
+  const onSubmit = useCallback(
+    async (data: FieldValues) => {
+      await mutateAsync(data as TSignInBody);
+      reset();
+    },
+    [mutateAsync, reset]
+  );
 
   return (
     <>

@@ -1,13 +1,17 @@
 import { AxiosInstance } from 'axios';
 import { TUser } from '../types/TUser';
+import { TSignInBody, TSignUpBody } from '../types/types';
 
 export default function (instance: AxiosInstance) {
   return {
-    login(payload: Pick<TUser, 'email'> & { password: string }) {
+    login(payload: TSignInBody) {
       return instance.post<{ access_token: string }>('/auth/login', payload);
     },
-    signUp(payload: Omit<TUser, 'id' | 'role'> & { password: string }) {
+    signUp(payload: TSignUpBody) {
       return instance.post<TUser>('/auth/signup', payload);
+    },
+    resetPassword(payload: TSignInBody) {
+      return instance.post('/auth/reset-password', payload);
     }
   };
 }
