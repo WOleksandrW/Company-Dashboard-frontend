@@ -6,3 +6,29 @@
   border-radius: 4px;
   padding: 8px 12px;
 }
+
+.input-block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  
+  .input {
+    padding-right: 36px;
+  }
+}
+
+.eye-btn {
+  all: unset;
+  display: flex;
+  cursor: pointer;
+  position: absolute;
+  font-size: 2rem;
+  right: 8px;
+  top: 50%;
+  transform: translate(0, -50%);
+  border-radius: 4px;
+
+  &:focus {
+    outline: $outline;
+  }
+}
