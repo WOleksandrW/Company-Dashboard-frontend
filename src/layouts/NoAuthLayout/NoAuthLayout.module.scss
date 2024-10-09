@@ -1,0 +1,23 @@
+@import "../../scss/variables.scss";
+
+.section {
+  background-image: url("../../assets/images/auth-background.png");
+  background-color: rgba(0, 0, 0, 0.7);
+  background-blend-mode: overlay;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding: $wrapperPadding;
+}
+
+.form-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: min(100%, 400px);
+}

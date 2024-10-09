@@ -1,0 +1,26 @@
+@use "sass:color";
+@import "../../scss/variables.scss";
+@import "../../scss/mixins.scss";
+
+.btn {
+  all: unset;
+  @include fontSettings();
+  padding: 12px 32px;
+  border-radius: 8px;
+  color: $colorContentLight;
+  background-color: $colorPrimary;
+  align-self: center;
+  transition: background-color .3s ease;
+  cursor: pointer;
+
+  &:focus {
+    outline: $outline;
+  }
+
+  &:hover {
+    background-color: color.scale($colorPrimary, $lightness: 20%);
+  }
+  &:active {
+    background-color: color.scale($colorPrimary, $lightness: -20%);
+  }
+}
