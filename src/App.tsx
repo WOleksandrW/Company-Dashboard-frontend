@@ -1,12 +1,7 @@
-import styles from './App.module.scss';
+import Routing from './routing/Routing';
 
 function App() {
-  return (
-    <>
-      <header className={styles['header']}>Header</header>
-      <main className={styles['main']}>Main</main>
-      <footer className={styles['footer']}>Footer</footer>
-    </>
-  );
+  return <Routing />;
 }
+
 export default App;
