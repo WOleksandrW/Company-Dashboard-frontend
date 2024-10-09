@@ -1,13 +1,12 @@
 import { Outlet } from 'react-router-dom';
+import { Header } from '../../components';
 
 import styles from './MainLayout.module.scss';
 
 function MainLayout() {
   return (
     <>
-      <header className={styles['header']}>
-        <h2 className="h2">Header</h2>
-      </header>
+      <Header isAuth={true} />
       <main className={styles['main']}>
         <Outlet />
       </main>

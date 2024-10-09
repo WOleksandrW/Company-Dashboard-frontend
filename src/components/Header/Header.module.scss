@@ -1,0 +1,35 @@
+@import "../../scss/variables.scss";
+
+.header {
+  background-color: $colorBack2;
+}
+
+.wrapper {
+  padding: 12px $wrapperPadding;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.logo {
+  color: $colorPrimary;
+  text-wrap: nowrap;
+}
+
+.nav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  width: 100%;
+  max-width: 700px;
+}
+
+.nav-list,
+.nav-sign {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
