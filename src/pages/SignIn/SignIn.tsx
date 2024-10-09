@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -7,8 +8,13 @@ import api from '../../api';
 import { AuthForm, TextLinkList } from '../../components';
 import { schemaSignIn } from '../../types/schema';
 import { TSignInBody } from '../../types/types';
+import useQueryCurrUser from '../../hooks/useQueryCurrUser';
 
 function SignIn() {
+  const navigate = useNavigate();
+
+  const { refetch } = useQueryCurrUser();
+
   const {
     register,
     handleSubmit,
@@ -19,9 +25,11 @@ function SignIn() {
   });
 
   const { mutateAsync } = useMutation((data: TSignInBody) => api.auth.login(data), {
-    onSuccess: (data) => {
-      console.log(data.data.access_token);
+    onSuccess: async ({ data }) => {
       toast.success('Logged in successfully!');
+      localStorage.setItem('accessToken', data.access_token);
+      await refetch();
+      navigate('/');
     }
   });
 

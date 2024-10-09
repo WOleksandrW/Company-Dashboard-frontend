@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -9,6 +10,8 @@ import { schemaSignUp } from '../../types/schema';
 import { TSignUpBody } from '../../types/types';
 
 function SignUp() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -19,9 +22,9 @@ function SignUp() {
   });
 
   const { mutateAsync } = useMutation((data: TSignUpBody) => api.auth.signUp(data), {
-    onSuccess: (data) => {
-      console.log(data.data);
+    onSuccess: () => {
       toast.success('Account created successfully!');
+      navigate('/sign-in');
     }
   });
 

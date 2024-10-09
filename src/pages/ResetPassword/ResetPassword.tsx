@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -9,6 +10,8 @@ import { schemaResetPassword } from '../../types/schema';
 import { TSignInBody } from '../../types/types';
 
 function ResetPassword() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -19,9 +22,9 @@ function ResetPassword() {
   });
 
   const { mutateAsync } = useMutation((data: TSignInBody) => api.auth.resetPassword(data), {
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
       toast.success('Password reset successfully!');
+      navigate('/sign-in');
     }
   });
 

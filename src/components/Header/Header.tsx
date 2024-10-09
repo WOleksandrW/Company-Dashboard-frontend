@@ -1,17 +1,25 @@
+import { useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useQueryClient } from 'react-query';
+import useQueryCurrUser from '../../hooks/useQueryCurrUser';
+import { EQueryKeys } from '../../types/enums';
 
 import styles from './Header.module.scss';
 
-interface IProps {
-  isAuth: boolean;
-}
+function Header() {
+  const queryClient = useQueryClient();
+  const { data: userData } = useQueryCurrUser();
 
-function Header({ isAuth }: IProps) {
+  const onClickHandler = useCallback(() => {
+    queryClient.setQueryData(EQueryKeys.CURRENT_USER, { data: null });
+    localStorage.removeItem('accessToken');
+  }, [queryClient]);
+
   return (
     <header className={styles['header']}>
       <div className={styles['wrapper']}>
         <h2 className={`h2 ${styles['logo']}`}>Company Dashboard</h2>
-        {isAuth ? (
+        {userData ? (
           <nav className={styles['nav']}>
             <ul className={styles['nav-list']}>
               <li>
@@ -25,9 +33,14 @@ function Header({ isAuth }: IProps) {
                 </NavLink>
               </li>
             </ul>
-            <NavLink className="link p2" to="/profile">
-              Profile
-            </NavLink>
+            <div className={styles['nav-list']}>
+              <NavLink className="link p2" to="/profile">
+                Profile
+              </NavLink>
+              <NavLink className="link p2" to="/sign-in" onClick={onClickHandler}>
+                Log out
+              </NavLink>
+            </div>
           </nav>
         ) : (
           <nav className={styles['nav-sign']}>

@@ -6,6 +6,9 @@ export default function (instance: AxiosInstance) {
     getAll() {
       return instance.get<TUser[]>('/users');
     },
+    getMe() {
+      return instance.get<TUser>('/users/me');
+    },
     getOne(id: number) {
       return instance.get<TUser>(`/users/${id}`);
     },

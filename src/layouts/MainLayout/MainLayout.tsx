@@ -6,7 +6,7 @@ import styles from './MainLayout.module.scss';
 function MainLayout() {
   return (
     <>
-      <Header isAuth={true} />
+      <Header />
       <main className={styles['main']}>
         <Outlet />
       </main>

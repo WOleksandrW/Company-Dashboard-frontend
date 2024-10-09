@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import useQueryCurrUser from '../hooks/useQueryCurrUser';
 import { MainLayout, NoAuthLayout } from '../layouts';
 import {
   CompaniesList,
@@ -13,13 +13,13 @@ import {
 } from '../pages';
 
 function Routing() {
-  const [isAuth] = useState(false);
+  const { data: userData } = useQueryCurrUser();
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          {isAuth ? (
+          {userData ? (
             <>
               <Route path="" element={<Dashboard />} />
               <Route path="companies" element={<CompaniesList />} />
