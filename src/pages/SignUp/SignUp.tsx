@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { useMutation } from 'react-query';
 import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { toast } from 'react-toastify';
 import api from '../../api';
 import { AuthForm, TextLinkList } from '../../components';
 import { schemaSignUp } from '../../types/schema';
@@ -20,6 +21,7 @@ function SignUp() {
   const { mutateAsync } = useMutation((data: TSignUpBody) => api.auth.signUp(data), {
     onSuccess: (data) => {
       console.log(data.data);
+      toast.success('Account created successfully!');
     }
   });
 
