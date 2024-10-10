@@ -27,6 +27,28 @@ const confirmPassword = yup
   .required('Please confirm your password')
   .oneOf([yup.ref('password')], 'Passwords must match');
 
+const titleCompany = yup
+  .string()
+  .required('Title is required')
+  .min(4, 'Title must be at least 4 characters long');
+
+const serviceCompany = yup
+  .string()
+  .required('Service is required')
+  .min(4, 'Service must be at least 4 characters long');
+
+const addressCompany = yup
+  .string()
+  .required('Address is required')
+  .min(4, 'Address must be at least 4 characters long');
+
+const capitalCompany = yup
+  .number()
+  .required('Capital is required')
+  .min(0, 'Capital must be bigger than 0');
+
+const file = yup.mixed().nullable();
+
 export const schemaSignUp = yup.object().shape({
   username,
   email,
@@ -43,4 +65,12 @@ export const schemaResetPassword = yup.object().shape({
   email,
   password,
   confirm: confirmPassword
+});
+
+export const schemaUpdateCompany = yup.object().shape({
+  file,
+  title: titleCompany,
+  service: serviceCompany,
+  address: addressCompany,
+  capital: capitalCompany
 });

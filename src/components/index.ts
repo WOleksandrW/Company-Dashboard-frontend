@@ -10,6 +10,7 @@ import CompanyCard from './CompanyCard/CompanyCard';
 import GridListUsage from './GridListUsage/GridListUsage';
 import BreadcrumbsUsage from './BreadcrumbsUsage/BreadcrumbsUsage';
 import SelectUsage from './SelectUsage/SelectUsage';
+import TextFieldUsage from './TextFieldUsage/TextFieldUsage';
 import TooltipUsage from './TooltipUsage/TooltipUsage';
 
 export {
@@ -25,5 +26,6 @@ export {
   GridListUsage,
   BreadcrumbsUsage,
   SelectUsage,
+  TextFieldUsage,
   TooltipUsage
 };

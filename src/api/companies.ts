@@ -23,8 +23,10 @@ export default function (instance: AxiosInstance) {
     create(payload: Omit<TCompany, 'id'>) {
       return instance.post<TCompany>('/companies', payload);
     },
-    update(id: number, payload: Omit<TCompany, 'id'>) {
-      return instance.patch<TCompany>(`/companies/${id}`, payload);
+    update(id: number, payload: FormData) {
+      return instance.patch<TCompany>(`/companies/${id}`, payload, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
     },
     remove(id: number) {
       return instance.delete<{ message: string }>(`/companies/${id}`);
