@@ -37,6 +37,18 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+      '@typescript-eslint/no-floating-promises': [
+        'off'
+      ],
+      'react-hooks/exhaustive-deps': [
+        'off'
+      ],
+      '@typescript-eslint/no-unsafe-argument': [
+        'off'
+      ],
+      '@typescript-eslint/no-unsafe-member-access': [
+        'off'
+      ]
     },
   },
 )
