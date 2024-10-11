@@ -28,6 +28,7 @@ function SignIn() {
     onSuccess: async ({ data }) => {
       toast.success('Logged in successfully!');
       localStorage.setItem('accessToken', data.access_token);
+      localStorage.setItem('refreshToken', data.refresh_token);
       await refetch();
       navigate('/');
     }

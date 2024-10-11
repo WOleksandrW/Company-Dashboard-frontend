@@ -5,7 +5,7 @@ import { TSignInBody, TSignUpBody } from '../types/types';
 export default function (instance: AxiosInstance) {
   return {
     login(payload: TSignInBody) {
-      return instance.post<{ access_token: string }>('/auth/login', payload);
+      return instance.post<{ access_token: string; refresh_token: string }>('/auth/login', payload);
     },
     signUp(payload: TSignUpBody) {
       return instance.post<TUser>('/auth/signup', payload);

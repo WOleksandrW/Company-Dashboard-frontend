@@ -13,6 +13,7 @@ function Header() {
   const onClickHandler = useCallback(() => {
     queryClient.setQueryData(EQueryKeys.CURRENT_USER, { data: null });
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
   }, [queryClient]);
 
   return (
