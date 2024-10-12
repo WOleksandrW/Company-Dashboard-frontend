@@ -20,7 +20,7 @@ export default function (instance: AxiosInstance) {
     getOne(id: number) {
       return instance.get<TCompany>(`/companies/${id}`);
     },
-    create(payload: Omit<TCompany, 'id'>) {
+    create(payload: FormData) {
       return instance.post<TCompany>('/companies', payload);
     },
     update(id: number, payload: FormData) {

@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useDebounce } from 'use-debounce';
 import api from '../../api';
-import { Box, IconButton, Pagination, Skeleton, TextField } from '@mui/material';
+import { Box, Button, IconButton, Pagination, Skeleton, TextField } from '@mui/material';
 import { BreadcrumbsUsage, SelectUsage, CompanyCard, GridListUsage } from '../../components';
+import { PopupCreateCompany } from './components';
 import { EOrder, EQueryKeys } from '../../types/enums';
 import { TGetAllCompanies } from '../../types/types';
 
+import { FaPlus } from 'react-icons/fa';
 import { IoReload } from 'react-icons/io5';
 
 import styles from './CompaniesList.module.scss';
@@ -18,6 +20,7 @@ function CompaniesList() {
   const [page, setPage] = useState(1);
   const [valueCapitalMin, setValueCapitalMin] = useState<number | undefined>(undefined);
   const [valueCapitalMax, setValueCapitalMax] = useState<number | undefined>(undefined);
+  const [openPopup, setOpenPopup] = useState(false);
 
   const [capitalMin] = useDebounce(valueCapitalMin, 500);
   const [capitalMax] = useDebounce(valueCapitalMax, 500);
@@ -123,6 +126,12 @@ function CompaniesList() {
           }}>
           <IoReload />
         </IconButton>
+        <Button
+          startIcon={<FaPlus />}
+          onClick={() => setOpenPopup(true)}
+          sx={{ typography: 'body1' }}>
+          Create Company
+        </Button>
       </Box>
       {isLoading ? (
         <GridListUsage sx={{ flex: 1 }}>
@@ -149,6 +158,7 @@ function CompaniesList() {
         page={page}
         onChange={(_, page) => setPage(page)}
       />
+      <PopupCreateCompany open={openPopup} setOpen={setOpenPopup} />
     </section>
   );
 }
