@@ -1,4 +1,12 @@
+@import "./variables.scss";
+
 @mixin fontSettings($fSize: 1.6rem, $lHeight: 100%) {
   font-size: $fSize;
   line-height: $lHeight;
+}
+
+@mixin popup() {
+  padding: 20px;
+  border-radius: 20px;
+  background-color: $colorBack1;
 }
