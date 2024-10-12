@@ -5,7 +5,7 @@ import { Box, IconButton } from '@mui/material';
 import api from '../../api';
 import useQueryCurrUser from '../../hooks/useQueryCurrUser';
 import { BreadcrumbsUsage } from '../../components';
-import { CompanyDataSection, UpdateCompanyForm } from './components';
+import { CompanyDataSection, PopupDeleteCompany, UpdateCompanyForm } from './components';
 import { EQueryKeys, ERole } from '../../types/enums';
 
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
@@ -19,6 +19,7 @@ function CompanyDetail() {
   const { data: userData } = useQueryCurrUser();
 
   const [isEdit, setIsEdit] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const { data: companyData } = useQuery(
     [EQueryKeys.COMPANY, { id: +id! }],
@@ -54,7 +55,7 @@ function CompanyDetail() {
                 <IconButton size="large" onClick={() => setIsEdit(true)}>
                   <FaEdit />
                 </IconButton>
-                <IconButton size="large">
+                <IconButton size="large" onClick={() => setOpen(true)}>
                   <FaTrashAlt />
                 </IconButton>
               </Box>
@@ -69,6 +70,7 @@ function CompanyDetail() {
               <h2 className="h2">Google map</h2>
               <img className={styles['map-image']} src={mapPlaceholder} alt={companyData.address} />
             </Box>
+            <PopupDeleteCompany open={open} setOpen={setOpen} {...companyData} />
           </>
         )}
       </Box>
