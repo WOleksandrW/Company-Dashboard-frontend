@@ -1,8 +1,13 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { Avatar, Button, Menu, MenuItem, Typography } from '@mui/material';
 import { useQueryClient } from 'react-query';
 import useQueryCurrUser from '../../hooks/useQueryCurrUser';
+import getImageFromBuffer from '../../utils/getImageFromBuffer';
+import stringAvatar from '../../utils/stringAvatar';
 import { EQueryKeys } from '../../types/enums';
+
+import { IoLogOutOutline, IoPersonCircleSharp } from 'react-icons/io5';
 
 import styles from './Header.module.scss';
 
@@ -10,10 +15,19 @@ function Header() {
   const queryClient = useQueryClient();
   const { data: userData } = useQueryCurrUser();
 
-  const onClickHandler = useCallback(() => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const srcImage = useMemo(() => {
+    if (userData?.image)
+      return getImageFromBuffer(userData.image.data.data, userData.image.mimeType);
+  }, [userData]);
+  const avatar = useMemo(() => stringAvatar(userData?.username ?? 'A'), [userData?.username]);
+
+  const logOut = useCallback(() => {
     queryClient.setQueryData(EQueryKeys.CURRENT_USER, { data: null });
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
+    setAnchorEl(null);
   }, [queryClient]);
 
   return (
@@ -34,13 +48,49 @@ function Header() {
                 </NavLink>
               </li>
             </ul>
-            <div className={styles['nav-list']}>
-              <NavLink className="link p2" to="/profile">
-                Profile
-              </NavLink>
-              <NavLink className="link p2" to="/sign-in" onClick={onClickHandler}>
-                Log out
-              </NavLink>
+            <div>
+              <Button
+                sx={{ display: 'flex', alignItems: 'center', gap: '12px' }}
+                onClick={(e) => setAnchorEl(e.currentTarget)}>
+                <Avatar
+                  src={srcImage}
+                  alt={userData.username}
+                  sx={{ height: '32px', width: '32px', ...avatar.sx }}>
+                  {avatar.children}
+                </Avatar>
+                <Typography className="text-ellipsis" typography="body1">
+                  {userData.username}
+                </Typography>
+              </Button>
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={() => setAnchorEl(null)}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'right'
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right'
+                }}>
+                <MenuItem
+                  component={NavLink}
+                  to="/profile"
+                  onClick={() => setAnchorEl(null)}
+                  sx={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <IoPersonCircleSharp className="h2" />
+                  Profile
+                </MenuItem>
+                <MenuItem
+                  component={NavLink}
+                  to="/sign-in"
+                  onClick={() => logOut()}
+                  sx={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <IoLogOutOutline className="h2" />
+                  Logout
+                </MenuItem>
+              </Menu>
             </div>
           </nav>
         ) : (
