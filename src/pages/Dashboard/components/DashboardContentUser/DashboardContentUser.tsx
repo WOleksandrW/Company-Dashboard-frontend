@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 import { Box, Divider, Pagination, Skeleton } from '@mui/material';
 import api from '../../../../api';
@@ -17,6 +17,12 @@ function DashboardContentUser() {
     }
   );
 
+  const totalCapital = useMemo(() => {
+    if (response && response.list.length > 0) {
+      return response.list.reduce((acc, company) => acc + company.capital, 0);
+    }
+  }, [response?.list]);
+
   return (
     <>
       <Box
@@ -26,7 +32,10 @@ function DashboardContentUser() {
           alignItems: 'center',
           gap: '32px'
         }}>
-        <h2 className="h2 primary-color">Chart of companies by capital</h2>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+          <h2 className="h2 primary-color">Chart of companies by capital</h2>
+          {totalCapital && <p className="p2 secondary-color">Total capital = {totalCapital}</p>}
+        </Box>
         {isLoading ? (
           <Skeleton variant="rectangular" sx={{ width: '250px', height: '250px' }} />
         ) : response?.totalAmount ? (
