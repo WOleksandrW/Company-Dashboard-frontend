@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { Box, Pagination, Skeleton, TextField } from '@mui/material';
 import { useDebounce } from 'use-debounce';
 import api from '../../../../api';
-import { GridListUsage, UserCard } from '../../../../components';
+import { EmptyMessage, GridListUsage, UserCard } from '../../../../components';
 import { EQueryKeys, ERole } from '../../../../types/enums';
 
 function SectionUsers() {
@@ -80,7 +80,7 @@ function SectionUsers() {
             <Pagination count={10} page={page} onChange={(_, page) => setPage(page)} />
           </>
         ) : (
-          <p className="p1">There are no users</p>
+          <EmptyMessage sx={{ flex: 1, justifyContent: 'center' }} message="No users data" />
         )}
       </Box>
     </Box>

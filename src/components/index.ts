@@ -8,6 +8,7 @@ import ImageBlock from './ImageBlock/ImageBlock';
 import CompanyCard from './CompanyCard/CompanyCard';
 import UserCard from './UserCard/UserCard';
 import GridListUsage from './GridListUsage/GridListUsage';
+import EmptyMessage from './EmptyMessage/EmptyMessage';
 import BreadcrumbsUsage from './BreadcrumbsUsage/BreadcrumbsUsage';
 import MenuUsage from './MenuUsage/MenuUsage';
 import ModalUsage from './ModalUsage/ModalUsage';
@@ -29,6 +30,7 @@ export {
   CompanyCard,
   UserCard,
   GridListUsage,
+  EmptyMessage,
   BreadcrumbsUsage,
   MenuUsage,
   ModalUsage,

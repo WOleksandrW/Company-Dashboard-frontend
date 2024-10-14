@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { Box, Divider, Pagination, Skeleton } from '@mui/material';
 import api from '../../../../api';
-import { CompanyCard, GridListUsage, PieChartUsage } from '../../../../components';
+import { CompanyCard, EmptyMessage, GridListUsage, PieChartUsage } from '../../../../components';
 import { EQueryKeys } from '../../../../types/enums';
 
 function DashboardContentUser() {
@@ -39,7 +39,7 @@ function DashboardContentUser() {
             />
           </Box>
         ) : (
-          <p className="p1">There are no companies</p>
+          <EmptyMessage sx={{ flex: 1, justifyContent: 'center' }} message="No companies data" />
         )}
       </Box>
       <Divider />
@@ -90,7 +90,7 @@ function DashboardContentUser() {
               />
             </>
           ) : (
-            <p className="p1">There are no companies</p>
+            <EmptyMessage sx={{ flex: 1, justifyContent: 'center' }} message="No companies data" />
           )}
         </Box>
       </Box>

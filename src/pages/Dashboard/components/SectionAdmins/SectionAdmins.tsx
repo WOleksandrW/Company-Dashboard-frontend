@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { Box, Button, Pagination, Skeleton, TextField } from '@mui/material';
 import { useDebounce } from 'use-debounce';
 import api from '../../../../api';
-import { GridListUsage, UserCard } from '../../../../components';
+import { EmptyMessage, GridListUsage, UserCard } from '../../../../components';
 import { PopupCreateAdmin, PopupDeleteAdmin, PopupUpdateAdmin } from '../';
 import { EQueryKeys, ERole } from '../../../../types/enums';
 import { TUser } from '../../../../types/TUser';
@@ -131,7 +131,7 @@ function SectionAdmins() {
             <Pagination count={10} page={page} onChange={(_, page) => setPage(page)} />
           </>
         ) : (
-          <p className="p1">There are no admins</p>
+          <EmptyMessage sx={{ flex: 1, justifyContent: 'center' }} message="No admins data" />
         )}
       </Box>
       <PopupCreateAdmin open={openPopupCreate} setOpen={setOpenPopupCreate} />

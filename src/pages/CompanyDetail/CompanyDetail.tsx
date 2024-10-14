@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import { Box, IconButton } from '@mui/material';
 import api from '../../api';
 import useQueryCurrUser from '../../hooks/useQueryCurrUser';
-import { BreadcrumbsUsage } from '../../components';
+import { BreadcrumbsUsage, EmptyMessage } from '../../components';
 import { CompanyDataSection, PopupDeleteCompany, UpdateCompanyForm } from './components';
 import { EQueryKeys, ERole } from '../../types/enums';
 
@@ -48,7 +48,7 @@ function CompanyDetail() {
         ]}
       />
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
-        {companyData && (
+        {companyData ? (
           <>
             {!isEdit && canEdit && (
               <Box sx={{ display: 'flex', alignSelf: 'flex-end', gap: '12px' }}>
@@ -72,6 +72,8 @@ function CompanyDetail() {
             </Box>
             <PopupDeleteCompany open={open} setOpen={setOpen} {...companyData} />
           </>
+        ) : (
+          <EmptyMessage message="No company data" />
         )}
       </Box>
     </section>

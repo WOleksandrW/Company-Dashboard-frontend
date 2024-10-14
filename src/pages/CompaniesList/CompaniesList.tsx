@@ -3,7 +3,13 @@ import { useQuery } from 'react-query';
 import { useDebounce } from 'use-debounce';
 import api from '../../api';
 import { Box, Button, IconButton, Pagination, Skeleton, TextField } from '@mui/material';
-import { BreadcrumbsUsage, SelectUsage, CompanyCard, GridListUsage } from '../../components';
+import {
+  BreadcrumbsUsage,
+  EmptyMessage,
+  SelectUsage,
+  CompanyCard,
+  GridListUsage
+} from '../../components';
 import { PopupCreateCompany } from './components';
 import { EOrder, EQueryKeys } from '../../types/enums';
 import { TGetAllCompanies } from '../../types/types';
@@ -148,9 +154,7 @@ function CompaniesList() {
           ))}
         </GridListUsage>
       ) : (
-        <div className={styles['empty-block']}>
-          <p className="h2">List is empty</p>
-        </div>
+        <EmptyMessage sx={{ flex: 1, justifyContent: 'center' }} message="List is empty" />
       )}
       <Pagination
         sx={{ alignSelf: 'center' }}

@@ -4,7 +4,7 @@ import { Box, Pagination, Skeleton, TextField } from '@mui/material';
 import { useDebounce } from 'use-debounce';
 import api from '../../../../api';
 import { EQueryKeys } from '../../../../types/enums';
-import { CompanyCard, GridListUsage } from '../../../../components';
+import { CompanyCard, EmptyMessage, GridListUsage } from '../../../../components';
 
 function SectionCompanies() {
   const [searchValue, setSearchValue] = useState('');
@@ -80,7 +80,7 @@ function SectionCompanies() {
             <Pagination count={10} page={page} onChange={(_, page) => setPage(page)} />
           </>
         ) : (
-          <p className="p1">There are no companies</p>
+          <EmptyMessage sx={{ flex: 1, justifyContent: 'center' }} message="No companies data" />
         )}
       </Box>
     </Box>
