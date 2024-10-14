@@ -1,4 +1,4 @@
-import { EOrder } from './enums';
+import { EOrder, ERole } from './enums';
 import { TUser } from './TUser';
 
 export type TBaseDates = {
@@ -24,4 +24,13 @@ export type TGetAllCompanies = {
   createdAt?: string;
   capitalMin?: number;
   capitalMax?: number;
+  search?: string;
+};
+
+export type TGetAllUsers = {
+  limit?: number;
+  page?: number;
+  createdAt?: string;
+  role?: ERole.USER | ERole.ADMIN;
+  search?: string;
 };

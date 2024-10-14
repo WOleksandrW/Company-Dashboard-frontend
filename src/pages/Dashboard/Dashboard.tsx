@@ -1,5 +1,48 @@
+import { Box } from '@mui/material';
+import useQueryCurrUser from '../../hooks/useQueryCurrUser';
+import { ERole } from '../../types/enums';
+import { TabsUsage } from '../../components';
+import { DashboardContentUser, SectionAdmins, SectionCompanies, SectionUsers } from './components';
+
+import styles from './Dashboard.module.scss';
+
 function Dashboard() {
-  return <p className="p1">Dashboard</p>;
+  const { data: userData } = useQueryCurrUser();
+
+  return (
+    <section className={styles['page']}>
+      <h1 className="h1">
+        <span className="secondary-color">Welcome,</span>{' '}
+        <span className="primary-color">{userData!.username}</span>.
+      </h1>
+      <Box
+        sx={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '20px'
+        }}>
+        {userData!.role === ERole.USER && <DashboardContentUser />}
+        {userData!.role === ERole.ADMIN && (
+          <TabsUsage
+            tabs={[
+              { label: 'Users', children: <SectionUsers /> },
+              { label: 'Companies', children: <SectionCompanies /> }
+            ]}
+          />
+        )}
+        {userData!.role === ERole.SUPER && (
+          <TabsUsage
+            tabs={[
+              { label: 'Admins', children: <SectionAdmins /> },
+              { label: 'Users', children: <SectionUsers /> },
+              { label: 'Companies', children: <SectionCompanies /> }
+            ]}
+          />
+        )}
+      </Box>
+    </section>
+  );
 }
 
 export default Dashboard;
