@@ -5,6 +5,7 @@ import { useDebounce } from 'use-debounce';
 import api from '../../../../api';
 import { EQueryKeys } from '../../../../types/enums';
 import { CompanyCard, EmptyMessage, GridListUsage } from '../../../../components';
+import { limitRecords } from '../../../../constants/queryParams';
 
 function SectionCompanies() {
   const [searchValue, setSearchValue] = useState('');
@@ -13,9 +14,9 @@ function SectionCompanies() {
 
   const [search] = useDebounce(searchValue, 500);
 
-  const { data: companies, isLoading } = useQuery(
+  const { data: response, isLoading } = useQuery(
     [EQueryKeys.COMPANIES_LIST, { page, search, createdAt }],
-    () => api.companies.getAll({ limit: 10, page, search, createdAt }),
+    () => api.companies.getAll({ limit: limitRecords, page, search, createdAt }),
     {
       select: ({ data }) => data
     }
@@ -60,7 +61,7 @@ function SectionCompanies() {
         {isLoading ? (
           <>
             <GridListUsage sx={{ width: '100%', flex: 1 }}>
-              {Array(10)
+              {Array(limitRecords)
                 .fill(0)
                 .map((_, idx) => (
                   <Skeleton key={idx} variant="rounded" sx={{ height: '100%' }} />
@@ -70,14 +71,18 @@ function SectionCompanies() {
               <Pagination count={10} />
             </Skeleton>
           </>
-        ) : companies?.length ? (
+        ) : response?.totalAmount ? (
           <>
             <GridListUsage sx={{ width: '100%' }}>
-              {companies.map((company) => (
+              {response.list.map((company) => (
                 <CompanyCard key={company.id} company={company} />
               ))}
             </GridListUsage>
-            <Pagination count={10} page={page} onChange={(_, page) => setPage(page)} />
+            <Pagination
+              count={Math.ceil(response.totalAmount / limitRecords)}
+              page={page}
+              onChange={(_, page) => setPage(page)}
+            />
           </>
         ) : (
           <EmptyMessage sx={{ flex: 1, justifyContent: 'center' }} message="No companies data" />

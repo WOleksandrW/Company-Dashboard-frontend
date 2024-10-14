@@ -34,3 +34,10 @@ export type TGetAllUsers = {
   role?: ERole.USER | ERole.ADMIN;
   search?: string;
 };
+
+export type TGetAllResponse<T> = {
+  list: T[];
+  totalAmount: number;
+  limit?: number;
+  page?: number;
+};

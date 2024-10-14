@@ -7,6 +7,7 @@ import { EmptyMessage, GridListUsage, UserCard } from '../../../../components';
 import { PopupCreateAdmin, PopupDeleteAdmin, PopupUpdateAdmin } from '../';
 import { EQueryKeys, ERole } from '../../../../types/enums';
 import { TUser } from '../../../../types/TUser';
+import { limitRecords } from '../../../../constants/queryParams';
 
 import { FaEdit, FaPlus, FaTrashAlt } from 'react-icons/fa';
 
@@ -21,15 +22,15 @@ function SectionAdmins() {
 
   const [search] = useDebounce(searchValue, 500);
 
-  const { data: admins, isLoading } = useQuery(
+  const { data: response, isLoading } = useQuery(
     [EQueryKeys.ADMINS_LIST, { page, search, createdAt }],
-    () => api.users.getAll({ role: ERole.ADMIN, limit: 10, page, search, createdAt }),
+    () => api.users.getAll({ role: ERole.ADMIN, limit: limitRecords, page, search, createdAt }),
     {
       select: ({ data }) => data
     }
   );
 
-  useEffect(() => setSelectedAdmin(null), [admins]);
+  useEffect(() => setSelectedAdmin(null), [response?.list]);
   useEffect(() => {
     if (!openPopupDelete) setSelectedAdmin(null);
   }, [openPopupDelete]);
@@ -90,7 +91,7 @@ function SectionAdmins() {
         {isLoading ? (
           <>
             <GridListUsage sx={{ width: '100%', flex: 1 }}>
-              {Array(10)
+              {Array(limitRecords)
                 .fill(0)
                 .map((_, idx) => (
                   <Skeleton key={idx} variant="rounded" sx={{ height: '100%' }} />
@@ -100,10 +101,10 @@ function SectionAdmins() {
               <Pagination count={10} />
             </Skeleton>
           </>
-        ) : admins?.length ? (
+        ) : response?.totalAmount ? (
           <>
             <GridListUsage sx={{ width: '100%' }}>
-              {admins.map((admin) => (
+              {response.list.map((admin) => (
                 <UserCard
                   key={admin.id}
                   user={admin}
@@ -128,7 +129,11 @@ function SectionAdmins() {
                 />
               ))}
             </GridListUsage>
-            <Pagination count={10} page={page} onChange={(_, page) => setPage(page)} />
+            <Pagination
+              count={Math.ceil(response.totalAmount / limitRecords)}
+              page={page}
+              onChange={(_, page) => setPage(page)}
+            />
           </>
         ) : (
           <EmptyMessage sx={{ flex: 1, justifyContent: 'center' }} message="No admins data" />

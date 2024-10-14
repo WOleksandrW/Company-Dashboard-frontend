@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 import { TUser } from '../types/TUser';
-import { TGetAllUsers, TSignUpBody } from '../types/types';
+import { TGetAllResponse, TGetAllUsers, TSignUpBody } from '../types/types';
 import { ERole } from '../types/enums';
 
 export default function (instance: AxiosInstance) {
@@ -16,7 +16,7 @@ export default function (instance: AxiosInstance) {
         path += `?${queries}`;
       }
 
-      return instance.get<TUser[]>(path);
+      return instance.get<TGetAllResponse<TUser>>(path);
     },
     getMe() {
       return instance.get<TUser>('/users/me');

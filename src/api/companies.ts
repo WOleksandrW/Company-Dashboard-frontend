@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 import { TCompany } from '../types/TCompany';
-import { TGetAllCompanies } from '../types/types';
+import { TGetAllCompanies, TGetAllResponse } from '../types/types';
 
 export default function (instance: AxiosInstance) {
   return {
@@ -15,7 +15,7 @@ export default function (instance: AxiosInstance) {
         path += `?${queries}`;
       }
 
-      return instance.get<TCompany[]>(path);
+      return instance.get<TGetAllResponse<TCompany>>(path);
     },
     getOne(id: number) {
       return instance.get<TCompany>(`/companies/${id}`);

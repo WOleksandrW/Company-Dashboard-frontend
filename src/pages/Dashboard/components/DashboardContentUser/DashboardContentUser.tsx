@@ -4,11 +4,12 @@ import { Box, Divider, Pagination, Skeleton } from '@mui/material';
 import api from '../../../../api';
 import { CompanyCard, EmptyMessage, GridListUsage, PieChartUsage } from '../../../../components';
 import { EQueryKeys } from '../../../../types/enums';
+import { limitRecords } from '../../../../constants/queryParams';
 
 function DashboardContentUser() {
   const [page, setPage] = useState(1);
 
-  const { data: companies, isLoading } = useQuery(
+  const { data: response, isLoading } = useQuery(
     EQueryKeys.COMPANIES_LIST,
     () => api.companies.getAll(),
     {
@@ -28,10 +29,10 @@ function DashboardContentUser() {
         <h2 className="h2 primary-color">Chart of companies by capital</h2>
         {isLoading ? (
           <Skeleton variant="rectangular" sx={{ width: '250px', height: '250px' }} />
-        ) : companies?.length ? (
+        ) : response?.totalAmount ? (
           <Box>
             <PieChartUsage
-              data={companies.map(({ id, capital, title }) => ({
+              data={response.list.map(({ id, capital, title }) => ({
                 id,
                 value: capital,
                 label: title
@@ -66,7 +67,7 @@ function DashboardContentUser() {
           {isLoading ? (
             <>
               <GridListUsage sx={{ width: '100%', flex: 1 }}>
-                {Array(10)
+                {Array(limitRecords)
                   .fill(0)
                   .map((_, idx) => (
                     <Skeleton key={idx} variant="rounded" sx={{ height: '100%' }} />
@@ -76,15 +77,17 @@ function DashboardContentUser() {
                 <Pagination count={10} />
               </Skeleton>
             </>
-          ) : companies?.length ? (
+          ) : response?.totalAmount ? (
             <>
               <GridListUsage sx={{ width: '100%' }}>
-                {companies.slice(10 * (page - 1), 10 * page).map((company) => (
-                  <CompanyCard key={company.id} company={company} />
-                ))}
+                {response.list
+                  .slice(limitRecords * (page - 1), limitRecords * page)
+                  .map((company) => (
+                    <CompanyCard key={company.id} company={company} />
+                  ))}
               </GridListUsage>
               <Pagination
-                count={Math.ceil(companies.length / 10)}
+                count={Math.ceil(response.totalAmount / limitRecords)}
                 page={page}
                 onChange={(_, page) => setPage(page)}
               />

@@ -13,6 +13,7 @@ import {
 import { PopupCreateCompany } from './components';
 import { EOrder, EQueryKeys } from '../../types/enums';
 import { TGetAllCompanies } from '../../types/types';
+import { limitRecords } from '../../constants/queryParams';
 
 import { FaPlus } from 'react-icons/fa';
 import { IoReload } from 'react-icons/io5';
@@ -33,12 +34,12 @@ function CompaniesList() {
 
   const {
     isLoading,
-    data: companies,
+    data: response,
     refetch
   } = useQuery(
     [EQueryKeys.COMPANIES_LIST, titleOrder, serviceOrder, page, createdAt, capitalMin, capitalMax],
     () => {
-      const body: TGetAllCompanies = { limit: 10 };
+      const body: TGetAllCompanies = { limit: limitRecords };
 
       if (Object.values(EOrder).includes(titleOrder as EOrder)) {
         body.titleOrder = titleOrder as EOrder;
@@ -141,27 +142,29 @@ function CompaniesList() {
       </Box>
       {isLoading ? (
         <GridListUsage sx={{ flex: 1 }}>
-          {Array(10)
+          {Array(limitRecords)
             .fill(0)
             .map((_, idx) => (
               <Skeleton key={idx} variant="rounded" sx={{ height: '100%' }} />
             ))}
         </GridListUsage>
-      ) : companies?.length ? (
-        <GridListUsage>
-          {companies.map((company) => (
-            <CompanyCard key={company.id} company={company} />
-          ))}
-        </GridListUsage>
+      ) : response?.totalAmount ? (
+        <>
+          <GridListUsage>
+            {response.list.map((company) => (
+              <CompanyCard key={company.id} company={company} />
+            ))}
+          </GridListUsage>
+          <Pagination
+            sx={{ alignSelf: 'center', marginTop: 'auto' }}
+            count={Math.ceil(response.totalAmount / limitRecords)}
+            page={page}
+            onChange={(_, page) => setPage(page)}
+          />
+        </>
       ) : (
         <EmptyMessage sx={{ flex: 1, justifyContent: 'center' }} message="List is empty" />
       )}
-      <Pagination
-        sx={{ alignSelf: 'center' }}
-        count={10}
-        page={page}
-        onChange={(_, page) => setPage(page)}
-      />
       <PopupCreateCompany open={openPopup} setOpen={setOpenPopup} />
     </section>
   );

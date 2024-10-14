@@ -5,6 +5,7 @@ import { useDebounce } from 'use-debounce';
 import api from '../../../../api';
 import { EmptyMessage, GridListUsage, UserCard } from '../../../../components';
 import { EQueryKeys, ERole } from '../../../../types/enums';
+import { limitRecords } from '../../../../constants/queryParams';
 
 function SectionUsers() {
   const [searchValue, setSearchValue] = useState('');
@@ -13,9 +14,9 @@ function SectionUsers() {
 
   const [search] = useDebounce(searchValue, 500);
 
-  const { data: users, isLoading } = useQuery(
+  const { data: response, isLoading } = useQuery(
     [EQueryKeys.USERS_LIST, { page, search, createdAt }],
-    () => api.users.getAll({ role: ERole.USER, limit: 10, page, search, createdAt }),
+    () => api.users.getAll({ role: ERole.USER, limit: limitRecords, page, search, createdAt }),
     {
       select: ({ data }) => data
     }
@@ -60,7 +61,7 @@ function SectionUsers() {
         {isLoading ? (
           <>
             <GridListUsage sx={{ width: '100%', flex: 1 }}>
-              {Array(10)
+              {Array(limitRecords)
                 .fill(0)
                 .map((_, idx) => (
                   <Skeleton key={idx} variant="rounded" sx={{ height: '100%' }} />
@@ -70,14 +71,18 @@ function SectionUsers() {
               <Pagination count={10} />
             </Skeleton>
           </>
-        ) : users?.length ? (
+        ) : response?.totalAmount ? (
           <>
             <GridListUsage sx={{ width: '100%' }}>
-              {users.map((user) => (
+              {response.list.map((user) => (
                 <UserCard key={user.id} user={user} />
               ))}
             </GridListUsage>
-            <Pagination count={10} page={page} onChange={(_, page) => setPage(page)} />
+            <Pagination
+              count={Math.ceil(response.totalAmount / limitRecords)}
+              page={page}
+              onChange={(_, page) => setPage(page)}
+            />
           </>
         ) : (
           <EmptyMessage sx={{ flex: 1, justifyContent: 'center' }} message="No users data" />
