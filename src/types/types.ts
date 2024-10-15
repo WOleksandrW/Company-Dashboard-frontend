@@ -41,3 +41,10 @@ export type TGetAllResponse<T> = {
   limit?: number;
   page?: number;
 };
+
+export type TPatchUser = {
+  oldPassword?: string;
+  password?: string;
+  username?: string;
+  email?: string;
+};

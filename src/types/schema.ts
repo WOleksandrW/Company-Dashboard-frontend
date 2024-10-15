@@ -74,3 +74,14 @@ export const schemaUpdateCompany = yup.object().shape({
   address: addressCompany,
   capital: capitalCompany
 });
+
+export const schemaUpdateUser = yup.object().shape({
+  username,
+  email
+});
+
+export const schemaUpdateUserPassword = yup.object().shape({
+  oldPassword: password,
+  password,
+  confirm: confirmPassword
+});
