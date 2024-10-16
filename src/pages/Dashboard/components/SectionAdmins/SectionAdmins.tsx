@@ -1,15 +1,19 @@
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { Box, Pagination, Skeleton, TextField } from '@mui/material';
+import { Box, Button, Pagination, Skeleton, TextField } from '@mui/material';
 import { useDebounce } from 'use-debounce';
 import api from '../../../../api';
 import { GridListUsage, UserCard } from '../../../../components';
+import { PopupCreateAdmin } from '../';
 import { EQueryKeys, ERole } from '../../../../types/enums';
+
+import { FaPlus } from 'react-icons/fa';
 
 function SectionAdmins() {
   const [searchValue, setSearchValue] = useState('');
   const [createdAt, setCreatedAt] = useState('');
   const [page, setPage] = useState(1);
+  const [openPopupCreate, setOpenPopupCreate] = useState(false);
 
   const [search] = useDebounce(searchValue, 500);
 
@@ -30,23 +34,37 @@ function SectionAdmins() {
         flexDirection: 'column',
         gap: '16px'
       }}>
-      <Box sx={{ display: 'flex', gap: '20px' }}>
-        <TextField
-          label="Search"
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
-        />
-        <TextField
-          type="date"
-          label="Created at"
-          slotProps={{
-            inputLabel: {
-              shrink: true
-            }
-          }}
-          value={createdAt}
-          onChange={(e) => setCreatedAt(e.target.value)}
-        />
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '12px'
+        }}>
+        <Box sx={{ display: 'flex', gap: '20px' }}>
+          <TextField
+            label="Search"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
+          <TextField
+            type="date"
+            label="Created at"
+            slotProps={{
+              inputLabel: {
+                shrink: true
+              }
+            }}
+            value={createdAt}
+            onChange={(e) => setCreatedAt(e.target.value)}
+          />
+        </Box>
+        <Button
+          startIcon={<FaPlus />}
+          onClick={() => setOpenPopupCreate(true)}
+          sx={{ typography: 'body1' }}>
+          Create Admin
+        </Button>
       </Box>
       <Box
         sx={{
@@ -83,6 +101,7 @@ function SectionAdmins() {
           <p className="p1">There are no admins</p>
         )}
       </Box>
+      <PopupCreateAdmin open={openPopupCreate} setOpen={setOpenPopupCreate} />
     </Box>
   );
 }

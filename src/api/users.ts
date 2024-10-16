@@ -1,6 +1,7 @@
 import { AxiosInstance } from 'axios';
 import { TUser } from '../types/TUser';
-import { TGetAllUsers } from '../types/types';
+import { TGetAllUsers, TSignUpBody } from '../types/types';
+import { ERole } from '../types/enums';
 
 export default function (instance: AxiosInstance) {
   return {
@@ -23,7 +24,7 @@ export default function (instance: AxiosInstance) {
     getOne(id: number) {
       return instance.get<TUser>(`/users/${id}`);
     },
-    create(payload: Omit<TUser, 'id'>) {
+    create(payload: TSignUpBody & { role: ERole.USER | ERole.ADMIN }) {
       return instance.post<TUser>('/users', payload);
     },
     update(id: number, payload: Omit<TUser, 'id'>) {
