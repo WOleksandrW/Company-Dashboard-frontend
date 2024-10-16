@@ -9,6 +9,7 @@ import CompanyCard from './CompanyCard/CompanyCard';
 import GridListUsage from './GridListUsage/GridListUsage';
 import BreadcrumbsUsage from './BreadcrumbsUsage/BreadcrumbsUsage';
 import ModalUsage from './ModalUsage/ModalUsage';
+import ConfirmModalUsage from './ConfirmModalUsage/ConfirmModalUsage';
 import SelectUsage from './SelectUsage/SelectUsage';
 import TextFieldUsage from './TextFieldUsage/TextFieldUsage';
 import TooltipUsage from './TooltipUsage/TooltipUsage';
@@ -25,6 +26,7 @@ export {
   GridListUsage,
   BreadcrumbsUsage,
   ModalUsage,
+  ConfirmModalUsage,
   SelectUsage,
   TextFieldUsage,
   TooltipUsage
