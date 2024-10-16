@@ -27,7 +27,7 @@ export default function (instance: AxiosInstance) {
     create(payload: TSignUpBody & { role: ERole.USER | ERole.ADMIN }) {
       return instance.post<TUser>('/users', payload);
     },
-    update(id: number, payload: Omit<TUser, 'id'>) {
+    update(id: number, payload: TSignUpBody) {
       return instance.patch<TUser>(`/users/${id}`, payload);
     },
     remove(id: number) {

@@ -4,11 +4,11 @@ import { Box, Button, Pagination, Skeleton, TextField } from '@mui/material';
 import { useDebounce } from 'use-debounce';
 import api from '../../../../api';
 import { GridListUsage, UserCard } from '../../../../components';
-import { PopupCreateAdmin, PopupDeleteAdmin } from '../';
+import { PopupCreateAdmin, PopupDeleteAdmin, PopupUpdateAdmin } from '../';
 import { EQueryKeys, ERole } from '../../../../types/enums';
 import { TUser } from '../../../../types/TUser';
 
-import { FaPlus, FaTrashAlt } from 'react-icons/fa';
+import { FaEdit, FaPlus, FaTrashAlt } from 'react-icons/fa';
 
 function SectionAdmins() {
   const [searchValue, setSearchValue] = useState('');
@@ -16,6 +16,7 @@ function SectionAdmins() {
   const [page, setPage] = useState(1);
   const [selectedAdmin, setSelectedAdmin] = useState<TUser | null>(null);
   const [openPopupCreate, setOpenPopupCreate] = useState(false);
+  const [openPopupUpdate, setOpenPopupUpdate] = useState(false);
   const [openPopupDelete, setOpenPopupDelete] = useState(false);
 
   const [search] = useDebounce(searchValue, 500);
@@ -32,6 +33,9 @@ function SectionAdmins() {
   useEffect(() => {
     if (!openPopupDelete) setSelectedAdmin(null);
   }, [openPopupDelete]);
+  useEffect(() => {
+    if (!openPopupUpdate) setSelectedAdmin(null);
+  }, [openPopupUpdate]);
 
   return (
     <Box
@@ -105,6 +109,14 @@ function SectionAdmins() {
                   user={admin}
                   dropDownMenu={[
                     {
+                      text: 'Update',
+                      icon: FaEdit,
+                      callback: () => {
+                        setSelectedAdmin(admin);
+                        setOpenPopupUpdate(true);
+                      }
+                    },
+                    {
                       text: 'Delete',
                       icon: FaTrashAlt,
                       callback: () => {
@@ -123,6 +135,13 @@ function SectionAdmins() {
         )}
       </Box>
       <PopupCreateAdmin open={openPopupCreate} setOpen={setOpenPopupCreate} />
+      {selectedAdmin && (
+        <PopupUpdateAdmin
+          open={openPopupUpdate}
+          setOpen={setOpenPopupUpdate}
+          user={selectedAdmin}
+        />
+      )}
       {selectedAdmin && (
         <PopupDeleteAdmin
           open={openPopupDelete}
