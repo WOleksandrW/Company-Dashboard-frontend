@@ -18,6 +18,7 @@ import TextFieldUsage from './TextFieldUsage/TextFieldUsage';
 import TooltipUsage from './TooltipUsage/TooltipUsage';
 import TabsUsage from './TabsUsage/TabsUsage';
 import PieChartUsage from './PieChartUsage/PieChartUsage';
+import MainDrawerUsage from './MainDrawerUsage/MainDrawerUsage';
 
 export {
   Header,
@@ -39,5 +40,6 @@ export {
   TabsUsage,
   TextFieldUsage,
   TooltipUsage,
-  PieChartUsage
+  PieChartUsage,
+  MainDrawerUsage
 };
