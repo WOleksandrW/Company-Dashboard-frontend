@@ -1,19 +1,22 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { Box, Button, Pagination, Skeleton, TextField } from '@mui/material';
 import { useDebounce } from 'use-debounce';
 import api from '../../../../api';
 import { GridListUsage, UserCard } from '../../../../components';
-import { PopupCreateAdmin } from '../';
+import { PopupCreateAdmin, PopupDeleteAdmin } from '../';
 import { EQueryKeys, ERole } from '../../../../types/enums';
+import { TUser } from '../../../../types/TUser';
 
-import { FaPlus } from 'react-icons/fa';
+import { FaPlus, FaTrashAlt } from 'react-icons/fa';
 
 function SectionAdmins() {
   const [searchValue, setSearchValue] = useState('');
   const [createdAt, setCreatedAt] = useState('');
   const [page, setPage] = useState(1);
+  const [selectedAdmin, setSelectedAdmin] = useState<TUser | null>(null);
   const [openPopupCreate, setOpenPopupCreate] = useState(false);
+  const [openPopupDelete, setOpenPopupDelete] = useState(false);
 
   const [search] = useDebounce(searchValue, 500);
 
@@ -24,6 +27,11 @@ function SectionAdmins() {
       select: ({ data }) => data
     }
   );
+
+  useEffect(() => setSelectedAdmin(null), [admins]);
+  useEffect(() => {
+    if (!openPopupDelete) setSelectedAdmin(null);
+  }, [openPopupDelete]);
 
   return (
     <Box
@@ -92,7 +100,20 @@ function SectionAdmins() {
           <>
             <GridListUsage sx={{ width: '100%' }}>
               {admins.map((admin) => (
-                <UserCard key={admin.id} user={admin} />
+                <UserCard
+                  key={admin.id}
+                  user={admin}
+                  dropDownMenu={[
+                    {
+                      text: 'Delete',
+                      icon: FaTrashAlt,
+                      callback: () => {
+                        setSelectedAdmin(admin);
+                        setOpenPopupDelete(true);
+                      }
+                    }
+                  ]}
+                />
               ))}
             </GridListUsage>
             <Pagination count={10} page={page} onChange={(_, page) => setPage(page)} />
@@ -102,6 +123,13 @@ function SectionAdmins() {
         )}
       </Box>
       <PopupCreateAdmin open={openPopupCreate} setOpen={setOpenPopupCreate} />
+      {selectedAdmin && (
+        <PopupDeleteAdmin
+          open={openPopupDelete}
+          setOpen={setOpenPopupDelete}
+          user={selectedAdmin}
+        />
+      )}
     </Box>
   );
 }
