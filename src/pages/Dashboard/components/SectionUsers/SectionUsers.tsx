@@ -3,8 +3,14 @@ import { useQuery } from 'react-query';
 import { Box, Button, Pagination, Skeleton, TextField } from '@mui/material';
 import { useDebounce } from 'use-debounce';
 import api from '../../../../api';
-import { EmptyMessage, GridListUsage, UserCard } from '../../../../components';
-import { PopupCreateUser, PopupDeleteUser, PopupChangePasswordUser, PopupUpdateUser } from '../';
+import {
+  EmptyMessage,
+  GridListUsage,
+  PopupChangePasswordUser,
+  PopupUpdateUser,
+  UserCard
+} from '../../../../components';
+import { PopupCreateUser, PopupDeleteUser } from '../';
 import { EQueryKeys, ERole } from '../../../../types/enums';
 import { TUser } from '../../../../types/TUser';
 import { limitRecords } from '../../../../constants/queryParams';

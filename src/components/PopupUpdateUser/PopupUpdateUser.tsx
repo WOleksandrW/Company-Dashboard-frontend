@@ -3,12 +3,12 @@ import { useMutation, useQueryClient } from 'react-query';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
-import api from '../../../../api';
-import { FormModalUsage } from '../../../../components';
-import { EQueryKeys } from '../../../../types/enums';
-import { schemaUpdateUser } from '../../../../types/schema';
-import { TPatchUser } from '../../../../types/types';
-import { TUser } from '../../../../types/TUser';
+import api from '../../api';
+import { FormModalUsage } from '../';
+import { EQueryKeys } from '../../types/enums';
+import { schemaUpdateUser } from '../../types/schema';
+import { TPatchUser } from '../../types/types';
+import { TUser } from '../../types/TUser';
 
 interface IFormValues {
   username: string;
@@ -19,12 +19,21 @@ interface IProps {
   open: boolean;
   setOpen: (value: boolean) => void;
   user: TUser;
-  queryKey: EQueryKeys.USERS_LIST | EQueryKeys.ADMINS_LIST;
+  queryKey: EQueryKeys.USERS_LIST | EQueryKeys.ADMINS_LIST | EQueryKeys.CURRENT_USER;
+  onSuccess?: () => void;
   toastMessage: string;
   popupTitle: string;
 }
 
-function PopupUpdateUser({ open, setOpen, user, queryKey, toastMessage, popupTitle }: IProps) {
+function PopupUpdateUser({
+  open,
+  setOpen,
+  user,
+  queryKey,
+  onSuccess,
+  toastMessage,
+  popupTitle
+}: IProps) {
   const { id, username, email } = user;
   const queryClient = useQueryClient();
 
@@ -45,6 +54,7 @@ function PopupUpdateUser({ open, setOpen, user, queryKey, toastMessage, popupTit
     onSuccess: () => {
       toast.success(toastMessage);
       queryClient.invalidateQueries(queryKey);
+      if (onSuccess) onSuccess();
     }
   });
 

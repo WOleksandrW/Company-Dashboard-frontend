@@ -1,15 +1,26 @@
-import { useMemo } from 'react';
-import { Avatar, Box, Paper, Typography } from '@mui/material';
+import { useMemo, useState } from 'react';
+import { Avatar, Box, Button, Paper, Typography } from '@mui/material';
 import useQueryCurrUser from '../../hooks/useQueryCurrUser';
-import { BreadcrumbsUsage, TabsUsage } from '../../components';
-import { UpdateUserForm, UpdateUserPasswordForm } from './components';
+import {
+  BreadcrumbsUsage,
+  MiniDataList,
+  PopupChangePasswordUser,
+  PopupUpdateUser,
+  TabsUsage
+} from '../../components';
 import getImageFromBuffer from '../../utils/getImageFromBuffer';
 import stringAvatar from '../../utils/stringAvatar';
+import { EQueryKeys } from '../../types/enums';
+
+import { FaEdit, FaLock } from 'react-icons/fa';
 
 import styles from './Profile.module.scss';
 
 function Profile() {
-  const { data: userData } = useQueryCurrUser();
+  const { data: userData, refetch } = useQueryCurrUser();
+
+  const [openPopupUpdate, setOpenPopupUpdate] = useState(false);
+  const [openPopupChangePass, setOpenPopupChangePass] = useState(false);
 
   const srcImage = useMemo(() => {
     if (userData?.image)
@@ -49,6 +60,29 @@ function Profile() {
             <Typography variant="body1" align="center" color="textSecondary">
               {userData.email}
             </Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '12px',
+                marginTop: '20px'
+              }}>
+              <Button
+                variant="contained"
+                startIcon={<FaEdit />}
+                onClick={() => setOpenPopupUpdate(true)}
+                sx={{ typography: 'body2' }}>
+                Update data
+              </Button>
+              <Button
+                variant="contained"
+                startIcon={<FaLock />}
+                onClick={() => setOpenPopupChangePass(true)}
+                sx={{ typography: 'body2' }}>
+                Change password
+              </Button>
+            </Box>
           </Paper>
 
           <Paper sx={{ flex: 1, borderRadius: '16px', padding: '20px' }}>
@@ -62,28 +96,42 @@ function Profile() {
                         Welcome to your profile. Here, you can view and update your personal
                         information.
                       </Typography>
-                    </Box>
-                  )
-                },
-                {
-                  label: 'Change Data',
-                  children: (
-                    <Box sx={{ padding: '20px' }}>
-                      <UpdateUserForm {...userData} />
-                    </Box>
-                  )
-                },
-                {
-                  label: 'Change Password',
-                  children: (
-                    <Box sx={{ padding: '20px' }}>
-                      <UpdateUserPasswordForm {...userData} />
+                      <MiniDataList
+                        list={[
+                          {
+                            subtitle: 'Created at:',
+                            value: new Date(userData.createdAt).toLocaleString()
+                          },
+                          {
+                            subtitle: 'Updated at',
+                            value: new Date(userData.updatedAt).toLocaleString()
+                          }
+                        ]}
+                      />
                     </Box>
                   )
                 }
               ]}
             />
           </Paper>
+          <PopupUpdateUser
+            open={openPopupUpdate}
+            setOpen={setOpenPopupUpdate}
+            user={userData}
+            queryKey={EQueryKeys.CURRENT_USER}
+            onSuccess={() => {
+              refetch();
+            }}
+            toastMessage="Your data was updated successfully!"
+            popupTitle="Update your data"
+          />
+          <PopupChangePasswordUser
+            open={openPopupChangePass}
+            setOpen={setOpenPopupChangePass}
+            userId={userData.id}
+            toastMessage="Your password was changed successfully!"
+            hasOldPassword
+          />
         </Box>
       )}
     </Box>

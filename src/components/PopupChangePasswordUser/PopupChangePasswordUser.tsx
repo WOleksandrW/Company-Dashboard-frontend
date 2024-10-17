@@ -1,13 +1,13 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useMutation } from 'react-query';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
-import api from '../../../../api';
-import { FormModalUsage } from '../../../../components';
-import { schemaChangePassword } from '../../../../types/schema';
-import { TPatchUser } from '../../../../types/types';
-import { TUser } from '../../../../types/TUser';
+import api from '../../api';
+import { FormModalUsage } from '../';
+import { schemaChangePassword } from '../../types/schema';
+import { TPatchUser } from '../../types/types';
+import { TUser } from '../../types/TUser';
 
 interface IFormValues {
   password: string;
@@ -19,9 +19,10 @@ interface IProps {
   setOpen: (value: boolean) => void;
   userId: TUser['id'];
   toastMessage: string;
+  hasOldPassword?: boolean;
 }
 
-function PopupChangePasswordUser({ open, setOpen, userId, toastMessage }: IProps) {
+function PopupChangePasswordUser({ open, setOpen, userId, toastMessage, hasOldPassword }: IProps) {
   const {
     control,
     handleSubmit,
@@ -30,7 +31,8 @@ function PopupChangePasswordUser({ open, setOpen, userId, toastMessage }: IProps
   } = useForm({
     defaultValues: {
       password: '',
-      confirm: ''
+      confirm: '',
+      oldPassword: hasOldPassword ? '' : undefined
     },
     resolver: yupResolver(schemaChangePassword)
   });
@@ -49,6 +51,22 @@ function PopupChangePasswordUser({ open, setOpen, userId, toastMessage }: IProps
     [mutateAsync]
   );
 
+  const additionalInputs = useMemo(
+    () =>
+      hasOldPassword
+        ? [
+            {
+              controlParams: { control, name: 'oldPassword' },
+              label: 'Old password',
+              type: 'password',
+              autoComplete: 'off',
+              errorMessage: errors.oldPassword?.message
+            }
+          ]
+        : [],
+    [hasOldPassword, control, errors.oldPassword]
+  );
+
   useEffect(() => {
     if (!open) reset();
   }, [open]);
@@ -59,6 +77,7 @@ function PopupChangePasswordUser({ open, setOpen, userId, toastMessage }: IProps
       setOpen={setOpen}
       title="Change password"
       inputs={[
+        ...additionalInputs,
         {
           controlParams: { control, name: 'password' },
           label: 'New password',

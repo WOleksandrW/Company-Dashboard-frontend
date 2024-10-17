@@ -20,6 +20,8 @@ import TooltipUsage from './TooltipUsage/TooltipUsage';
 import TabsUsage from './TabsUsage/TabsUsage';
 import PieChartUsage from './PieChartUsage/PieChartUsage';
 import MainDrawerUsage from './MainDrawerUsage/MainDrawerUsage';
+import PopupUpdateUser from './PopupUpdateUser/PopupUpdateUser';
+import PopupChangePasswordUser from './PopupChangePasswordUser/PopupChangePasswordUser';
 
 export {
   Header,
@@ -43,5 +45,7 @@ export {
   TextFieldUsage,
   TooltipUsage,
   PieChartUsage,
-  MainDrawerUsage
+  MainDrawerUsage,
+  PopupUpdateUser,
+  PopupChangePasswordUser
 };
