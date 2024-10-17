@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import { Box, IconButton, Typography } from '@mui/material';
 import api from '../../api';
 import useQueryCurrUser from '../../hooks/useQueryCurrUser';
-import { BreadcrumbsUsage, EmptyMessage, WrapperBoxUsage } from '../../components';
+import { BreadcrumbsUsage, EmptyMessage } from '../../components';
 import { CompanyDataSection, PopupDeleteCompany, UpdateCompanyForm } from './components';
 import { EQueryKeys, ERole } from '../../types/enums';
 
@@ -37,9 +37,7 @@ function CompanyDetail() {
   }, [companyData, userData]);
 
   return (
-    <WrapperBoxUsage
-      component="section"
-      sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '20px' }}>
+    <>
       <BreadcrumbsUsage
         list={[
           { to: '/', text: 'Home' },
@@ -83,7 +81,7 @@ function CompanyDetail() {
           <EmptyMessage message="No company data" />
         )}
       </Box>
-    </WrapperBoxUsage>
+    </>
   );
 }
 

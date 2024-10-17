@@ -5,13 +5,12 @@ function NotFound() {
   return (
     <Box
       sx={{
+        flex: 1,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100vh',
-        textAlign: 'center',
-        padding: 2
+        textAlign: 'center'
       }}>
       <Typography typography="h1" sx={{ fontSize: { xs: '4rem', md: '6rem' }, fontWeight: 'bold' }}>
         404

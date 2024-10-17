@@ -6,8 +6,7 @@ import {
   MiniDataList,
   PopupChangePasswordUser,
   PopupUpdateUser,
-  TabsUsage,
-  WrapperBoxUsage
+  TabsUsage
 } from '../../components';
 import getImageFromBuffer from '../../utils/getImageFromBuffer';
 import stringAvatar from '../../utils/stringAvatar';
@@ -28,7 +27,7 @@ function Profile() {
   const avatar = useMemo(() => stringAvatar(userData?.username ?? 'A'), [userData?.username]);
 
   return (
-    <WrapperBoxUsage sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '20px' }}>
+    <>
       <BreadcrumbsUsage list={[{ to: '/', text: 'Home' }, { text: 'Profile' }]} />
       {userData && (
         <Box component="section" sx={{ flex: 1, display: 'flex', gap: '20px' }}>
@@ -133,7 +132,7 @@ function Profile() {
           />
         </Box>
       )}
-    </WrapperBoxUsage>
+    </>
   );
 }
 

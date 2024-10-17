@@ -8,8 +8,7 @@ import {
   EmptyMessage,
   SelectUsage,
   CompanyCard,
-  GridListUsage,
-  WrapperBoxUsage
+  GridListUsage
 } from '../../components';
 import { PopupCreateCompany } from './components';
 import { EOrder, EQueryKeys } from '../../types/enums';
@@ -65,9 +64,7 @@ function CompaniesList() {
   }, [capitalMin, capitalMax, titleOrder, serviceOrder, createdAt]);
 
   return (
-    <WrapperBoxUsage
-      component="section"
-      sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '20px' }}>
+    <>
       <BreadcrumbsUsage list={[{ to: '/', text: 'Home' }, { text: 'Companies list' }]} />
       <Box
         sx={{
@@ -167,7 +164,7 @@ function CompaniesList() {
         <EmptyMessage sx={{ flex: 1, justifyContent: 'center' }} message="List is empty" />
       )}
       <PopupCreateCompany open={openPopup} setOpen={setOpenPopup} />
-    </WrapperBoxUsage>
+    </>
   );
 }
 

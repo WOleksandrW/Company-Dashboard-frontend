@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import useQueryCurrUser from '../hooks/useQueryCurrUser';
-import { MainLayout, NoAuthLayout } from '../layouts';
+import { AuthLayout, MainLayout, NoAuthLayout } from '../layouts';
 import {
   CompaniesList,
   CompanyDetail,
@@ -20,13 +20,13 @@ function Routing() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           {userData ? (
-            <>
+            <Route path="" element={<AuthLayout />}>
               <Route path="" element={<Dashboard />} />
               <Route path="companies" element={<CompaniesList />} />
               <Route path="company/:id" element={<CompanyDetail />} />
               <Route path="profile" element={<Profile />} />
               <Route path="*" element={<NotFound />} />
-            </>
+            </Route>
           ) : (
             <>
               <Route path="/" element={<Navigate to="sign-in" replace />} />
