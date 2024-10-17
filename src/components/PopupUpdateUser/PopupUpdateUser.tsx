@@ -4,15 +4,14 @@ import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import api from '../../api';
-import { FormModalUsage } from '../';
+import { AvatarUsage, FormModalUsage } from '../';
 import { EQueryKeys } from '../../types/enums';
 import { schemaUpdateUser } from '../../types/schema';
 import { TUser } from '../../types/TUser';
-import { Avatar, Box, Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { MdCloudUpload } from 'react-icons/md';
 import { FaTrashAlt } from 'react-icons/fa';
 import getImageFromBuffer from '../../utils/getImageFromBuffer';
-import stringAvatar from '../../utils/stringAvatar';
 
 interface IProps {
   open: boolean;
@@ -101,7 +100,6 @@ function PopupUpdateUser({
   const srcImage = useMemo(() => {
     if (image) return getImageFromBuffer(image.data.data, image.mimeType);
   }, [image]);
-  const avatar = useMemo(() => stringAvatar(username ?? 'A'), [username]);
 
   useEffect(() => {
     handleImagePreview();
@@ -140,17 +138,15 @@ function PopupUpdateUser({
             gap: '12px',
             marginBottom: '8px'
           }}>
-          <Avatar
+          <AvatarUsage
             src={imgPreview ?? (watchFile !== null ? srcImage : undefined)}
-            alt={username}
+            title={username}
             sx={{
               height: '120px',
               width: '120px',
-              fontSize: '10rem',
-              ...avatar.sx
-            }}>
-            {avatar.children}
-          </Avatar>
+              fontSize: '10rem'
+            }}
+          />
           <Box sx={{ display: 'flex', gap: '16px' }}>
             <Button
               sx={{ typography: 'body1' }}

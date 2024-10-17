@@ -1,8 +1,7 @@
 import { useMemo } from 'react';
-import { Avatar, Box, Card, CardContent, Typography } from '@mui/material';
-import { MenuUsage, MiniDataList } from '../';
+import { Box, Card, CardContent, Typography } from '@mui/material';
+import { AvatarUsage, MenuUsage, MiniDataList } from '../';
 import getImageFromBuffer from '../../utils/getImageFromBuffer';
-import stringAvatar from '../../utils/stringAvatar';
 import { TUser } from '../../types/TUser';
 import { IconType } from 'react-icons';
 
@@ -21,7 +20,6 @@ function UserCard({ user, dropDownMenu }: IProps) {
   const srcImage = useMemo(() => {
     if (image) return getImageFromBuffer(image.data.data, image.mimeType);
   }, [image]);
-  const avatar = useMemo(() => stringAvatar(username ?? 'A'), [username]);
 
   return (
     <Card>
@@ -32,17 +30,15 @@ function UserCard({ user, dropDownMenu }: IProps) {
           padding: '8px 16px',
           position: 'relative'
         }}>
-        <Avatar
+        <AvatarUsage
           src={srcImage}
-          alt={username}
+          title={username}
           sx={{
             height: '64px',
             width: '64px',
-            fontSize: '4rem',
-            ...avatar.sx
-          }}>
-          {avatar.children}
-        </Avatar>
+            fontSize: '4rem'
+          }}
+        />
         {dropDownMenu?.length && (
           <MenuUsage
             list={dropDownMenu}

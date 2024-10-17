@@ -1,20 +1,10 @@
 import { useCallback, useMemo, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import {
-  Avatar,
-  Box,
-  Button,
-  IconButton,
-  Menu,
-  MenuItem,
-  Typography,
-  useMediaQuery
-} from '@mui/material';
+import { Box, Button, IconButton, Menu, MenuItem, Typography, useMediaQuery } from '@mui/material';
 import { useQueryClient } from 'react-query';
 import useQueryCurrUser from '../../hooks/useQueryCurrUser';
 import getImageFromBuffer from '../../utils/getImageFromBuffer';
-import stringAvatar from '../../utils/stringAvatar';
-import { MainDrawerUsage, WrapperBoxUsage } from '../';
+import { AvatarUsage, MainDrawerUsage, WrapperBoxUsage } from '../';
 import { EQueryKeys } from '../../types/enums';
 
 import { IoLogOutOutline, IoMenu, IoPersonCircleSharp } from 'react-icons/io5';
@@ -34,7 +24,6 @@ function Header() {
     if (userData?.image)
       return getImageFromBuffer(userData.image.data.data, userData.image.mimeType);
   }, [userData]);
-  const avatar = useMemo(() => stringAvatar(userData?.username ?? 'A'), [userData?.username]);
 
   const logOut = useCallback(() => {
     queryClient.setQueryData(EQueryKeys.CURRENT_USER, { data: null });
@@ -101,12 +90,11 @@ function Header() {
                 <Button
                   sx={{ display: 'flex', alignItems: 'center', gap: '12px' }}
                   onClick={(e) => setAnchorEl(e.currentTarget)}>
-                  <Avatar
+                  <AvatarUsage
                     src={srcImage}
-                    alt={userData.username}
-                    sx={{ height: '32px', width: '32px', ...avatar.sx }}>
-                    {avatar.children}
-                  </Avatar>
+                    title={userData.username}
+                    sx={{ height: '32px', width: '32px' }}
+                  />
                   <Typography className="text-ellipsis" typography="body1">
                     {userData.username}
                   </Typography>

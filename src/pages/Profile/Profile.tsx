@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react';
-import { Avatar, Box, Button, Paper, Typography } from '@mui/material';
+import { Box, Button, Paper, Typography } from '@mui/material';
 import useQueryCurrUser from '../../hooks/useQueryCurrUser';
 import {
+  AvatarUsage,
   BreadcrumbsUsage,
   MiniDataList,
   PopupChangePasswordUser,
@@ -9,7 +10,6 @@ import {
   TabsUsage
 } from '../../components';
 import getImageFromBuffer from '../../utils/getImageFromBuffer';
-import stringAvatar from '../../utils/stringAvatar';
 import { EQueryKeys } from '../../types/enums';
 
 import { FaEdit, FaLock } from 'react-icons/fa';
@@ -24,7 +24,6 @@ function Profile() {
     if (userData?.image)
       return getImageFromBuffer(userData.image.data.data, userData.image.mimeType);
   }, [userData?.image]);
-  const avatar = useMemo(() => stringAvatar(userData?.username ?? 'A'), [userData?.username]);
 
   return (
     <>
@@ -52,19 +51,17 @@ function Profile() {
                 borderRadius: '12px'
               }
             }}>
-            <Avatar
+            <AvatarUsage
               src={srcImage}
-              alt={userData.username}
+              title={userData.username}
               sx={{
                 height: '120px',
                 width: '120px',
                 margin: 'auto',
                 fontSize: '10rem',
-                marginBottom: '10px',
-                ...avatar.sx
-              }}>
-              {avatar.children}
-            </Avatar>
+                marginBottom: '10px'
+              }}
+            />
             <Typography variant="h6" align="center">
               {userData.username}
             </Typography>
