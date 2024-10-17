@@ -1,17 +1,15 @@
 import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import { Box, IconButton } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import api from '../../api';
 import useQueryCurrUser from '../../hooks/useQueryCurrUser';
-import { BreadcrumbsUsage, EmptyMessage } from '../../components';
+import { BreadcrumbsUsage, EmptyMessage, WrapperBoxUsage } from '../../components';
 import { CompanyDataSection, PopupDeleteCompany, UpdateCompanyForm } from './components';
 import { EQueryKeys, ERole } from '../../types/enums';
 
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import mapPlaceholder from '../../assets/images/map-placeholder.png';
-
-import styles from './CompanyDetail.module.scss';
 
 function CompanyDetail() {
   const { id } = useParams();
@@ -39,7 +37,9 @@ function CompanyDetail() {
   }, [companyData, userData]);
 
   return (
-    <section className={styles['page']}>
+    <WrapperBoxUsage
+      component="section"
+      sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <BreadcrumbsUsage
         list={[
           { to: '/', text: 'Home' },
@@ -67,8 +67,15 @@ function CompanyDetail() {
             )}
             <Box
               sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
-              <h2 className="h2">Google map</h2>
-              <img className={styles['map-image']} src={mapPlaceholder} alt={companyData.address} />
+              <Typography variant="h2" sx={{ fontWeight: 'bold' }}>
+                Google map
+              </Typography>
+              <Box
+                component="img"
+                src={mapPlaceholder}
+                alt={companyData.address}
+                sx={{ maxWidth: '900px' }}
+              />
             </Box>
             <PopupDeleteCompany open={open} setOpen={setOpen} {...companyData} />
           </>
@@ -76,7 +83,7 @@ function CompanyDetail() {
           <EmptyMessage message="No company data" />
         )}
       </Box>
-    </section>
+    </WrapperBoxUsage>
   );
 }
 

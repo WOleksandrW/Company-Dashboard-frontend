@@ -14,7 +14,7 @@ import { useQueryClient } from 'react-query';
 import useQueryCurrUser from '../../hooks/useQueryCurrUser';
 import getImageFromBuffer from '../../utils/getImageFromBuffer';
 import stringAvatar from '../../utils/stringAvatar';
-import { MainDrawerUsage } from '../';
+import { MainDrawerUsage, WrapperBoxUsage } from '../';
 import { EQueryKeys } from '../../types/enums';
 
 import { IoLogOutOutline, IoMenu, IoPersonCircleSharp } from 'react-icons/io5';
@@ -73,7 +73,17 @@ function Header() {
 
   return (
     <header className={styles['header']}>
-      <div className={styles['wrapper']}>
+      <WrapperBoxUsage
+        sx={{
+          paddingY: '12px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          columnGap: '40px',
+          '@media (max-width: 768px)': {
+            columnGap: '20px'
+          }
+        }}>
         <h2 className={`h2 ${styles['logo']}`}>Company Dashboard</h2>
         {!isTablet ? (
           userData ? (
@@ -151,7 +161,7 @@ function Header() {
             />
           </>
         )}
-      </div>
+      </WrapperBoxUsage>
     </header>
   );
 }

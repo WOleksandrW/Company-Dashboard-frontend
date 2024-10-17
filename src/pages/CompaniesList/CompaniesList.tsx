@@ -8,7 +8,8 @@ import {
   EmptyMessage,
   SelectUsage,
   CompanyCard,
-  GridListUsage
+  GridListUsage,
+  WrapperBoxUsage
 } from '../../components';
 import { PopupCreateCompany } from './components';
 import { EOrder, EQueryKeys } from '../../types/enums';
@@ -17,8 +18,6 @@ import { limitRecords } from '../../constants/queryParams';
 
 import { FaPlus } from 'react-icons/fa';
 import { IoReload } from 'react-icons/io5';
-
-import styles from './CompaniesList.module.scss';
 
 function CompaniesList() {
   const [titleOrder, setTitleOrder] = useState<string>('');
@@ -66,7 +65,9 @@ function CompaniesList() {
   }, [capitalMin, capitalMax, titleOrder, serviceOrder, createdAt]);
 
   return (
-    <section className={styles['page']}>
+    <WrapperBoxUsage
+      component="section"
+      sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <BreadcrumbsUsage list={[{ to: '/', text: 'Home' }, { text: 'Companies list' }]} />
       <Box
         sx={{
@@ -166,7 +167,7 @@ function CompaniesList() {
         <EmptyMessage sx={{ flex: 1, justifyContent: 'center' }} message="List is empty" />
       )}
       <PopupCreateCompany open={openPopup} setOpen={setOpenPopup} />
-    </section>
+    </WrapperBoxUsage>
   );
 }
 

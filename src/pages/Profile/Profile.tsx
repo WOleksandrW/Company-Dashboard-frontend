@@ -6,15 +6,14 @@ import {
   MiniDataList,
   PopupChangePasswordUser,
   PopupUpdateUser,
-  TabsUsage
+  TabsUsage,
+  WrapperBoxUsage
 } from '../../components';
 import getImageFromBuffer from '../../utils/getImageFromBuffer';
 import stringAvatar from '../../utils/stringAvatar';
 import { EQueryKeys } from '../../types/enums';
 
 import { FaEdit, FaLock } from 'react-icons/fa';
-
-import styles from './Profile.module.scss';
 
 function Profile() {
   const { data: userData, refetch } = useQueryCurrUser();
@@ -29,7 +28,7 @@ function Profile() {
   const avatar = useMemo(() => stringAvatar(userData?.username ?? 'A'), [userData?.username]);
 
   return (
-    <Box className={styles['page']}>
+    <WrapperBoxUsage sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <BreadcrumbsUsage list={[{ to: '/', text: 'Home' }, { text: 'Profile' }]} />
       {userData && (
         <Box component="section" sx={{ flex: 1, display: 'flex', gap: '20px' }}>
@@ -134,7 +133,7 @@ function Profile() {
           />
         </Box>
       )}
-    </Box>
+    </WrapperBoxUsage>
   );
 }
 

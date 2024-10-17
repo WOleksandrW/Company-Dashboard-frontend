@@ -4,14 +4,6 @@
   background-color: $colorBack2;
 }
 
-.wrapper {
-  padding: 12px $wrapperPadding;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-}
-
 .logo {
   color: $colorPrimary;
   text-wrap: nowrap;

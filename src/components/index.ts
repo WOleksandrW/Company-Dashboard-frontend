@@ -1,3 +1,4 @@
+import WrapperBoxUsage from './WrapperBoxUsage/WrapperBoxUsage';
 import Header from './Header/Header';
 import Button from './Button/Button';
 import Input from './Input/Input';
@@ -24,6 +25,7 @@ import PopupUpdateUser from './PopupUpdateUser/PopupUpdateUser';
 import PopupChangePasswordUser from './PopupChangePasswordUser/PopupChangePasswordUser';
 
 export {
+  WrapperBoxUsage,
   Header,
   Button,
   Input,
