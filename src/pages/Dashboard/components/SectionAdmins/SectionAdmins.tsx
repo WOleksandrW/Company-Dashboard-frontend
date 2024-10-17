@@ -4,7 +4,7 @@ import { Box, Button, Pagination, Skeleton, TextField } from '@mui/material';
 import { useDebounce } from 'use-debounce';
 import api from '../../../../api';
 import { EmptyMessage, GridListUsage, UserCard } from '../../../../components';
-import { PopupCreateUser, PopupDeleteAdmin, PopupUpdateAdmin } from '../';
+import { PopupCreateUser, PopupDeleteUser, PopupUpdateAdmin } from '../';
 import { EQueryKeys, ERole } from '../../../../types/enums';
 import { TUser } from '../../../../types/TUser';
 import { limitRecords } from '../../../../constants/queryParams';
@@ -155,10 +155,13 @@ function SectionAdmins() {
         />
       )}
       {selectedAdmin && (
-        <PopupDeleteAdmin
+        <PopupDeleteUser
           open={openPopupDelete}
           setOpen={setOpenPopupDelete}
-          user={selectedAdmin}
+          userId={selectedAdmin.id}
+          queryKey={EQueryKeys.ADMINS_LIST}
+          toastMessage={`Admin "${selectedAdmin.username}" was deleted successfully!`}
+          popupText={`Are you sure you want to delete the admin "${selectedAdmin.username}"`}
         />
       )}
     </Box>

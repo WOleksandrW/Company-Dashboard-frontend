@@ -1,20 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { Box, Button, Pagination, Skeleton, TextField } from '@mui/material';
 import { useDebounce } from 'use-debounce';
 import api from '../../../../api';
 import { EmptyMessage, GridListUsage, UserCard } from '../../../../components';
-import { PopupCreateUser } from '../';
+import { PopupCreateUser, PopupDeleteUser } from '../';
 import { EQueryKeys, ERole } from '../../../../types/enums';
+import { TUser } from '../../../../types/TUser';
 import { limitRecords } from '../../../../constants/queryParams';
 
-import { FaPlus } from 'react-icons/fa';
+import { FaPlus, FaTrashAlt } from 'react-icons/fa';
 
 function SectionUsers() {
   const [searchValue, setSearchValue] = useState('');
   const [createdAt, setCreatedAt] = useState('');
   const [page, setPage] = useState(1);
+  const [selectedUser, setSelectedUser] = useState<TUser | null>(null);
   const [openPopupCreate, setOpenPopupCreate] = useState(false);
+  const [openPopupDelete, setOpenPopupDelete] = useState(false);
 
   const [search] = useDebounce(searchValue, 500);
 
@@ -25,6 +28,11 @@ function SectionUsers() {
       select: ({ data }) => data
     }
   );
+
+  useEffect(() => setSelectedUser(null), [response?.list]);
+  useEffect(() => {
+    if (!openPopupDelete) setSelectedUser(null);
+  }, [openPopupDelete]);
 
   return (
     <Box
@@ -93,7 +101,20 @@ function SectionUsers() {
           <>
             <GridListUsage sx={{ width: '100%' }}>
               {response.list.map((user) => (
-                <UserCard key={user.id} user={user} />
+                <UserCard
+                  key={user.id}
+                  user={user}
+                  dropDownMenu={[
+                    {
+                      text: 'Delete',
+                      icon: FaTrashAlt,
+                      callback: () => {
+                        setSelectedUser(user);
+                        setOpenPopupDelete(true);
+                      }
+                    }
+                  ]}
+                />
               ))}
             </GridListUsage>
             <Pagination
@@ -114,6 +135,16 @@ function SectionUsers() {
         toastMessage="User created successfully!"
         popupTitle="Create User"
       />
+      {selectedUser && (
+        <PopupDeleteUser
+          open={openPopupDelete}
+          setOpen={setOpenPopupDelete}
+          userId={selectedUser.id}
+          queryKey={EQueryKeys.USERS_LIST}
+          toastMessage={`User "${selectedUser.username}" was deleted successfully!`}
+          popupText={`Are you sure you want to delete the user "${selectedUser.username}"`}
+        />
+      )}
     </Box>
   );
 }

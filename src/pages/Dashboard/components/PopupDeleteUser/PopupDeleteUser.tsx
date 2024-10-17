@@ -8,17 +8,19 @@ import { TUser } from '../../../../types/TUser';
 interface IProps {
   open: boolean;
   setOpen: (value: boolean) => void;
-  user: TUser;
+  userId: TUser['id'];
+  queryKey: EQueryKeys.USERS_LIST | EQueryKeys.ADMINS_LIST;
+  toastMessage: string;
+  popupText: string;
 }
 
-function PopupDeleteAdmin({ user, ...rest }: IProps) {
-  const { id, username } = user;
+function PopupDeleteUser({ userId, queryKey, toastMessage, popupText, ...rest }: IProps) {
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation(() => api.users.remove(id), {
+  const { mutate } = useMutation(() => api.users.remove(userId), {
     onSuccess: () => {
-      toast.success(`Admin "${username}" deleted successfully!`);
-      queryClient.invalidateQueries(EQueryKeys.ADMINS_LIST);
+      toast.success(toastMessage);
+      queryClient.invalidateQueries(queryKey);
     }
   });
 
@@ -26,10 +28,10 @@ function PopupDeleteAdmin({ user, ...rest }: IProps) {
     <ConfirmModalUsage
       {...rest}
       title="Confirm deletion"
-      text={`Are you sure you want to delete the admin "${username}"`}
+      text={popupText}
       onSubmit={() => mutate()}
     />
   );
 }
 
-export default PopupDeleteAdmin;
+export default PopupDeleteUser;
