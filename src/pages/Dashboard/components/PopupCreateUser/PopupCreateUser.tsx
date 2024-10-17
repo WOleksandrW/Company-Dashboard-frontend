@@ -9,7 +9,7 @@ import { EQueryKeys, ERole } from '../../../../types/enums';
 import { schemaSignUp } from '../../../../types/schema';
 import { TSignUpBody } from '../../../../types/types';
 
-interface ICreateAdminForm {
+interface IFormValues {
   username: string;
   email: string;
   password: string;
@@ -19,9 +19,13 @@ interface ICreateAdminForm {
 interface IProps {
   open: boolean;
   setOpen: (value: boolean) => void;
+  queryKey: EQueryKeys.USERS_LIST | EQueryKeys.ADMINS_LIST;
+  role: ERole.USER | ERole.ADMIN;
+  toastMessage: string;
+  popupTitle: string;
 }
 
-function PopupCreateAdmin({ open, setOpen }: IProps) {
+function PopupCreateUser({ open, setOpen, queryKey, role, toastMessage, popupTitle }: IProps) {
   const queryClient = useQueryClient();
 
   const {
@@ -39,18 +43,15 @@ function PopupCreateAdmin({ open, setOpen }: IProps) {
     resolver: yupResolver(schemaSignUp)
   });
 
-  const { mutateAsync } = useMutation(
-    (data: TSignUpBody) => api.users.create({ ...data, role: ERole.ADMIN }),
-    {
-      onSuccess: () => {
-        toast.success('Admin created successfully!');
-        queryClient.invalidateQueries(EQueryKeys.ADMINS_LIST);
-      }
+  const { mutateAsync } = useMutation((data: TSignUpBody) => api.users.create({ ...data, role }), {
+    onSuccess: () => {
+      toast.success(toastMessage);
+      queryClient.invalidateQueries(queryKey);
     }
-  );
+  });
 
   const onSubmit = useCallback(
-    async ({ username, email, password }: ICreateAdminForm) => {
+    async ({ username, email, password }: IFormValues) => {
       await mutateAsync({ username, email, password });
       setOpen(false);
     },
@@ -65,7 +66,7 @@ function PopupCreateAdmin({ open, setOpen }: IProps) {
     <FormModalUsage
       open={open}
       setOpen={setOpen}
-      title="Create Admin"
+      title={popupTitle}
       inputs={[
         {
           controlParams: { control, name: 'username' },
@@ -99,4 +100,4 @@ function PopupCreateAdmin({ open, setOpen }: IProps) {
   );
 }
 
-export default PopupCreateAdmin;
+export default PopupCreateUser;

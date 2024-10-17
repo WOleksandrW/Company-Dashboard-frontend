@@ -1,16 +1,20 @@
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { Box, Pagination, Skeleton, TextField } from '@mui/material';
+import { Box, Button, Pagination, Skeleton, TextField } from '@mui/material';
 import { useDebounce } from 'use-debounce';
 import api from '../../../../api';
 import { EmptyMessage, GridListUsage, UserCard } from '../../../../components';
+import { PopupCreateUser } from '../';
 import { EQueryKeys, ERole } from '../../../../types/enums';
 import { limitRecords } from '../../../../constants/queryParams';
+
+import { FaPlus } from 'react-icons/fa';
 
 function SectionUsers() {
   const [searchValue, setSearchValue] = useState('');
   const [createdAt, setCreatedAt] = useState('');
   const [page, setPage] = useState(1);
+  const [openPopupCreate, setOpenPopupCreate] = useState(false);
 
   const [search] = useDebounce(searchValue, 500);
 
@@ -31,23 +35,37 @@ function SectionUsers() {
         flexDirection: 'column',
         gap: '16px'
       }}>
-      <Box sx={{ display: 'flex', gap: '20px' }}>
-        <TextField
-          label="Search"
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
-        />
-        <TextField
-          type="date"
-          label="Created at"
-          slotProps={{
-            inputLabel: {
-              shrink: true
-            }
-          }}
-          value={createdAt}
-          onChange={(e) => setCreatedAt(e.target.value)}
-        />
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '12px'
+        }}>
+        <Box sx={{ display: 'flex', gap: '20px' }}>
+          <TextField
+            label="Search"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
+          <TextField
+            type="date"
+            label="Created at"
+            slotProps={{
+              inputLabel: {
+                shrink: true
+              }
+            }}
+            value={createdAt}
+            onChange={(e) => setCreatedAt(e.target.value)}
+          />
+        </Box>
+        <Button
+          startIcon={<FaPlus />}
+          onClick={() => setOpenPopupCreate(true)}
+          sx={{ typography: 'body1' }}>
+          Create User
+        </Button>
       </Box>
       <Box
         sx={{
@@ -88,6 +106,14 @@ function SectionUsers() {
           <EmptyMessage sx={{ flex: 1, justifyContent: 'center' }} message="No users data" />
         )}
       </Box>
+      <PopupCreateUser
+        open={openPopupCreate}
+        setOpen={setOpenPopupCreate}
+        queryKey={EQueryKeys.USERS_LIST}
+        role={ERole.USER}
+        toastMessage="User created successfully!"
+        popupTitle="Create User"
+      />
     </Box>
   );
 }

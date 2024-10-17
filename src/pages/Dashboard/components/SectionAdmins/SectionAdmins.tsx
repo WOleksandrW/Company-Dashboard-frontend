@@ -4,7 +4,7 @@ import { Box, Button, Pagination, Skeleton, TextField } from '@mui/material';
 import { useDebounce } from 'use-debounce';
 import api from '../../../../api';
 import { EmptyMessage, GridListUsage, UserCard } from '../../../../components';
-import { PopupCreateAdmin, PopupDeleteAdmin, PopupUpdateAdmin } from '../';
+import { PopupCreateUser, PopupDeleteAdmin, PopupUpdateAdmin } from '../';
 import { EQueryKeys, ERole } from '../../../../types/enums';
 import { TUser } from '../../../../types/TUser';
 import { limitRecords } from '../../../../constants/queryParams';
@@ -139,7 +139,14 @@ function SectionAdmins() {
           <EmptyMessage sx={{ flex: 1, justifyContent: 'center' }} message="No admins data" />
         )}
       </Box>
-      <PopupCreateAdmin open={openPopupCreate} setOpen={setOpenPopupCreate} />
+      <PopupCreateUser
+        open={openPopupCreate}
+        setOpen={setOpenPopupCreate}
+        queryKey={EQueryKeys.ADMINS_LIST}
+        role={ERole.ADMIN}
+        toastMessage="Admin created successfully!"
+        popupTitle="Create Admin"
+      />
       {selectedAdmin && (
         <PopupUpdateAdmin
           open={openPopupUpdate}
