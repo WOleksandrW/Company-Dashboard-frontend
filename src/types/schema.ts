@@ -82,6 +82,7 @@ export const schemaUpdateCompany = yup.object().shape({
 });
 
 export const schemaUpdateUser = yup.object().shape({
+  file: file.optional(),
   username,
   email
 });

@@ -11,6 +11,7 @@ interface IProps {
   submitHandler: (e: React.FormEvent<HTMLFormElement>) => void;
   onCancel?: () => void;
   title: string;
+  startChildren?: React.ReactNode;
   inputs: {
     controlParams: {
       control: Control<any>;
@@ -23,7 +24,15 @@ interface IProps {
   }[];
 }
 
-function FormModalUsage({ open, setOpen, title, inputs, onCancel, submitHandler }: IProps) {
+function FormModalUsage({
+  open,
+  setOpen,
+  title,
+  inputs,
+  onCancel,
+  submitHandler,
+  startChildren
+}: IProps) {
   const cancelHandler = useCallback(() => {
     if (onCancel) onCancel();
     setOpen(false);
@@ -47,6 +56,7 @@ function FormModalUsage({ open, setOpen, title, inputs, onCancel, submitHandler 
               gap: '16px',
               alignSelf: 'center'
             }}>
+            {startChildren}
             {inputs.map(({ controlParams, ...rest }) => (
               <Controller
                 key={controlParams.name}

@@ -1,19 +1,18 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import api from '../../api';
 import { FormModalUsage } from '../';
 import { EQueryKeys } from '../../types/enums';
 import { schemaUpdateUser } from '../../types/schema';
-import { TPatchUser } from '../../types/types';
 import { TUser } from '../../types/TUser';
-
-interface IFormValues {
-  username: string;
-  email: string;
-}
+import { Avatar, Box, Button } from '@mui/material';
+import { MdCloudUpload } from 'react-icons/md';
+import { FaTrashAlt } from 'react-icons/fa';
+import getImageFromBuffer from '../../utils/getImageFromBuffer';
+import stringAvatar from '../../utils/stringAvatar';
 
 interface IProps {
   open: boolean;
@@ -34,13 +33,18 @@ function PopupUpdateUser({
   toastMessage,
   popupTitle
 }: IProps) {
-  const { id, username, email } = user;
+  const { id, username, email, image } = user;
   const queryClient = useQueryClient();
+
+  const [imgPreview, setImgPreview] = useState<string | null>(null);
 
   const {
     control,
+    register,
     handleSubmit,
+    setValue,
     reset,
+    watch,
     formState: { errors }
   } = useForm({
     defaultValues: {
@@ -50,7 +54,7 @@ function PopupUpdateUser({
     resolver: yupResolver(schemaUpdateUser)
   });
 
-  const { mutateAsync } = useMutation((data: TPatchUser) => api.users.update(id, data), {
+  const { mutateAsync } = useMutation((data: FormData) => api.users.update(id, data), {
     onSuccess: () => {
       toast.success(toastMessage);
       queryClient.invalidateQueries(queryKey);
@@ -58,13 +62,50 @@ function PopupUpdateUser({
     }
   });
 
+  const watchFile = watch('file') as FileList | undefined | null;
+
   const onSubmit = useCallback(
-    async ({ username, email }: IFormValues) => {
-      await mutateAsync({ username, email });
+    async ({ file, ...restData }: FieldValues) => {
+      const formData = new FormData();
+      Object.entries(restData).forEach(([key, value]) => {
+        formData.append(key, value);
+      });
+
+      if (file?.[0]) {
+        if ((file[0] as File).type.startsWith('image/')) {
+          formData.append('file', file[0]);
+        }
+      } else if (file === null) {
+        formData.append('file', file);
+      }
+
+      await mutateAsync(formData);
       setOpen(false);
     },
     [mutateAsync]
   );
+
+  const handleImagePreview = () => {
+    const file = watchFile?.[0];
+    if (file instanceof File && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImgPreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setImgPreview(null);
+    }
+  };
+
+  const srcImage = useMemo(() => {
+    if (image) return getImageFromBuffer(image.data.data, image.mimeType);
+  }, [image]);
+  const avatar = useMemo(() => stringAvatar(username ?? 'A'), [username]);
+
+  useEffect(() => {
+    handleImagePreview();
+  }, [watchFile]);
 
   useEffect(() => {
     if (!open) reset();
@@ -90,6 +131,51 @@ function PopupUpdateUser({
       submitHandler={(e) => {
         handleSubmit(onSubmit)(e);
       }}
+      startChildren={
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '12px',
+            marginBottom: '8px'
+          }}>
+          <Avatar
+            src={imgPreview ?? (watchFile !== null ? srcImage : undefined)}
+            alt={username}
+            sx={{
+              height: '120px',
+              width: '120px',
+              fontSize: '10rem',
+              ...avatar.sx
+            }}>
+            {avatar.children}
+          </Avatar>
+          <Box sx={{ display: 'flex', gap: '16px' }}>
+            <Button
+              sx={{ typography: 'body1' }}
+              component="label"
+              variant="outlined"
+              startIcon={<MdCloudUpload />}>
+              Upload
+              <input
+                type="file"
+                accept="image/*"
+                {...register('file')}
+                style={{ display: 'none' }}
+              />
+            </Button>
+            <Button
+              sx={{ typography: 'body1' }}
+              variant="outlined"
+              startIcon={<FaTrashAlt />}
+              onClick={() => setValue('file', null)}
+              disabled={watchFile === null || (!watchFile && !image)}>
+              Remove
+            </Button>
+          </Box>
+        </Box>
+      }
     />
   );
 }
