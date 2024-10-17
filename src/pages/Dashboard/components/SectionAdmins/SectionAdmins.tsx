@@ -48,10 +48,10 @@ function SectionAdmins() {
 
   useEffect(() => setSelectedAdmin(null), [response?.list]);
   useEffect(() => {
-    if (!openPopupUpdate && !setOpenPopupChangePass && !openPopupDelete) {
+    if (!openPopupUpdate && !openPopupChangePass && !openPopupDelete) {
       setSelectedAdmin(null);
     }
-  }, [openPopupUpdate, setOpenPopupChangePass, openPopupDelete]);
+  }, [openPopupUpdate, openPopupChangePass, openPopupDelete]);
 
   return (
     <Box
