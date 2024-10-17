@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import { useDebounce } from 'use-debounce';
 import api from '../../api';
 import { Box, Button, IconButton, Pagination, Skeleton, TextField } from '@mui/material';
+import useQueryCurrUser from '../../hooks/useQueryCurrUser';
 import {
   BreadcrumbsUsage,
   EmptyMessage,
@@ -11,7 +12,7 @@ import {
   GridListUsage
 } from '../../components';
 import { PopupCreateCompany } from './components';
-import { EOrder, EQueryKeys } from '../../types/enums';
+import { EOrder, EQueryKeys, ERole } from '../../types/enums';
 import { TGetAllCompanies } from '../../types/types';
 import { limitRecords } from '../../constants/queryParams';
 
@@ -19,6 +20,7 @@ import { FaPlus } from 'react-icons/fa';
 import { IoReload } from 'react-icons/io5';
 
 function CompaniesList() {
+  const { data: userData } = useQueryCurrUser();
   const [titleOrder, setTitleOrder] = useState<string>('');
   const [serviceOrder, setServiceOrder] = useState<string>('');
   const [createdAt, setCreatedAt] = useState('');
@@ -131,12 +133,14 @@ function CompaniesList() {
           }}>
           <IoReload />
         </IconButton>
-        <Button
-          startIcon={<FaPlus />}
-          onClick={() => setOpenPopup(true)}
-          sx={{ typography: 'body1' }}>
-          Create Company
-        </Button>
+        {userData!.role === ERole.USER && (
+          <Button
+            startIcon={<FaPlus />}
+            onClick={() => setOpenPopup(true)}
+            sx={{ typography: 'body1' }}>
+            Create Company
+          </Button>
+        )}
       </Box>
       {isLoading ? (
         <GridListUsage sx={{ flex: 1 }}>
@@ -163,7 +167,9 @@ function CompaniesList() {
       ) : (
         <EmptyMessage sx={{ flex: 1, justifyContent: 'center' }} message="List is empty" />
       )}
-      <PopupCreateCompany open={openPopup} setOpen={setOpenPopup} />
+      {userData!.role === ERole.USER && (
+        <PopupCreateCompany open={openPopup} setOpen={setOpenPopup} />
+      )}
     </>
   );
 }
