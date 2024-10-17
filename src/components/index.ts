@@ -13,6 +13,7 @@ import BreadcrumbsUsage from './BreadcrumbsUsage/BreadcrumbsUsage';
 import MenuUsage from './MenuUsage/MenuUsage';
 import ModalUsage from './ModalUsage/ModalUsage';
 import ConfirmModalUsage from './ConfirmModalUsage/ConfirmModalUsage';
+import FormModalUsage from './FormModalUsage/FormModalUsage';
 import SelectUsage from './SelectUsage/SelectUsage';
 import TextFieldUsage from './TextFieldUsage/TextFieldUsage';
 import TooltipUsage from './TooltipUsage/TooltipUsage';
@@ -36,6 +37,7 @@ export {
   MenuUsage,
   ModalUsage,
   ConfirmModalUsage,
+  FormModalUsage,
   SelectUsage,
   TabsUsage,
   TextFieldUsage,
