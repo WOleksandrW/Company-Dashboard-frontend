@@ -1,16 +1,13 @@
 import { useCallback, useEffect } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
-import { Box, Button, Typography } from '@mui/material';
-import { Controller, FieldValues, useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import api from '../../../../api';
 import useQueryCurrUser from '../../../../hooks/useQueryCurrUser';
-import { ModalUsage, TextFieldUsage } from '../../../../components';
+import { FormModalUsage } from '../../../../components';
 import { schemaUpdateCompany } from '../../../../types/schema';
 import { EQueryKeys } from '../../../../types/enums';
-
-import { MdCancel, MdOutlineDone } from 'react-icons/md';
 
 interface IProps {
   open: boolean;
@@ -69,87 +66,37 @@ function PopupCreateCompany({ open, setOpen }: IProps) {
   }, [open]);
 
   return (
-    <ModalUsage open={open} setOpen={setOpen}>
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-        <Typography variant="h2" className="primary-color" sx={{ fontWeight: 'bold' }}>
-          Create company
-        </Typography>
-        <Box
-          component="form"
-          onSubmit={(e) => {
-            handleSubmit(onSubmit)(e);
-          }}
-          sx={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-          <Box
-            sx={{
-              width: 'min(300px, 100%)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '16px',
-              alignSelf: 'center'
-            }}>
-            <Controller
-              name="title"
-              control={control}
-              render={({ field }) => (
-                <TextFieldUsage label="Title" errorMessage={errors.title?.message} field={field} />
-              )}
-            />
-            <Controller
-              name="service"
-              control={control}
-              render={({ field }) => (
-                <TextFieldUsage
-                  label="Service"
-                  errorMessage={errors.service?.message}
-                  field={field}
-                />
-              )}
-            />
-            <Controller
-              name="address"
-              control={control}
-              render={({ field }) => (
-                <TextFieldUsage
-                  label="Address"
-                  errorMessage={errors.address?.message}
-                  field={field}
-                />
-              )}
-            />
-            <Controller
-              name="capital"
-              control={control}
-              render={({ field }) => (
-                <TextFieldUsage
-                  label="Capital"
-                  type="number"
-                  errorMessage={errors.capital?.message}
-                  field={field}
-                />
-              )}
-            />
-          </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Button
-              sx={{ typography: 'body1' }}
-              variant="outlined"
-              type="button"
-              startIcon={<MdCancel />}
-              onClick={() => setOpen(false)}>
-              Cancel
-            </Button>
-            <Button
-              sx={{ typography: 'body1' }}
-              variant="outlined"
-              type="submit"
-              startIcon={<MdOutlineDone />}>
-              Create
-            </Button>
-          </Box>
-        </Box>
-      </Box>
-    </ModalUsage>
+    <FormModalUsage
+      open={open}
+      setOpen={setOpen}
+      title="Create Company"
+      inputs={[
+        {
+          controlParams: { control, name: 'title' },
+          label: 'Title',
+          errorMessage: errors.title?.message
+        },
+        {
+          controlParams: { control, name: 'service' },
+          label: 'Service',
+          errorMessage: errors.service?.message
+        },
+        {
+          controlParams: { control, name: 'address' },
+          label: 'Address',
+          errorMessage: errors.address?.message
+        },
+        {
+          controlParams: { control, name: 'capital' },
+          label: 'Capital',
+          type: 'number',
+          errorMessage: errors.capital?.message
+        }
+      ]}
+      submitHandler={(e) => {
+        handleSubmit(onSubmit)(e);
+      }}
+    />
   );
 }
 
