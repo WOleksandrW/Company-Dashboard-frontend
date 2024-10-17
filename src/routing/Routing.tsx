@@ -23,7 +23,7 @@ function Routing() {
             <Route path="" element={<AuthLayout />}>
               <Route path="" element={<Dashboard />} />
               <Route path="companies" element={<CompaniesList />} />
-              <Route path="company/:id" element={<CompanyDetail />} />
+              <Route path="companies/:id" element={<CompanyDetail />} />
               <Route path="profile" element={<Profile />} />
               <Route path="*" element={<NotFound />} />
             </Route>

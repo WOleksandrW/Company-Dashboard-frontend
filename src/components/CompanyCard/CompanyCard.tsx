@@ -39,7 +39,7 @@ function CompanyCard({ company }: IProps) {
         />
       </CardContent>
       <CardActions sx={{ marginTop: 'auto' }}>
-        <NavLink className="link" to={`/company/${id}`}>
+        <NavLink className="link" to={`/companies/${id}`}>
           <Button sx={{ typography: 'body1' }} size="small">
             View
           </Button>
