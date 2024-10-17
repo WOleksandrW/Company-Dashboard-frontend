@@ -67,9 +67,22 @@ function SectionUsers() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: '12px'
+          gap: '12px',
+          flexWrap: 'wrap',
+          '@media (max-width: 500px)': {
+            flexDirection: 'column'
+          }
         }}>
-        <Box sx={{ display: 'flex', gap: '20px' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            gap: '20px',
+            '@media (max-width: 500px)': {
+              width: 'min(360px, 100%)',
+              flexDirection: 'column',
+              gap: '12px'
+            }
+          }}>
           <TextField
             label="Search"
             value={searchValue}
@@ -90,7 +103,7 @@ function SectionUsers() {
         <Button
           startIcon={<FaPlus />}
           onClick={() => setOpenPopupCreate(true)}
-          sx={{ typography: 'body1' }}>
+          sx={{ typography: 'body1', marginLeft: 'auto' }}>
           Create User
         </Button>
       </Box>

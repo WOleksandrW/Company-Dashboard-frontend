@@ -31,7 +31,16 @@ function SectionCompanies() {
         flexDirection: 'column',
         gap: '16px'
       }}>
-      <Box sx={{ display: 'flex', gap: '20px' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          gap: '20px',
+          '@media (max-width: 500px)': {
+            width: 'min(360px, 100%)',
+            flexDirection: 'column',
+            alignSelf: 'center'
+          }
+        }}>
         <TextField
           label="Search"
           value={searchValue}

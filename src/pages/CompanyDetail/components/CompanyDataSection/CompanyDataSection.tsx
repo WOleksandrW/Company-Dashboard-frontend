@@ -22,11 +22,45 @@ function CompanyDataSection({ company }: IProps) {
         width: 'min(800px, 100%)',
         display: 'flex',
         justifyContent: 'space-between',
-        gap: '32px'
+        gap: '32px',
+        '@media (max-width: 768px)': {
+          alignItems: 'center',
+          gap: '20px'
+        },
+        '@media (max-width: 640px)': {
+          flexDirection: 'column',
+          gap: '12px'
+        }
       }}>
-      <ImageBlock size="large" imgSrc={imgSrc} altText={title} />
+      <ImageBlock
+        imgSrc={imgSrc}
+        altText={title}
+        sx={{
+          height: '300px',
+          width: 'min(300px, 100%)',
+          '@media (max-width: 768px)': {
+            maxHeight: '240px',
+            maxWidth: '240px'
+          },
+          '@media (max-width: 640px)': {
+            maxHeight: '280px',
+            maxWidth: '280px'
+          }
+        }}
+      />
       <Box
-        sx={{ width: 'min(400px, 100%)', display: 'flex', flexDirection: 'column', gap: '32px' }}>
+        sx={{
+          width: 'min(400px, 100%)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '32px',
+          '@media (max-width: 768px)': {
+            gap: '20px'
+          },
+          '@media (max-width: 640px)': {
+            gap: '12px'
+          }
+        }}>
         <Typography
           variant="h2"
           className="text-ellipsis content-dark-color"

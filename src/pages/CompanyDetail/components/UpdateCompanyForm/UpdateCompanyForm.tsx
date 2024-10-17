@@ -106,13 +106,28 @@ function UpdateCompanyForm({ company, onClose }: IProps) {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          gap: '32px'
+          gap: '32px',
+          '@media (max-width: 640px)': {
+            flexDirection: 'column',
+            gap: '20px'
+          }
         }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
           <ImageBlock
-            size="large"
             imgSrc={imgPreview ?? (watchFile !== null ? imgSrc : undefined)}
             altText={title}
+            sx={{
+              height: '300px',
+              width: 'min(300px, 100%)',
+              '@media (max-width: 768px)': {
+                maxHeight: '240px',
+                maxWidth: '240px'
+              },
+              '@media (max-width: 640px)': {
+                maxHeight: '280px',
+                maxWidth: '280px'
+              }
+            }}
           />
           <Box sx={{ display: 'flex', gap: '16px' }}>
             <Button

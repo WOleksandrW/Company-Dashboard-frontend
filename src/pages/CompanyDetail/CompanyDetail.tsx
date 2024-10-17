@@ -72,7 +72,7 @@ function CompanyDetail() {
                 component="img"
                 src={mapPlaceholder}
                 alt={companyData.address}
-                sx={{ maxWidth: '900px' }}
+                sx={{ width: '100%', maxWidth: '900px' }}
               />
             </Box>
             <PopupDeleteCompany open={open} setOpen={setOpen} {...companyData} />

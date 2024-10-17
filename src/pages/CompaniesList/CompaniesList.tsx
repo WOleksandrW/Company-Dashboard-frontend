@@ -73,10 +73,37 @@ function CompaniesList() {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          gap: '40px'
+          columnGap: '40px',
+          rowGap: '16px',
+          '@media (max-width: 1024px)': {
+            flexDirection: 'column',
+            alignItems: 'stretch'
+          },
+          '@media (max-width: 500px)': {
+            width: 'min(340px, 100%)',
+            marginX: 'auto'
+          }
         }}>
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '20px',
+            '@media (max-width: 500px)': {
+              flexDirection: 'column',
+              gap: '16px'
+            }
+          }}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '20px',
+              '@media (max-width: 500px)': {
+                flexDirection: 'column',
+                gap: '16px'
+              }
+            }}>
             <TextField
               type="date"
               label="Created at"
@@ -101,7 +128,16 @@ function CompaniesList() {
               onChange={(e) => setValueCapitalMax(+e.target.value)}
             />
           </Box>
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '20px',
+              '@media (max-width: 500px)': {
+                flexDirection: 'column',
+                gap: '16px'
+              }
+            }}>
             <SelectUsage
               label="Title order"
               list={[
@@ -111,7 +147,7 @@ function CompaniesList() {
               hasNone={true}
               value={titleOrder}
               onChange={(value) => setTitleOrder(value)}
-              sx={{ width: 160 }}
+              sx={{ width: 160, '@media (max-width: 500px)': { width: '100%', maxWidth: 'unset' } }}
             />
             <SelectUsage
               label="Service order"
@@ -122,25 +158,27 @@ function CompaniesList() {
               hasNone={true}
               value={serviceOrder}
               onChange={(value) => setServiceOrder(value)}
-              sx={{ width: 160 }}
+              sx={{ width: 160, '@media (max-width: 500px)': { width: '100%', maxWidth: 'unset' } }}
             />
           </Box>
         </Box>
-        <IconButton
-          size="large"
-          onClick={() => {
-            refetch();
-          }}>
-          <IoReload />
-        </IconButton>
-        {userData!.role === ERole.USER && (
-          <Button
-            startIcon={<FaPlus />}
-            onClick={() => setOpenPopup(true)}
-            sx={{ typography: 'body1' }}>
-            Create Company
-          </Button>
-        )}
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <IconButton
+            size="large"
+            onClick={() => {
+              refetch();
+            }}>
+            <IoReload />
+          </IconButton>
+          {userData!.role === ERole.USER && (
+            <Button
+              startIcon={<FaPlus />}
+              onClick={() => setOpenPopup(true)}
+              sx={{ typography: 'body1', whiteSpace: 'nowrap' }}>
+              Create Company
+            </Button>
+          )}
+        </Box>
       </Box>
       {isLoading ? (
         <GridListUsage sx={{ flex: 1 }}>

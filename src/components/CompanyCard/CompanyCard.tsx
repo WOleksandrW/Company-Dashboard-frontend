@@ -5,8 +5,6 @@ import { ImageBlock, MiniDataList, TooltipUsage } from '../';
 import getImageFromBuffer from '../../utils/getImageFromBuffer';
 import { TCompany } from '../../types/TCompany';
 
-import styles from './CompanyCard.module.scss';
-
 interface IProps {
   company: TCompany;
 }
@@ -20,7 +18,7 @@ function CompanyCard({ company }: IProps) {
 
   return (
     <Card sx={{ display: 'flex', flexDirection: 'column', borderRadius: '8px' }}>
-      <ImageBlock className={styles['img-block']} imgSrc={imgSrc} altText={title} />
+      <ImageBlock imgSrc={imgSrc} altText={title} sx={{ height: '260px', marginX: 'auto' }} />
       <CardContent className="content-color">
         <TooltipUsage title={title}>
           <Typography

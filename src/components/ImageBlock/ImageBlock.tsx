@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { Box, SxProps, Theme } from '@mui/material';
 
 import imgPlaceholder from '../../assets/images/image-placeholder.png';
 
@@ -7,22 +7,30 @@ import styles from './ImageBlock.module.scss';
 interface IProps {
   imgSrc?: string;
   altText?: string;
-  className?: string;
-  size?: 'normal' | 'large';
+  sx?: SxProps<Theme>;
 }
 
-function ImageBlock({ imgSrc, altText, className, size }: IProps) {
-  const classNames = useMemo(() => {
-    const arr = [styles['img-block']];
-    if (size) arr.push(styles[size]);
-    if (className) arr.push(className);
-    return arr.join(' ');
-  }, [size, className]);
-
+function ImageBlock({ imgSrc, altText, sx }: IProps) {
   return (
-    <div className={classNames}>
-      <img className={styles['img']} src={imgSrc ?? imgPlaceholder} alt={altText} />
-    </div>
+    <Box
+      className={styles['img-block']}
+      sx={{
+        maxHeight: '400px',
+        maxWidth: '400px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: '8px',
+        overflow: 'clip',
+        ...sx
+      }}>
+      <Box
+        component="img"
+        src={imgSrc ?? imgPlaceholder}
+        alt={altText}
+        sx={{ maxWidth: '100%', maxHeight: '100%' }}
+      />
+    </Box>
   );
 }
 

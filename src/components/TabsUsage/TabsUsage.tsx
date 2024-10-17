@@ -14,9 +14,23 @@ function TabsUsage({ tabs }: IProps) {
   return (
     <>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={tab} onChange={(_, val) => setTab(val)} aria-label="basic tabs example">
+        <Tabs
+          value={tab}
+          onChange={(_, val) => setTab(val)}
+          sx={{ '@media (max-width: 500px)': { minHeight: 'auto' } }}>
           {tabs.map(({ label }) => (
-            <Tab sx={{ typography: 'body1' }} key={label} label={label} />
+            <Tab
+              sx={{
+                typography: 'body1',
+                '@media (max-width: 500px)': {
+                  padding: '8px 12px',
+                  minHeight: 'auto',
+                  minWidth: 'auto'
+                }
+              }}
+              key={label}
+              label={label}
+            />
           ))}
         </Tabs>
       </Box>

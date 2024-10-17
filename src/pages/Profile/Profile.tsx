@@ -30,14 +30,27 @@ function Profile() {
     <>
       <BreadcrumbsUsage list={[{ to: '/', text: 'Home' }, { text: 'Profile' }]} />
       {userData && (
-        <Box component="section" sx={{ flex: 1, display: 'flex', gap: '20px' }}>
+        <Box
+          component="section"
+          sx={{
+            flex: 1,
+            display: 'flex',
+            gap: '20px',
+            '@media (max-width: 900px)': {
+              flexDirection: 'column'
+            }
+          }}>
           <Paper
             sx={{
               width: 'min(300px, 100%)',
               alignSelf: 'flex-start',
               padding: '20px',
               borderRadius: '16px',
-              boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)'
+              boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+              '@media (max-width: 900px)': {
+                padding: '12px',
+                borderRadius: '12px'
+              }
             }}>
             <Avatar
               src={srcImage}
@@ -83,13 +96,22 @@ function Profile() {
             </Box>
           </Paper>
 
-          <Paper sx={{ flex: 1, borderRadius: '16px', padding: '20px' }}>
+          <Paper
+            sx={{
+              flex: 1,
+              borderRadius: '16px',
+              padding: '20px',
+              '@media (max-width: 900px)': {
+                padding: '12px',
+                borderRadius: '12px'
+              }
+            }}>
             <TabsUsage
               tabs={[
                 {
                   label: 'Account Info',
                   children: (
-                    <Box sx={{ padding: '20px' }}>
+                    <Box sx={{ padding: '20px', '@media (max-width: 900px)': { padding: '12px' } }}>
                       <Typography variant="body1">
                         Welcome to your profile. Here, you can view and update your personal
                         information.
