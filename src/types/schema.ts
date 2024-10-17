@@ -56,6 +56,11 @@ export const schemaSignUp = yup.object().shape({
   confirm: confirmPassword
 });
 
+export const schemaChangePassword = yup.object().shape({
+  password,
+  confirm: confirmPassword
+});
+
 export const schemaSignIn = yup.object().shape({
   email,
   password

@@ -6,15 +6,13 @@ import { toast } from 'react-toastify';
 import api from '../../../../api';
 import { FormModalUsage } from '../../../../components';
 import { EQueryKeys } from '../../../../types/enums';
-import { schemaSignUp } from '../../../../types/schema';
-import { TSignUpBody } from '../../../../types/types';
+import { schemaUpdateUser } from '../../../../types/schema';
+import { TPatchUser } from '../../../../types/types';
 import { TUser } from '../../../../types/TUser';
 
 interface IUpdateAdminForm {
   username: string;
   email: string;
-  password: string;
-  confirm: string;
 }
 
 interface IProps {
@@ -34,14 +32,12 @@ function PopupUpdateAdmin({ open, setOpen, user }: IProps) {
   } = useForm({
     defaultValues: {
       username: user.username,
-      email: user.email,
-      password: '',
-      confirm: ''
+      email: user.email
     },
-    resolver: yupResolver(schemaSignUp)
+    resolver: yupResolver(schemaUpdateUser)
   });
 
-  const { mutateAsync } = useMutation((data: TSignUpBody) => api.users.update(user.id, data), {
+  const { mutateAsync } = useMutation((data: TPatchUser) => api.users.update(user.id, data), {
     onSuccess: () => {
       toast.success('Admin updated successfully!');
       queryClient.invalidateQueries(EQueryKeys.ADMINS_LIST);
@@ -49,8 +45,8 @@ function PopupUpdateAdmin({ open, setOpen, user }: IProps) {
   });
 
   const onSubmit = useCallback(
-    async ({ username, email, password }: IUpdateAdminForm) => {
-      await mutateAsync({ username, email, password });
+    async ({ username, email }: IUpdateAdminForm) => {
+      await mutateAsync({ username, email });
       setOpen(false);
     },
     [mutateAsync]
@@ -75,20 +71,6 @@ function PopupUpdateAdmin({ open, setOpen, user }: IProps) {
           controlParams: { control, name: 'email' },
           label: 'Email',
           errorMessage: errors.email?.message
-        },
-        {
-          controlParams: { control, name: 'password' },
-          label: 'Password',
-          type: 'password',
-          autoComplete: 'off',
-          errorMessage: errors.password?.message
-        },
-        {
-          controlParams: { control, name: 'confirm' },
-          label: 'Confirm password',
-          type: 'password',
-          autoComplete: 'off',
-          errorMessage: errors.confirm?.message
         }
       ]}
       submitHandler={(e) => {

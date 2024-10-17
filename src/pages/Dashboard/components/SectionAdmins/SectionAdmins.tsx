@@ -4,12 +4,12 @@ import { Box, Button, Pagination, Skeleton, TextField } from '@mui/material';
 import { useDebounce } from 'use-debounce';
 import api from '../../../../api';
 import { EmptyMessage, GridListUsage, UserCard } from '../../../../components';
-import { PopupCreateUser, PopupDeleteUser, PopupUpdateAdmin } from '../';
+import { PopupCreateUser, PopupDeleteUser, PopupChangePasswordUser, PopupUpdateAdmin } from '../';
 import { EQueryKeys, ERole } from '../../../../types/enums';
 import { TUser } from '../../../../types/TUser';
 import { limitRecords } from '../../../../constants/queryParams';
 
-import { FaEdit, FaPlus, FaTrashAlt } from 'react-icons/fa';
+import { FaEdit, FaLock, FaPlus, FaTrashAlt } from 'react-icons/fa';
 
 function SectionAdmins() {
   const [searchValue, setSearchValue] = useState('');
@@ -18,6 +18,7 @@ function SectionAdmins() {
   const [selectedAdmin, setSelectedAdmin] = useState<TUser | null>(null);
   const [openPopupCreate, setOpenPopupCreate] = useState(false);
   const [openPopupUpdate, setOpenPopupUpdate] = useState(false);
+  const [openPopupChangePass, setOpenPopupChangePass] = useState(false);
   const [openPopupDelete, setOpenPopupDelete] = useState(false);
 
   const [search] = useDebounce(searchValue, 500);
@@ -37,6 +38,9 @@ function SectionAdmins() {
   useEffect(() => {
     if (!openPopupUpdate) setSelectedAdmin(null);
   }, [openPopupUpdate]);
+  useEffect(() => {
+    if (!openPopupChangePass) setSelectedAdmin(null);
+  }, [openPopupChangePass]);
 
   return (
     <Box
@@ -118,6 +122,14 @@ function SectionAdmins() {
                       }
                     },
                     {
+                      text: 'Change password',
+                      icon: FaLock,
+                      callback: () => {
+                        setSelectedAdmin(admin);
+                        setOpenPopupChangePass(true);
+                      }
+                    },
+                    {
                       text: 'Delete',
                       icon: FaTrashAlt,
                       callback: () => {
@@ -152,6 +164,14 @@ function SectionAdmins() {
           open={openPopupUpdate}
           setOpen={setOpenPopupUpdate}
           user={selectedAdmin}
+        />
+      )}
+      {selectedAdmin && (
+        <PopupChangePasswordUser
+          open={openPopupChangePass}
+          setOpen={setOpenPopupChangePass}
+          userId={selectedAdmin.id}
+          toastMessage={`Password of admin "${selectedAdmin.username}" changed successfully!`}
         />
       )}
       {selectedAdmin && (
