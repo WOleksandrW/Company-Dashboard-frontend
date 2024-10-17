@@ -4,12 +4,12 @@ import { Box, Button, Pagination, Skeleton, TextField } from '@mui/material';
 import { useDebounce } from 'use-debounce';
 import api from '../../../../api';
 import { EmptyMessage, GridListUsage, UserCard } from '../../../../components';
-import { PopupCreateUser, PopupDeleteUser, PopupChangePasswordUser } from '../';
+import { PopupCreateUser, PopupDeleteUser, PopupChangePasswordUser, PopupUpdateUser } from '../';
 import { EQueryKeys, ERole } from '../../../../types/enums';
 import { TUser } from '../../../../types/TUser';
 import { limitRecords } from '../../../../constants/queryParams';
 
-import { FaLock, FaPlus, FaTrashAlt } from 'react-icons/fa';
+import { FaEdit, FaLock, FaPlus, FaTrashAlt } from 'react-icons/fa';
 
 function SectionUsers() {
   const [searchValue, setSearchValue] = useState('');
@@ -17,6 +17,7 @@ function SectionUsers() {
   const [page, setPage] = useState(1);
   const [selectedUser, setSelectedUser] = useState<TUser | null>(null);
   const [openPopupCreate, setOpenPopupCreate] = useState(false);
+  const [openPopupUpdate, setOpenPopupUpdate] = useState(false);
   const [openPopupChangePass, setOpenPopupChangePass] = useState(false);
   const [openPopupDelete, setOpenPopupDelete] = useState(false);
 
@@ -37,6 +38,9 @@ function SectionUsers() {
   useEffect(() => {
     if (!openPopupChangePass) setSelectedUser(null);
   }, [openPopupChangePass]);
+  useEffect(() => {
+    if (!openPopupUpdate) setSelectedUser(null);
+  }, [openPopupUpdate]);
 
   return (
     <Box
@@ -110,6 +114,14 @@ function SectionUsers() {
                   user={user}
                   dropDownMenu={[
                     {
+                      text: 'Update',
+                      icon: FaEdit,
+                      callback: () => {
+                        setSelectedUser(user);
+                        setOpenPopupUpdate(true);
+                      }
+                    },
+                    {
                       text: 'Change password',
                       icon: FaLock,
                       callback: () => {
@@ -163,6 +175,16 @@ function SectionUsers() {
           setOpen={setOpenPopupChangePass}
           userId={selectedUser.id}
           toastMessage={`Password of user "${selectedUser.username}" changed successfully!`}
+        />
+      )}
+      {selectedUser && (
+        <PopupUpdateUser
+          open={openPopupUpdate}
+          setOpen={setOpenPopupUpdate}
+          user={selectedUser}
+          queryKey={EQueryKeys.USERS_LIST}
+          toastMessage={`User "${selectedUser.username}" data was updated successfully`}
+          popupTitle="Update User data"
         />
       )}
     </Box>

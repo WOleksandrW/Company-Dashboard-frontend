@@ -4,7 +4,7 @@ import { Box, Button, Pagination, Skeleton, TextField } from '@mui/material';
 import { useDebounce } from 'use-debounce';
 import api from '../../../../api';
 import { EmptyMessage, GridListUsage, UserCard } from '../../../../components';
-import { PopupCreateUser, PopupDeleteUser, PopupChangePasswordUser, PopupUpdateAdmin } from '../';
+import { PopupCreateUser, PopupDeleteUser, PopupChangePasswordUser, PopupUpdateUser } from '../';
 import { EQueryKeys, ERole } from '../../../../types/enums';
 import { TUser } from '../../../../types/TUser';
 import { limitRecords } from '../../../../constants/queryParams';
@@ -160,10 +160,13 @@ function SectionAdmins() {
         popupTitle="Create Admin"
       />
       {selectedAdmin && (
-        <PopupUpdateAdmin
+        <PopupUpdateUser
           open={openPopupUpdate}
           setOpen={setOpenPopupUpdate}
           user={selectedAdmin}
+          queryKey={EQueryKeys.ADMINS_LIST}
+          toastMessage={`Admin "${selectedAdmin.username}" data was updated successfully`}
+          popupTitle="Update Admin data"
         />
       )}
       {selectedAdmin && (

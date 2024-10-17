@@ -10,7 +10,7 @@ import { schemaUpdateUser } from '../../../../types/schema';
 import { TPatchUser } from '../../../../types/types';
 import { TUser } from '../../../../types/TUser';
 
-interface IUpdateAdminForm {
+interface IFormValues {
   username: string;
   email: string;
 }
@@ -19,9 +19,13 @@ interface IProps {
   open: boolean;
   setOpen: (value: boolean) => void;
   user: TUser;
+  queryKey: EQueryKeys.USERS_LIST | EQueryKeys.ADMINS_LIST;
+  toastMessage: string;
+  popupTitle: string;
 }
 
-function PopupUpdateAdmin({ open, setOpen, user }: IProps) {
+function PopupUpdateUser({ open, setOpen, user, queryKey, toastMessage, popupTitle }: IProps) {
+  const { id, username, email } = user;
   const queryClient = useQueryClient();
 
   const {
@@ -31,21 +35,21 @@ function PopupUpdateAdmin({ open, setOpen, user }: IProps) {
     formState: { errors }
   } = useForm({
     defaultValues: {
-      username: user.username,
-      email: user.email
+      username,
+      email
     },
     resolver: yupResolver(schemaUpdateUser)
   });
 
-  const { mutateAsync } = useMutation((data: TPatchUser) => api.users.update(user.id, data), {
+  const { mutateAsync } = useMutation((data: TPatchUser) => api.users.update(id, data), {
     onSuccess: () => {
-      toast.success('Admin updated successfully!');
-      queryClient.invalidateQueries(EQueryKeys.ADMINS_LIST);
+      toast.success(toastMessage);
+      queryClient.invalidateQueries(queryKey);
     }
   });
 
   const onSubmit = useCallback(
-    async ({ username, email }: IUpdateAdminForm) => {
+    async ({ username, email }: IFormValues) => {
       await mutateAsync({ username, email });
       setOpen(false);
     },
@@ -60,7 +64,7 @@ function PopupUpdateAdmin({ open, setOpen, user }: IProps) {
     <FormModalUsage
       open={open}
       setOpen={setOpen}
-      title="Update Admin"
+      title={popupTitle}
       inputs={[
         {
           controlParams: { control, name: 'username' },
@@ -80,4 +84,4 @@ function PopupUpdateAdmin({ open, setOpen, user }: IProps) {
   );
 }
 
-export default PopupUpdateAdmin;
+export default PopupUpdateUser;
