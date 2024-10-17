@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 import { Box, Button, Pagination, Skeleton, TextField } from '@mui/material';
 import { useDebounce } from 'use-debounce';
@@ -31,16 +31,21 @@ function SectionUsers() {
     }
   );
 
+  const dropDownUserCard = useMemo(
+    () => [
+      { text: 'Update', icon: FaEdit, open: setOpenPopupUpdate },
+      { text: 'Change password', icon: FaLock, open: setOpenPopupChangePass },
+      { text: 'Delete', icon: FaTrashAlt, open: setOpenPopupDelete }
+    ],
+    []
+  );
+
   useEffect(() => setSelectedUser(null), [response?.list]);
   useEffect(() => {
-    if (!openPopupDelete) setSelectedUser(null);
-  }, [openPopupDelete]);
-  useEffect(() => {
-    if (!openPopupChangePass) setSelectedUser(null);
-  }, [openPopupChangePass]);
-  useEffect(() => {
-    if (!openPopupUpdate) setSelectedUser(null);
-  }, [openPopupUpdate]);
+    if (!openPopupUpdate && !openPopupChangePass && !openPopupDelete) {
+      setSelectedUser(null);
+    }
+  }, [openPopupUpdate, openPopupChangePass, openPopupDelete]);
 
   return (
     <Box
@@ -112,32 +117,13 @@ function SectionUsers() {
                 <UserCard
                   key={user.id}
                   user={user}
-                  dropDownMenu={[
-                    {
-                      text: 'Update',
-                      icon: FaEdit,
-                      callback: () => {
-                        setSelectedUser(user);
-                        setOpenPopupUpdate(true);
-                      }
+                  dropDownMenu={dropDownUserCard.map(({ open, ...rest }) => ({
+                    callback: () => {
+                      setSelectedUser(user);
+                      open(true);
                     },
-                    {
-                      text: 'Change password',
-                      icon: FaLock,
-                      callback: () => {
-                        setSelectedUser(user);
-                        setOpenPopupChangePass(true);
-                      }
-                    },
-                    {
-                      text: 'Delete',
-                      icon: FaTrashAlt,
-                      callback: () => {
-                        setSelectedUser(user);
-                        setOpenPopupDelete(true);
-                      }
-                    }
-                  ]}
+                    ...rest
+                  }))}
                 />
               ))}
             </GridListUsage>
@@ -160,32 +146,30 @@ function SectionUsers() {
         popupTitle="Create User"
       />
       {selectedUser && (
-        <PopupDeleteUser
-          open={openPopupDelete}
-          setOpen={setOpenPopupDelete}
-          userId={selectedUser.id}
-          queryKey={EQueryKeys.USERS_LIST}
-          toastMessage={`User "${selectedUser.username}" was deleted successfully!`}
-          popupText={`Are you sure you want to delete the user "${selectedUser.username}"`}
-        />
-      )}
-      {selectedUser && (
-        <PopupChangePasswordUser
-          open={openPopupChangePass}
-          setOpen={setOpenPopupChangePass}
-          userId={selectedUser.id}
-          toastMessage={`Password of user "${selectedUser.username}" changed successfully!`}
-        />
-      )}
-      {selectedUser && (
-        <PopupUpdateUser
-          open={openPopupUpdate}
-          setOpen={setOpenPopupUpdate}
-          user={selectedUser}
-          queryKey={EQueryKeys.USERS_LIST}
-          toastMessage={`User "${selectedUser.username}" data was updated successfully`}
-          popupTitle="Update User data"
-        />
+        <>
+          <PopupUpdateUser
+            open={openPopupUpdate}
+            setOpen={setOpenPopupUpdate}
+            user={selectedUser}
+            queryKey={EQueryKeys.USERS_LIST}
+            toastMessage={`User "${selectedUser.username}" data was updated successfully`}
+            popupTitle="Update User data"
+          />
+          <PopupChangePasswordUser
+            open={openPopupChangePass}
+            setOpen={setOpenPopupChangePass}
+            userId={selectedUser.id}
+            toastMessage={`Password of user "${selectedUser.username}" changed successfully!`}
+          />
+          <PopupDeleteUser
+            open={openPopupDelete}
+            setOpen={setOpenPopupDelete}
+            userId={selectedUser.id}
+            queryKey={EQueryKeys.USERS_LIST}
+            toastMessage={`User "${selectedUser.username}" was deleted successfully!`}
+            popupText={`Are you sure you want to delete the user "${selectedUser.username}"`}
+          />
+        </>
       )}
     </Box>
   );

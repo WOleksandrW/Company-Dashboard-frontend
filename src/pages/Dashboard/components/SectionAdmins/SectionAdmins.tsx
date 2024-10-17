@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 import { Box, Button, Pagination, Skeleton, TextField } from '@mui/material';
 import { useDebounce } from 'use-debounce';
@@ -31,16 +31,21 @@ function SectionAdmins() {
     }
   );
 
+  const dropDownUserCard = useMemo(
+    () => [
+      { text: 'Update', icon: FaEdit, open: setOpenPopupUpdate },
+      { text: 'Change password', icon: FaLock, open: setOpenPopupChangePass },
+      { text: 'Delete', icon: FaTrashAlt, open: setOpenPopupDelete }
+    ],
+    []
+  );
+
   useEffect(() => setSelectedAdmin(null), [response?.list]);
   useEffect(() => {
-    if (!openPopupDelete) setSelectedAdmin(null);
-  }, [openPopupDelete]);
-  useEffect(() => {
-    if (!openPopupUpdate) setSelectedAdmin(null);
-  }, [openPopupUpdate]);
-  useEffect(() => {
-    if (!openPopupChangePass) setSelectedAdmin(null);
-  }, [openPopupChangePass]);
+    if (!openPopupUpdate && !setOpenPopupChangePass && !openPopupDelete) {
+      setSelectedAdmin(null);
+    }
+  }, [openPopupUpdate, setOpenPopupChangePass, openPopupDelete]);
 
   return (
     <Box
@@ -112,32 +117,13 @@ function SectionAdmins() {
                 <UserCard
                   key={admin.id}
                   user={admin}
-                  dropDownMenu={[
-                    {
-                      text: 'Update',
-                      icon: FaEdit,
-                      callback: () => {
-                        setSelectedAdmin(admin);
-                        setOpenPopupUpdate(true);
-                      }
+                  dropDownMenu={dropDownUserCard.map(({ open, ...rest }) => ({
+                    callback: () => {
+                      setSelectedAdmin(admin);
+                      open(true);
                     },
-                    {
-                      text: 'Change password',
-                      icon: FaLock,
-                      callback: () => {
-                        setSelectedAdmin(admin);
-                        setOpenPopupChangePass(true);
-                      }
-                    },
-                    {
-                      text: 'Delete',
-                      icon: FaTrashAlt,
-                      callback: () => {
-                        setSelectedAdmin(admin);
-                        setOpenPopupDelete(true);
-                      }
-                    }
-                  ]}
+                    ...rest
+                  }))}
                 />
               ))}
             </GridListUsage>
@@ -160,32 +146,30 @@ function SectionAdmins() {
         popupTitle="Create Admin"
       />
       {selectedAdmin && (
-        <PopupUpdateUser
-          open={openPopupUpdate}
-          setOpen={setOpenPopupUpdate}
-          user={selectedAdmin}
-          queryKey={EQueryKeys.ADMINS_LIST}
-          toastMessage={`Admin "${selectedAdmin.username}" data was updated successfully`}
-          popupTitle="Update Admin data"
-        />
-      )}
-      {selectedAdmin && (
-        <PopupChangePasswordUser
-          open={openPopupChangePass}
-          setOpen={setOpenPopupChangePass}
-          userId={selectedAdmin.id}
-          toastMessage={`Password of admin "${selectedAdmin.username}" changed successfully!`}
-        />
-      )}
-      {selectedAdmin && (
-        <PopupDeleteUser
-          open={openPopupDelete}
-          setOpen={setOpenPopupDelete}
-          userId={selectedAdmin.id}
-          queryKey={EQueryKeys.ADMINS_LIST}
-          toastMessage={`Admin "${selectedAdmin.username}" was deleted successfully!`}
-          popupText={`Are you sure you want to delete the admin "${selectedAdmin.username}"`}
-        />
+        <>
+          <PopupUpdateUser
+            open={openPopupUpdate}
+            setOpen={setOpenPopupUpdate}
+            user={selectedAdmin}
+            queryKey={EQueryKeys.ADMINS_LIST}
+            toastMessage={`Admin "${selectedAdmin.username}" data was updated successfully`}
+            popupTitle="Update Admin data"
+          />
+          <PopupChangePasswordUser
+            open={openPopupChangePass}
+            setOpen={setOpenPopupChangePass}
+            userId={selectedAdmin.id}
+            toastMessage={`Password of admin "${selectedAdmin.username}" changed successfully!`}
+          />
+          <PopupDeleteUser
+            open={openPopupDelete}
+            setOpen={setOpenPopupDelete}
+            userId={selectedAdmin.id}
+            queryKey={EQueryKeys.ADMINS_LIST}
+            toastMessage={`Admin "${selectedAdmin.username}" was deleted successfully!`}
+            popupText={`Are you sure you want to delete the admin "${selectedAdmin.username}"`}
+          />
+        </>
       )}
     </Box>
   );
