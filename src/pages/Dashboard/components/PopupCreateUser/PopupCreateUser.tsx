@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { FormModalUsage } from '../../../../components';
 import { EQueryKeys } from '../../../../enums/queryKeys.enum';
 import { ERole } from '../../../../enums/role.enum';
-import { schemaSignUp } from '../../../../types/schema';
+import { schemaSignUp } from '../../../../yup/schema';
 import { TSignUpBody } from '../../../../types/types';
 
 interface IFormValues {

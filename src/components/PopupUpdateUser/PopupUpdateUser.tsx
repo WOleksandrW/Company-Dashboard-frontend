@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import api from '../../api';
 import { AvatarUsage, FormModalUsage } from '../';
 import { EQueryKeys } from '../../enums/queryKeys.enum';
-import { schemaUpdateUser } from '../../types/schema';
+import { schemaUpdateUser } from '../../yup/schema';
 import { TUser } from '../../types/user.type';
 import { Box, Button } from '@mui/material';
 import { MdCloudUpload } from 'react-icons/md';

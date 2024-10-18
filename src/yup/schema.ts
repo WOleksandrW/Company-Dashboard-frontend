@@ -49,46 +49,48 @@ const capitalCompany = yup
 
 const file = yup.mixed().nullable();
 
-export const schemaSignUp = yup.object().shape({
+const userSchema = yup.object().shape({
   username,
-  email,
+  email
+});
+
+const passwordSchema = yup.object({
   password,
   confirm: confirmPassword
 });
 
-export const schemaChangePassword = yup.object().shape({
-  oldPassword: password.optional(),
-  password,
-  confirm: confirmPassword
-});
+export const schemaSignUp = userSchema.concat(passwordSchema);
 
 export const schemaSignIn = yup.object().shape({
   email,
   password
 });
 
-export const schemaResetPassword = yup.object().shape({
-  email,
-  password,
-  confirm: confirmPassword
-});
+export const schemaResetPassword = yup
+  .object()
+  .shape({
+    email
+  })
+  .concat(passwordSchema);
 
-export const schemaUpdateCompany = yup.object().shape({
+export const schemaUpdateUser = yup
+  .object()
+  .shape({
+    file: file.optional()
+  })
+  .concat(userSchema);
+
+export const schemaChangePassword = yup
+  .object()
+  .shape({
+    oldPassword: password.optional()
+  })
+  .concat(passwordSchema);
+
+export const schemaCompany = yup.object().shape({
   file,
   title: titleCompany,
   service: serviceCompany,
   address: addressCompany,
   capital: capitalCompany
-});
-
-export const schemaUpdateUser = yup.object().shape({
-  file: file.optional(),
-  username,
-  email
-});
-
-export const schemaUpdateUserPassword = yup.object().shape({
-  oldPassword: password,
-  password,
-  confirm: confirmPassword
 });

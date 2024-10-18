@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import api from '../../api';
 import { FormModalUsage } from '../';
-import { schemaChangePassword } from '../../types/schema';
+import { schemaChangePassword } from '../../yup/schema';
 import { TPatchUser } from '../../types/types';
 import { TUser } from '../../types/user.type';
 

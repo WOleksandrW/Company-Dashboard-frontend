@@ -8,7 +8,7 @@ import getImageFromBuffer from '../../../../utils/getImageFromBuffer';
 import api from '../../../../api';
 import { ImageBlock, TextFieldUsage } from '../../../../components';
 import { TCompany } from '../../../../types/company.type';
-import { schemaUpdateCompany } from '../../../../types/schema';
+import { schemaCompany } from '../../../../yup/schema';
 import { EQueryKeys } from '../../../../enums/queryKeys.enum';
 
 import { FaTrashAlt } from 'react-icons/fa';
@@ -38,7 +38,7 @@ function UpdateCompanyForm({ company, onClose }: IProps) {
       address: address,
       capital: capital
     },
-    resolver: yupResolver(schemaUpdateCompany)
+    resolver: yupResolver(schemaCompany)
   });
 
   const { mutateAsync } = useMutation((data: FormData) => api.companies.update(id, data), {

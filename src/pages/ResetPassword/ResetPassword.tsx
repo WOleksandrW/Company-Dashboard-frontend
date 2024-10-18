@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import api from '../../api';
 import { Typography } from '@mui/material';
 import { AuthForm, TextLinkList } from '../../components';
-import { schemaResetPassword } from '../../types/schema';
+import { schemaResetPassword } from '../../yup/schema';
 import { TSignInBody } from '../../types/types';
 
 function ResetPassword() {

@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import api from '../../api';
 import useQueryCurrUser from '../../hooks/useQueryCurrUser';
 import { FormModalUsage } from '../';
-import { schemaUpdateCompany } from '../../types/schema';
+import { schemaCompany } from '../../yup/schema';
 import { EQueryKeys } from '../../enums/queryKeys.enum';
 import { TUser } from '../../types/user.type';
 
@@ -32,7 +32,7 @@ function PopupCreateCompany({ open, setOpen, userId }: IProps) {
       address: '',
       capital: 0
     },
-    resolver: yupResolver(schemaUpdateCompany)
+    resolver: yupResolver(schemaCompany)
   });
 
   const { mutateAsync } = useMutation((data: FormData) => api.companies.create(data), {

@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import api from '../../api';
 import { Typography } from '@mui/material';
 import { AuthForm, TextLinkList } from '../../components';
-import { schemaSignUp } from '../../types/schema';
+import { schemaSignUp } from '../../yup/schema';
 import { TSignUpBody } from '../../types/types';
 
 function SignUp() {

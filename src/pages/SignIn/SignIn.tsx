@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import api from '../../api';
 import { Typography } from '@mui/material';
 import { AuthForm, TextLinkList } from '../../components';
-import { schemaSignIn } from '../../types/schema';
+import { schemaSignIn } from '../../yup/schema';
 import { TSignInBody } from '../../types/types';
 import useQueryCurrUser from '../../hooks/useQueryCurrUser';
 
