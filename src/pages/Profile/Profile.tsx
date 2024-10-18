@@ -14,7 +14,8 @@ import {
   TabsUsage
 } from '../../components';
 import getImageFromBuffer from '../../utils/getImageFromBuffer';
-import { EQueryKeys, ERole } from '../../types/enums';
+import { EQueryKeys } from '../../enums/queryKeys.enum';
+import { ERole } from '../../enums/role.enum';
 
 import { FaEdit, FaLock } from 'react-icons/fa';
 import { CompaniesTab } from './components';

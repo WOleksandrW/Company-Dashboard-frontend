@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import useQueryCurrUser from '../../hooks/useQueryCurrUser';
-import { ERole } from '../../types/enums';
+import { ERole } from '../../enums/role.enum';
 import { TabsUsage } from '../../components';
 import { DashboardContentUser, SectionAdmins, SectionCompanies, SectionUsers } from './components';
 

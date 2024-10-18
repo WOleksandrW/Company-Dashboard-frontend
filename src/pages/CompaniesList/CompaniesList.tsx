@@ -13,7 +13,9 @@ import {
   PopupCreateCompany,
   TextFieldUsage
 } from '../../components';
-import { EOrder, EQueryKeys, ERole } from '../../types/enums';
+import { EOrder } from '../../enums/order.enum';
+import { EQueryKeys } from '../../enums/queryKeys.enum';
+import { ERole } from '../../enums/role.enum';
 import { TGetAllCompanies } from '../../types/types';
 import { limitRecords } from '../../constants/queryParams';
 

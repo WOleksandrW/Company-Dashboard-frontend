@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { Box, Pagination, Skeleton, TextField } from '@mui/material';
 import { useDebounce } from 'use-debounce';
 import api from '../../../../api';
-import { EQueryKeys } from '../../../../types/enums';
+import { EQueryKeys } from '../../../../enums/queryKeys.enum';
 import { CompanyCard, EmptyMessage, GridListUsage } from '../../../../components';
 import { limitRecords } from '../../../../constants/queryParams';
 

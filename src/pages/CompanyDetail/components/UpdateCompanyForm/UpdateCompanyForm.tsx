@@ -9,7 +9,7 @@ import api from '../../../../api';
 import { ImageBlock, TextFieldUsage } from '../../../../components';
 import { TCompany } from '../../../../types/TCompany';
 import { schemaUpdateCompany } from '../../../../types/schema';
-import { EQueryKeys } from '../../../../types/enums';
+import { EQueryKeys } from '../../../../enums/queryKeys.enum';
 
 import { FaTrashAlt } from 'react-icons/fa';
 import { MdCancel, MdCloudUpload, MdOutlineDone } from 'react-icons/md';

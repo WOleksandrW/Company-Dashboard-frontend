@@ -6,14 +6,3 @@ export enum EQueryKeys {
   COMPANY = 'company',
   USER = 'user'
 }
-
-export enum ERole {
-  USER = 'USER',
-  ADMIN = 'ADMIN',
-  SUPER = 'SUPER-ADMIN'
-}
-
-export enum EOrder {
-  ASC = 'ASC',
-  DESC = 'DESC'
-}

@@ -4,7 +4,7 @@ import api from '../../../../api';
 import { Box, Button, List, Pagination, Skeleton } from '@mui/material';
 import { CompanyCard, EmptyMessage, PopupCreateCompany } from '../../../../components';
 import { TUser } from '../../../../types/TUser';
-import { EQueryKeys } from '../../../../types/enums';
+import { EQueryKeys } from '../../../../enums/queryKeys.enum';
 
 import { FaPlus } from 'react-icons/fa';
 

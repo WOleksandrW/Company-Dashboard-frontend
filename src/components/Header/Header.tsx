@@ -5,7 +5,7 @@ import { useQueryClient } from 'react-query';
 import useQueryCurrUser from '../../hooks/useQueryCurrUser';
 import getImageFromBuffer from '../../utils/getImageFromBuffer';
 import { AvatarUsage, MainDrawerUsage, WrapperBoxUsage } from '../';
-import { EQueryKeys } from '../../types/enums';
+import { EQueryKeys } from '../../enums/queryKeys.enum';
 
 import { IoLogOutOutline, IoMenu, IoPersonCircleSharp } from 'react-icons/io5';
 

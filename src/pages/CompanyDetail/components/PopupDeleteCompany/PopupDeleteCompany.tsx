@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import api from '../../../../api';
 import { ConfirmModalUsage } from '../../../../components';
-import { EQueryKeys } from '../../../../types/enums';
+import { EQueryKeys } from '../../../../enums/queryKeys.enum';
 import { TCompany } from '../../../../types/TCompany';
 
 interface IProps {

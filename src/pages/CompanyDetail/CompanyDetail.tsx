@@ -6,7 +6,8 @@ import api from '../../api';
 import useQueryCurrUser from '../../hooks/useQueryCurrUser';
 import { BreadcrumbsUsage, EmptyMessage } from '../../components';
 import { CompanyDataSection, PopupDeleteCompany, UpdateCompanyForm } from './components';
-import { EQueryKeys, ERole } from '../../types/enums';
+import { EQueryKeys } from '../../enums/queryKeys.enum';
+import { ERole } from '../../enums/role.enum';
 
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import mapPlaceholder from '../../assets/images/map-placeholder.png';

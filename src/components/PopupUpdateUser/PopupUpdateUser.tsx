@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import api from '../../api';
 import { AvatarUsage, FormModalUsage } from '../';
-import { EQueryKeys } from '../../types/enums';
+import { EQueryKeys } from '../../enums/queryKeys.enum';
 import { schemaUpdateUser } from '../../types/schema';
 import { TUser } from '../../types/TUser';
 import { Box, Button } from '@mui/material';

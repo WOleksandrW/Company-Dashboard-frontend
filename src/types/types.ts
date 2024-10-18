@@ -1,4 +1,5 @@
-import { EOrder, ERole } from './enums';
+import { EOrder } from '../enums/order.enum';
+import { ERole } from '../enums/role.enum';
 import { TUser } from './TUser';
 
 export type TBaseDates = {

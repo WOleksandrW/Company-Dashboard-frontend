@@ -7,7 +7,7 @@ import api from '../../api';
 import useQueryCurrUser from '../../hooks/useQueryCurrUser';
 import { FormModalUsage } from '../';
 import { schemaUpdateCompany } from '../../types/schema';
-import { EQueryKeys } from '../../types/enums';
+import { EQueryKeys } from '../../enums/queryKeys.enum';
 import { TUser } from '../../types/TUser';
 
 interface IProps {

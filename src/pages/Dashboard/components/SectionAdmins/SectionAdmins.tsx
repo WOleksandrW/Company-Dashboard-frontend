@@ -11,7 +11,8 @@ import {
   UserCard
 } from '../../../../components';
 import { PopupCreateUser, PopupDeleteUser } from '../';
-import { EQueryKeys, ERole } from '../../../../types/enums';
+import { EQueryKeys } from '../../../../enums/queryKeys.enum';
+import { ERole } from '../../../../enums/role.enum';
 import { TUser } from '../../../../types/TUser';
 import { limitRecords } from '../../../../constants/queryParams';
 

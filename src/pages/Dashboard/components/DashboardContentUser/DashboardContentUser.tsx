@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { Box, Divider, Pagination, Skeleton, Typography } from '@mui/material';
 import api from '../../../../api';
 import { CompanyCard, EmptyMessage, GridListUsage, PieChartUsage } from '../../../../components';
-import { EQueryKeys } from '../../../../types/enums';
+import { EQueryKeys } from '../../../../enums/queryKeys.enum';
 import { limitRecords } from '../../../../constants/queryParams';
 
 function DashboardContentUser() {

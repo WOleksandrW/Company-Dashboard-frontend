@@ -5,7 +5,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import api from '../../../../api';
 import { toast } from 'react-toastify';
 import { FormModalUsage } from '../../../../components';
-import { EQueryKeys, ERole } from '../../../../types/enums';
+import { EQueryKeys } from '../../../../enums/queryKeys.enum';
+import { ERole } from '../../../../enums/role.enum';
 import { schemaSignUp } from '../../../../types/schema';
 import { TSignUpBody } from '../../../../types/types';
 
