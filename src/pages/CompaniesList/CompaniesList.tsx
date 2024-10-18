@@ -10,7 +10,8 @@ import {
   SelectUsage,
   CompanyCard,
   GridListUsage,
-  PopupCreateCompany
+  PopupCreateCompany,
+  TextFieldUsage
 } from '../../components';
 import { EOrder, EQueryKeys, ERole } from '../../types/enums';
 import { TGetAllCompanies } from '../../types/types';
@@ -25,12 +26,15 @@ function CompaniesList() {
   const [serviceOrder, setServiceOrder] = useState<string>('');
   const [createdAt, setCreatedAt] = useState('');
   const [page, setPage] = useState(1);
-  const [valueCapitalMin, setValueCapitalMin] = useState<number | undefined>(undefined);
-  const [valueCapitalMax, setValueCapitalMax] = useState<number | undefined>(undefined);
+  const [valueCapitalMin, setValueCapitalMin] = useState<number | string>('');
+  const [valueCapitalMax, setValueCapitalMax] = useState<number | string>('');
   const [openPopup, setOpenPopup] = useState(false);
 
-  const [capitalMin] = useDebounce(valueCapitalMin, 500);
-  const [capitalMax] = useDebounce(valueCapitalMax, 500);
+  const validate = (value: string | number) =>
+    value === '' || (typeof value === 'number' && value > 0);
+
+  const [capitalMin] = useDebounce(validate(valueCapitalMin) ? valueCapitalMin : '', 500);
+  const [capitalMax] = useDebounce(validate(valueCapitalMax) ? valueCapitalMax : '', 500);
 
   const {
     isLoading,
@@ -48,12 +52,17 @@ function CompaniesList() {
         body.serviceOrder = serviceOrder as EOrder;
       }
 
+      if (typeof capitalMin === 'number' && capitalMin > 0) {
+        body.capitalMin = capitalMin;
+      }
+      if (typeof capitalMax === 'number' && capitalMax > 0) {
+        body.capitalMax = capitalMax;
+      }
+
       return api.companies.getAll({
         ...body,
         page,
-        createdAt,
-        capitalMin,
-        capitalMax
+        createdAt
       });
     },
     {
@@ -115,17 +124,31 @@ function CompaniesList() {
               value={createdAt}
               onChange={(e) => setCreatedAt(e.target.value)}
             />
-            <TextField
+            <TextFieldUsage
               type="number"
               label="Minimal capital"
               value={valueCapitalMin}
-              onChange={(e) => setValueCapitalMin(+e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value === '' ? '' : +e.target.value;
+                setValueCapitalMin(value);
+              }}
+              onBlur={(e) => {
+                if (!e.target.value.length) e.target.value = '';
+              }}
+              errorMessage={!validate(valueCapitalMin) ? 'Value must be more than 0' : undefined}
             />
-            <TextField
+            <TextFieldUsage
               type="number"
               label="Maximal capital"
               value={valueCapitalMax}
-              onChange={(e) => setValueCapitalMax(+e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value === '' ? '' : +e.target.value;
+                setValueCapitalMax(value);
+              }}
+              onBlur={(e) => {
+                if (!e.target.value.length) e.target.value = '';
+              }}
+              errorMessage={!validate(valueCapitalMax) ? 'Value must be more than 0' : undefined}
             />
           </Box>
           <Box
