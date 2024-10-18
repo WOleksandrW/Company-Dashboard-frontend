@@ -1,4 +1,6 @@
+import { useMemo } from 'react';
 import { FormControl, InputLabel, MenuItem, Select, SxProps, Theme } from '@mui/material';
+import { merge } from 'lodash';
 
 interface IProps {
   label: string;
@@ -13,8 +15,10 @@ interface IProps {
 }
 
 function SelectUsage({ label, list, hasNone, value, onChange, sx }: IProps) {
+  const sxProps = useMemo(() => merge({ maxWidth: 200 }, sx), [sx]);
+
   return (
-    <FormControl sx={{ maxWidth: 200, ...sx }}>
+    <FormControl sx={sxProps}>
       <InputLabel id={`labe-${label}`}>{label}</InputLabel>
       <Select
         labelId={`labe-${label}`}

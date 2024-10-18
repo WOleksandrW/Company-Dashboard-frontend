@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
-import { Button, Card, CardActions, CardContent, SxProps, Theme, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import { Button, Card, CardActions, CardContent, SxProps, Theme, Typography } from '@mui/material';
+import { merge } from 'lodash';
 import { ImageBlock, MiniDataList, TooltipUsage } from '../';
 import getImageFromBuffer from '@root/utils/getImageFromBuffer';
 import { TCompany } from '@root/types/company.type';
@@ -13,13 +14,17 @@ interface IProps {
 function CompanyCard({ company, sx }: IProps) {
   const { id, image, title, service, address, capital } = company;
 
+  const sxProps = useMemo(
+    () => merge({ display: 'flex', flexDirection: 'column', borderRadius: '8px' }, sx),
+    [sx]
+  );
   const imgSrc = useMemo(
     () => (image ? getImageFromBuffer(image.data.data, image.mimeType) : undefined),
     [image]
   );
 
   return (
-    <Card sx={{ display: 'flex', flexDirection: 'column', borderRadius: '8px', ...sx }}>
+    <Card sx={sxProps}>
       <ImageBlock imgSrc={imgSrc} altText={title} sx={{ height: '260px', marginX: 'auto' }} />
       <CardContent className="content-color">
         <TooltipUsage title={title}>
