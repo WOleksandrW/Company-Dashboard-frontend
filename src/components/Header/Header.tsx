@@ -18,10 +18,13 @@ function Header() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openDrawer, setOpenDrawer] = useState(false);
 
-  const srcImage = useMemo(() => {
-    if (userData?.image)
-      return getImageFromBuffer(userData.image.data.data, userData.image.mimeType);
-  }, [userData]);
+  const srcImage = useMemo(
+    () =>
+      userData?.image
+        ? getImageFromBuffer(userData.image.data.data, userData.image.mimeType)
+        : undefined,
+    [userData]
+  );
 
   const logOut = useCallback(() => {
     queryClient.setQueryData(EQueryKeys.CURRENT_USER, { data: null });

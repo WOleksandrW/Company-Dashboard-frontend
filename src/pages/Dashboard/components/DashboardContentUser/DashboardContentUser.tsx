@@ -17,11 +17,13 @@ function DashboardContentUser() {
     }
   );
 
-  const totalCapital = useMemo(() => {
-    if (response && response.list.length > 0) {
-      return response.list.reduce((acc, company) => acc + company.capital, 0);
-    }
-  }, [response?.list]);
+  const totalCapital = useMemo(
+    () =>
+      response && response.list.length > 0
+        ? response.list.reduce((acc, company) => acc + company.capital, 0)
+        : undefined,
+    [response?.list]
+  );
 
   return (
     <>

@@ -64,9 +64,10 @@ function UpdateCompanyForm({ company, onClose }: IProps) {
     }
   };
 
-  const imgSrc = useMemo(() => {
-    if (image) return getImageFromBuffer(image.data.data, image.mimeType);
-  }, [image]);
+  const imgSrc = useMemo(
+    () => (image ? getImageFromBuffer(image.data.data, image.mimeType) : undefined),
+    [image]
+  );
 
   const onSubmit = useCallback(
     async ({ file, ...restData }: FieldValues) => {

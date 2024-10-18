@@ -35,9 +35,10 @@ function Profile() {
   const [openPopupUpdate, setOpenPopupUpdate] = useState(false);
   const [openPopupChangePass, setOpenPopupChangePass] = useState(false);
 
-  const srcImage = useMemo(() => {
-    if (user?.image) return getImageFromBuffer(user.image.data.data, user.image.mimeType);
-  }, [user?.image]);
+  const srcImage = useMemo(
+    () => (user?.image ? getImageFromBuffer(user.image.data.data, user.image.mimeType) : undefined),
+    [user?.image]
+  );
 
   const isThisYou = useMemo(() => user && userData && user.id === userData.id, [user, userData]);
   const canEdit = useMemo(() => {
@@ -55,17 +56,13 @@ function Profile() {
     return false;
   }, [userData, user]);
 
-  const additionalTabs = useMemo(() => {
-    if (user?.role === ERole.USER)
-      return [
-        {
-          label: 'Comanies',
-          children: <CompaniesTab user={user} />
-        }
-      ];
-
-    return [];
-  }, [user]);
+  const additionalTabs = useMemo(
+    () =>
+      user?.role === ERole.USER
+        ? [{ label: 'Comanies', children: <CompaniesTab user={user} /> }]
+        : [],
+    [user]
+  );
 
   if (isLoading)
     return (

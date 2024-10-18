@@ -18,9 +18,10 @@ interface IProps {
 function UserCard({ user, dropDownMenu }: IProps) {
   const { id, image, username, email, createdAt } = user;
 
-  const srcImage = useMemo(() => {
-    if (image) return getImageFromBuffer(image.data.data, image.mimeType);
-  }, [image]);
+  const srcImage = useMemo(
+    () => (image ? getImageFromBuffer(image.data.data, image.mimeType) : undefined),
+    [image]
+  );
 
   return (
     <Card>

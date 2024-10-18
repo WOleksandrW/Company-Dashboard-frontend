@@ -13,9 +13,10 @@ interface IProps {
 function CompanyCard({ company, sx }: IProps) {
   const { id, image, title, service, address, capital } = company;
 
-  const imgSrc = useMemo(() => {
-    if (image) return getImageFromBuffer(image.data.data, image.mimeType);
-  }, [image]);
+  const imgSrc = useMemo(
+    () => (image ? getImageFromBuffer(image.data.data, image.mimeType) : undefined),
+    [image]
+  );
 
   return (
     <Card sx={{ display: 'flex', flexDirection: 'column', borderRadius: '8px', ...sx }}>

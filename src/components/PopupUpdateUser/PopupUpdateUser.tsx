@@ -101,9 +101,10 @@ function PopupUpdateUser({
     }
   };
 
-  const srcImage = useMemo(() => {
-    if (image) return getImageFromBuffer(image.data.data, image.mimeType);
-  }, [image]);
+  const srcImage = useMemo(
+    () => (image ? getImageFromBuffer(image.data.data, image.mimeType) : undefined),
+    [image]
+  );
 
   useEffect(() => {
     handleImagePreview();

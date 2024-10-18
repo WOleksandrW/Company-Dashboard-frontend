@@ -12,13 +12,15 @@ interface IProps {
 function CompanyDataSection({ company }: IProps) {
   const { image, title, service, address, capital, createdAt, updatedAt, user } = company;
 
-  const imgSrc = useMemo(() => {
-    if (image) return getImageFromBuffer(image.data.data, image.mimeType);
-  }, [image]);
+  const imgSrc = useMemo(
+    () => (image ? getImageFromBuffer(image.data.data, image.mimeType) : undefined),
+    [image]
+  );
 
-  const imgSrcUser = useMemo(() => {
-    if (user.image) return getImageFromBuffer(user.image.data.data, user.image.mimeType);
-  }, [user.image]);
+  const imgSrcUser = useMemo(
+    () => (user.image ? getImageFromBuffer(user.image.data.data, user.image.mimeType) : undefined),
+    [user.image]
+  );
 
   return (
     <Box
