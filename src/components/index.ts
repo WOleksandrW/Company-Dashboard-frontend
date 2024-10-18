@@ -1,55 +1,26 @@
-import WrapperBoxUsage from './WrapperBoxUsage/WrapperBoxUsage';
-import PopupBoxUsage from './PopupBoxUsage/PopupBoxUsage';
-import Header from './Header/Header';
-import TextLinkList from './TextLinkList/TextLinkList';
-import AuthForm from './AuthForm/AuthForm';
-import MiniDataList from './MiniDataList/MiniDataList';
-import ImageBlock from './ImageBlock/ImageBlock';
-import CompanyCard from './CompanyCard/CompanyCard';
-import UserCard from './UserCard/UserCard';
-import GridListUsage from './GridListUsage/GridListUsage';
-import EmptyMessage from './EmptyMessage/EmptyMessage';
-import AvatarUsage from './AvatarUsage/AvatarUsage';
-import BreadcrumbsUsage from './BreadcrumbsUsage/BreadcrumbsUsage';
-import MenuUsage from './MenuUsage/MenuUsage';
-import ModalUsage from './ModalUsage/ModalUsage';
-import ConfirmModalUsage from './ConfirmModalUsage/ConfirmModalUsage';
-import FormModalUsage from './FormModalUsage/FormModalUsage';
-import SelectUsage from './SelectUsage/SelectUsage';
-import TextFieldUsage from './TextFieldUsage/TextFieldUsage';
-import TooltipUsage from './TooltipUsage/TooltipUsage';
-import TabsUsage from './TabsUsage/TabsUsage';
-import PieChartUsage from './PieChartUsage/PieChartUsage';
-import MainDrawerUsage from './MainDrawerUsage/MainDrawerUsage';
-import PopupUpdateUser from './PopupUpdateUser/PopupUpdateUser';
-import PopupChangePasswordUser from './PopupChangePasswordUser/PopupChangePasswordUser';
-import PopupCreateCompany from './PopupCreateCompany/PopupCreateCompany';
-
-export {
-  WrapperBoxUsage,
-  PopupBoxUsage,
-  Header,
-  TextLinkList,
-  AuthForm,
-  MiniDataList,
-  ImageBlock,
-  CompanyCard,
-  UserCard,
-  GridListUsage,
-  EmptyMessage,
-  AvatarUsage,
-  BreadcrumbsUsage,
-  MenuUsage,
-  ModalUsage,
-  ConfirmModalUsage,
-  FormModalUsage,
-  SelectUsage,
-  TabsUsage,
-  TextFieldUsage,
-  TooltipUsage,
-  PieChartUsage,
-  MainDrawerUsage,
-  PopupUpdateUser,
-  PopupChangePasswordUser,
-  PopupCreateCompany
-};
+export { default as WrapperBoxUsage } from './WrapperBoxUsage/WrapperBoxUsage';
+export { default as PopupBoxUsage } from './PopupBoxUsage/PopupBoxUsage';
+export { default as Header } from './Header/Header';
+export { default as TextLinkList } from './TextLinkList/TextLinkList';
+export { default as AuthForm } from './AuthForm/AuthForm';
+export { default as MiniDataList } from './MiniDataList/MiniDataList';
+export { default as ImageBlock } from './ImageBlock/ImageBlock';
+export { default as CompanyCard } from './CompanyCard/CompanyCard';
+export { default as UserCard } from './UserCard/UserCard';
+export { default as GridListUsage } from './GridListUsage/GridListUsage';
+export { default as EmptyMessage } from './EmptyMessage/EmptyMessage';
+export { default as AvatarUsage } from './AvatarUsage/AvatarUsage';
+export { default as BreadcrumbsUsage } from './BreadcrumbsUsage/BreadcrumbsUsage';
+export { default as MenuUsage } from './MenuUsage/MenuUsage';
+export { default as ModalUsage } from './ModalUsage/ModalUsage';
+export { default as ConfirmModalUsage } from './ConfirmModalUsage/ConfirmModalUsage';
+export { default as FormModalUsage } from './FormModalUsage/FormModalUsage';
+export { default as SelectUsage } from './SelectUsage/SelectUsage';
+export { default as TextFieldUsage } from './TextFieldUsage/TextFieldUsage';
+export { default as TooltipUsage } from './TooltipUsage/TooltipUsage';
+export { default as TabsUsage } from './TabsUsage/TabsUsage';
+export { default as PieChartUsage } from './PieChartUsage/PieChartUsage';
+export { default as MainDrawerUsage } from './MainDrawerUsage/MainDrawerUsage';
+export { default as PopupUpdateUser } from './PopupUpdateUser/PopupUpdateUser';
+export { default as PopupChangePasswordUser } from './PopupChangePasswordUser/PopupChangePasswordUser';
+export { default as PopupCreateCompany } from './PopupCreateCompany/PopupCreateCompany';

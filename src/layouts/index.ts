@@ -1,5 +1,3 @@
-import MainLayout from './MainLayout/MainLayout';
-import AuthLayout from './AuthLayout/AuthLayout';
-import NoAuthLayout from './NoAuthLayout/NoAuthLayout';
-
-export { MainLayout, AuthLayout, NoAuthLayout };
+export { default as MainLayout } from './MainLayout/MainLayout';
+export { default as AuthLayout } from './AuthLayout/AuthLayout';
+export { default as NoAuthLayout } from './NoAuthLayout/NoAuthLayout';

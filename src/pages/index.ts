@@ -1,19 +1,8 @@
-import CompaniesList from './CompaniesList/CompaniesList';
-import CompanyDetail from './CompanyDetail/CompanyDetail';
-import Dashboard from './Dashboard/Dashboard';
-import NotFound from './NotFound/NotFound';
-import Profile from './Profile/Profile';
-import ResetPassword from './ResetPassword/ResetPassword';
-import SignIn from './SignIn/SignIn';
-import SignUp from './SignUp/SignUp';
-
-export {
-  CompaniesList,
-  CompanyDetail,
-  Dashboard,
-  NotFound,
-  Profile,
-  ResetPassword,
-  SignIn,
-  SignUp
-};
+export { default as CompaniesList } from './CompaniesList/CompaniesList';
+export { default as CompanyDetail } from './CompanyDetail/CompanyDetail';
+export { default as Dashboard } from './Dashboard/Dashboard';
+export { default as NotFound } from './NotFound/NotFound';
+export { default as Profile } from './Profile/Profile';
+export { default as ResetPassword } from './ResetPassword/ResetPassword';
+export { default as SignIn } from './SignIn/SignIn';
+export { default as SignUp } from './SignUp/SignUp';

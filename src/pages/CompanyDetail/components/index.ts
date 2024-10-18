@@ -1,5 +1,3 @@
-import CompanyDataSection from './CompanyDataSection/CompanyDataSection';
-import UpdateCompanyForm from './UpdateCompanyForm/UpdateCompanyForm';
-import PopupDeleteCompany from './PopupDeleteCompany/PopupDeleteCompany';
-
-export { CompanyDataSection, UpdateCompanyForm, PopupDeleteCompany };
+export { default as CompanyDataSection } from './CompanyDataSection/CompanyDataSection';
+export { default as UpdateCompanyForm } from './UpdateCompanyForm/UpdateCompanyForm';
+export { default as PopupDeleteCompany } from './PopupDeleteCompany/PopupDeleteCompany';

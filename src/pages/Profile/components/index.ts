@@ -1,3 +1,1 @@
-import CompaniesTab from './CompaniesTab/CompaniesTab';
-
-export { CompaniesTab };
+export { default as CompaniesTab } from './CompaniesTab/CompaniesTab';
