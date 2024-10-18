@@ -12,10 +12,10 @@ function NotFound() {
         alignItems: 'center',
         textAlign: 'center'
       }}>
-      <Typography typography="h1" sx={{ fontSize: { xs: '4rem', md: '6rem' }, fontWeight: 'bold' }}>
+      <Typography variant="h1" sx={{ fontSize: { xs: '4rem', md: '6rem' }, fontWeight: 'bold' }}>
         404
       </Typography>
-      <Typography typography="h4" sx={{ marginBottom: 2 }}>
+      <Typography variant="h4" sx={{ marginBottom: 2 }}>
         Sorry, the page you are looking for does not exist.
       </Typography>
       <Button

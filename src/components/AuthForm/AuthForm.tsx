@@ -1,43 +1,39 @@
-import { useMemo } from 'react';
-import { UseFormRegisterReturn } from 'react-hook-form';
-import { Button, Input } from '..';
-
-import styles from './AuthForm.module.scss';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Box, Button } from '@mui/material';
+import { Control, Controller } from 'react-hook-form';
+import { TextFieldUsage } from '../';
 
 interface IProps {
-  className?: string;
   submitText: string;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  control: Control<any>;
   inputs: {
-    id: string;
+    controlName: string;
     label: string;
-    error?: string;
-    type?: 'email' | 'password' | 'text';
-    placeholder?: string;
-    register?: UseFormRegisterReturn;
+    type?: React.HTMLInputTypeAttribute;
+    errorMessage?: string;
+    autoComplete?: string;
   }[];
 }
 
-function AuthForm({ className, submitText, onSubmit, inputs }: IProps) {
-  const classNames = useMemo(() => {
-    let str = styles['form'];
-    if (className) str += ` ${className}`;
-    return str;
-  }, [className]);
-
+function AuthForm({ submitText, onSubmit, control, inputs }: IProps) {
   return (
-    <form className={classNames} onSubmit={onSubmit}>
-      {inputs.map(({ label, error, ...rest }) => (
-        <div className={styles['input-block']} key={rest.id}>
-          <label className="p2" htmlFor={rest.id}>
-            {label}
-          </label>
-          <Input {...rest} />
-          {error && <p className="p3 fault-color">{error}</p>}
-        </div>
+    <Box
+      component="form"
+      onSubmit={onSubmit}
+      sx={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      {inputs.map(({ controlName, ...rest }) => (
+        <Controller
+          key={controlName}
+          name={controlName}
+          control={control}
+          render={({ field }) => <TextFieldUsage {...rest} field={field} />}
+        />
       ))}
-      <Button>{submitText}</Button>
-    </form>
+      <Button variant="contained" type="submit" sx={{ typography: 'body1', alignSelf: 'center' }}>
+        {submitText}
+      </Button>
+    </Box>
   );
 }
 

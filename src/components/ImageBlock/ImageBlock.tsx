@@ -2,8 +2,6 @@ import { Box, SxProps, Theme } from '@mui/material';
 
 import imgPlaceholder from '../../assets/images/image-placeholder.png';
 
-import styles from './ImageBlock.module.scss';
-
 interface IProps {
   imgSrc?: string;
   altText?: string;
@@ -13,7 +11,7 @@ interface IProps {
 function ImageBlock({ imgSrc, altText, sx }: IProps) {
   return (
     <Box
-      className={styles['img-block']}
+      className="back2-color"
       sx={{
         maxHeight: '400px',
         maxWidth: '400px',

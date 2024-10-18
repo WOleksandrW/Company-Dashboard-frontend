@@ -1,7 +1,6 @@
 import WrapperBoxUsage from './WrapperBoxUsage/WrapperBoxUsage';
+import PopupBoxUsage from './PopupBoxUsage/PopupBoxUsage';
 import Header from './Header/Header';
-import Button from './Button/Button';
-import Input from './Input/Input';
 import TextLinkList from './TextLinkList/TextLinkList';
 import AuthForm from './AuthForm/AuthForm';
 import MiniDataList from './MiniDataList/MiniDataList';
@@ -28,9 +27,8 @@ import PopupCreateCompany from './PopupCreateCompany/PopupCreateCompany';
 
 export {
   WrapperBoxUsage,
+  PopupBoxUsage,
   Header,
-  Button,
-  Input,
   TextLinkList,
   AuthForm,
   MiniDataList,

@@ -5,6 +5,7 @@ import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import api from '../../api';
+import { Typography } from '@mui/material';
 import { AuthForm, TextLinkList } from '../../components';
 import { schemaSignIn } from '../../types/schema';
 import { TSignInBody } from '../../types/types';
@@ -16,11 +17,15 @@ function SignIn() {
   const { refetch } = useQueryCurrUser();
 
   const {
-    register,
     handleSubmit,
     reset,
+    control,
     formState: { errors }
   } = useForm({
+    defaultValues: {
+      email: '',
+      password: ''
+    },
     resolver: yupResolver(schemaSignIn)
   });
 
@@ -44,25 +49,28 @@ function SignIn() {
 
   return (
     <>
-      <h2 className="h2 primary-color">Sign in</h2>
+      <Typography variant="h2" className="primary-color" sx={{ fontWeight: 'bold' }}>
+        Sign in
+      </Typography>
       <AuthForm
-        onSubmit={(e) => void handleSubmit(onSubmit)(e)}
+        onSubmit={(e) => {
+          handleSubmit(onSubmit)(e);
+        }}
         submitText="Sign in"
+        control={control}
         inputs={[
           {
-            id: 'input-email',
-            label: 'Email:',
+            controlName: 'email',
+            label: 'Email',
             type: 'email',
-            placeholder: 'example@gmail.com',
-            register: register('email'),
-            error: errors.email?.message
+            errorMessage: errors.email?.message
           },
           {
-            id: 'input-password',
-            label: 'Password:',
+            controlName: 'password',
+            label: 'Password',
             type: 'password',
-            register: register('password'),
-            error: errors.password?.message
+            errorMessage: errors.password?.message,
+            autoComplete: 'off'
           }
         ]}
       />

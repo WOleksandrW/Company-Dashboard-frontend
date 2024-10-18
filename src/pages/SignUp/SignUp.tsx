@@ -5,6 +5,7 @@ import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import api from '../../api';
+import { Typography } from '@mui/material';
 import { AuthForm, TextLinkList } from '../../components';
 import { schemaSignUp } from '../../types/schema';
 import { TSignUpBody } from '../../types/types';
@@ -13,11 +14,17 @@ function SignUp() {
   const navigate = useNavigate();
 
   const {
-    register,
     handleSubmit,
     reset,
+    control,
     formState: { errors }
   } = useForm({
+    defaultValues: {
+      username: '',
+      email: '',
+      password: '',
+      confirm: ''
+    },
     resolver: yupResolver(schemaSignUp)
   });
 
@@ -38,38 +45,40 @@ function SignUp() {
 
   return (
     <>
-      <h2 className="h2 primary-color">Sign up</h2>
+      <Typography variant="h2" className="primary-color" sx={{ fontWeight: 'bold' }}>
+        Sign up
+      </Typography>
       <AuthForm
-        onSubmit={(e) => void handleSubmit(onSubmit)(e)}
+        onSubmit={(e) => {
+          handleSubmit(onSubmit)(e);
+        }}
         submitText="Sign up"
+        control={control}
         inputs={[
           {
-            id: 'input-username',
-            label: 'Username:',
-            register: register('username'),
-            error: errors.username?.message
+            controlName: 'username',
+            label: 'Username',
+            errorMessage: errors.username?.message
           },
           {
-            id: 'input-email',
-            label: 'Email:',
+            controlName: 'email',
+            label: 'Email',
             type: 'email',
-            placeholder: 'example@gmail.com',
-            register: register('email'),
-            error: errors.email?.message
+            errorMessage: errors.email?.message
           },
           {
-            id: 'input-password',
-            label: 'Password:',
+            controlName: 'password',
+            label: 'Password',
             type: 'password',
-            register: register('password'),
-            error: errors.password?.message
+            errorMessage: errors.password?.message,
+            autoComplete: 'off'
           },
           {
-            id: 'input-confirm',
-            label: 'Confirm password:',
+            controlName: 'confirm',
+            label: 'Confirm password',
             type: 'password',
-            register: register('confirm'),
-            error: errors.confirm?.message
+            errorMessage: errors.confirm?.message,
+            autoComplete: 'off'
           }
         ]}
       />

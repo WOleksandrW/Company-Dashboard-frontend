@@ -5,6 +5,7 @@ import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import api from '../../api';
+import { Typography } from '@mui/material';
 import { AuthForm, TextLinkList } from '../../components';
 import { schemaResetPassword } from '../../types/schema';
 import { TSignInBody } from '../../types/types';
@@ -13,11 +14,16 @@ function ResetPassword() {
   const navigate = useNavigate();
 
   const {
-    register,
     handleSubmit,
     reset,
+    control,
     formState: { errors }
   } = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+      confirm: ''
+    },
     resolver: yupResolver(schemaResetPassword)
   });
 
@@ -38,32 +44,35 @@ function ResetPassword() {
 
   return (
     <>
-      <h2 className="h2 primary-color">Reset Password</h2>
+      <Typography variant="h2" className="primary-color" sx={{ fontWeight: 'bold' }}>
+        Reset password
+      </Typography>
       <AuthForm
-        onSubmit={(e) => void handleSubmit(onSubmit)(e)}
+        onSubmit={(e) => {
+          handleSubmit(onSubmit)(e);
+        }}
         submitText="Reset"
+        control={control}
         inputs={[
           {
-            id: 'input-email',
-            label: 'Email:',
+            controlName: 'email',
+            label: 'Email',
             type: 'email',
-            placeholder: 'example@gmail.com',
-            register: register('email'),
-            error: errors.email?.message
+            errorMessage: errors.email?.message
           },
           {
-            id: 'input-password',
-            label: 'Password:',
+            controlName: 'password',
+            label: 'Password',
             type: 'password',
-            register: register('password'),
-            error: errors.password?.message
+            errorMessage: errors.password?.message,
+            autoComplete: 'off'
           },
           {
-            id: 'input-confirm',
-            label: 'Confirm password:',
+            controlName: 'confirm',
+            label: 'Confirm password',
             type: 'password',
-            register: register('confirm'),
-            error: errors.confirm?.message
+            errorMessage: errors.confirm?.message,
+            autoComplete: 'off'
           }
         ]}
       />

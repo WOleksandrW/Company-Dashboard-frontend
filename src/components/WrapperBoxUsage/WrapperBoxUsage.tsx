@@ -5,7 +5,7 @@ interface IProps extends BoxProps {
   component?: ElementType;
 }
 
-function WrapperBoxUsage({ children, component = 'div', sx }: IProps) {
+function WrapperBoxUsage({ children, component = 'div', sx, ...rest }: IProps) {
   return (
     <Box
       component={component}
@@ -15,7 +15,8 @@ function WrapperBoxUsage({ children, component = 'div', sx }: IProps) {
         '@media (max-width: 768px)': { paddingX: '32px' },
         '@media (max-width: 500px)': { paddingX: '20px' },
         ...sx
-      }}>
+      }}
+      {...rest}>
       {children}
     </Box>
   );

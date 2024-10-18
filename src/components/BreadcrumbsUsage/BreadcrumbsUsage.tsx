@@ -13,9 +13,9 @@ function BreadcrumbsUsage({ list }: IProps) {
     <Breadcrumbs maxItems={2} sx={{ maxWidth: '100%' }}>
       {list.map(({ to, text }, idx) =>
         to ? (
-          <NavLink className="link" to={to} key={idx}>
+          <Typography component={NavLink} className="link" to={to} key={idx}>
             {text}
-          </NavLink>
+          </Typography>
         ) : (
           <Typography key={idx} className="text-ellipsis" sx={{ maxWidth: '150px' }}>
             {text}

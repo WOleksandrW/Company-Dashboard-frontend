@@ -14,10 +14,8 @@ function MiniDataList({ list, sx, sxItem }: IProps) {
     <List sx={sx}>
       {list.map(({ subtitle, value }) => (
         <ListItem key={subtitle} sx={{ display: 'flex', flexWrap: 'wrap', gap: '8px', ...sxItem }}>
-          <Typography variant="body1" className="content-dark-color">
-            {subtitle}
-          </Typography>
-          <Typography variant="body1" className="text-ellipsis" sx={{ marginLeft: 'auto' }}>
+          <Typography className="content-dark-color">{subtitle}</Typography>
+          <Typography className="text-ellipsis" sx={{ marginLeft: 'auto' }}>
             {value}
           </Typography>
         </ListItem>

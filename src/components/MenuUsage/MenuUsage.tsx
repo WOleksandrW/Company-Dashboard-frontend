@@ -41,7 +41,7 @@ function MenuUsage({ list, sx, sxBtn }: IProps) {
               setAnchorEl(null);
             }}
             sx={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            {Icon && <Icon className="p1" />}
+            {Icon && <Box component={Icon} sx={{ typography: 'body1' }} />}
             {text}
           </MenuItem>
         ))}

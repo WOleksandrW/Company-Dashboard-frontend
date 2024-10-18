@@ -1,25 +1,5 @@
 @use 'sass:color';
 
-.h1 {
-  @include fontSettings(3.2rem);
-}
-
-.h2 {
-  @include fontSettings(2.4rem);
-}
-
-.p1 {
-  @include fontSettings(1.8rem);
-}
-
-.p2 {
-  @include fontSettings();
-}
-
-.p3 {
-  @include fontSettings(1.4rem, 1.6rem);
-}
-
 .link {
   display: inline-flex;
   color: inherit;
@@ -55,4 +35,12 @@
 
 .content-color {
   color: $colorContent;
+}
+
+.back1-color {
+  background-color: $colorBack1;
+}
+
+.back2-color {
+  background-color: $colorBack2;
 }

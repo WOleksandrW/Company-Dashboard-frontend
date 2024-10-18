@@ -9,8 +9,6 @@ import { EQueryKeys } from '../../types/enums';
 
 import { IoLogOutOutline, IoMenu, IoPersonCircleSharp } from 'react-icons/io5';
 
-import styles from './Header.module.scss';
-
 function Header() {
   const isTablet = useMediaQuery('(max-width: 768px)');
 
@@ -54,12 +52,12 @@ function Header() {
             {
               text: 'Profile',
               to: `/profile/${userData.id}`,
-              icon: <IoPersonCircleSharp className="h2" />
+              icon: <Box component={IoPersonCircleSharp} sx={{ typography: 'h2' }} />
             },
             {
               text: 'Logout',
               to: '/sign-in',
-              icon: <IoLogOutOutline className="h2" />,
+              icon: <Box component={IoLogOutOutline} sx={{ typography: 'h2' }} />,
               onClick: logOut
             }
           ]
@@ -73,7 +71,7 @@ function Header() {
   );
 
   return (
-    <header className={styles['header']}>
+    <Box component="header" className="back2-color">
       <WrapperBoxUsage
         sx={{
           paddingY: '12px',
@@ -85,19 +83,29 @@ function Header() {
             columnGap: '20px'
           }
         }}>
-        <h2 className={`h2 ${styles['logo']}`}>Company Dashboard</h2>
+        <Typography variant="h2" className="primary-color" sx={{ fontWeight: 'bold' }}>
+          Company Dashboard
+        </Typography>
         {!isTablet ? (
           userData ? (
-            <nav className={styles['nav']}>
-              <ul className={styles['nav-list']}>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                gap: '40px',
+                width: 'min(700px, 100%)',
+                marginLeft: 'auto'
+              }}>
+              <Box component="ul" sx={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
                 {authNavigation.map(({ text, to }) => (
-                  <li key={text}>
-                    <NavLink className="link p2" to={to}>
+                  <Box component="li" key={text}>
+                    <Typography component={NavLink} className="link" to={to}>
                       {text}
-                    </NavLink>
-                  </li>
+                    </Typography>
+                  </Box>
                 ))}
-              </ul>
+              </Box>
               <Box>
                 <Button
                   sx={{ display: 'flex', alignItems: 'center', gap: '12px' }}
@@ -139,15 +147,15 @@ function Header() {
                   ))}
                 </Menu>
               </Box>
-            </nav>
+            </Box>
           ) : (
-            <nav className={styles['nav-sign']}>
+            <Box component="nav" sx={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
               {noAuthNavigation.map(({ text, to }) => (
-                <NavLink key={text} className="link p2" to={to}>
+                <Typography component={NavLink} key={text} className="link" to={to}>
                   {text}
-                </NavLink>
+                </Typography>
               ))}
-            </nav>
+            </Box>
           )
         ) : (
           <>
@@ -162,7 +170,7 @@ function Header() {
           </>
         )}
       </WrapperBoxUsage>
-    </header>
+    </Box>
   );
 }
 

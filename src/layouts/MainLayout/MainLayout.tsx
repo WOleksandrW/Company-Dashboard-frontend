@@ -1,15 +1,17 @@
 import { Outlet } from 'react-router-dom';
 import { Header } from '../../components';
 
-import styles from './MainLayout.module.scss';
+import { Box } from '@mui/material';
 
 function MainLayout() {
   return (
     <>
       <Header />
-      <main className={styles['main']}>
+      <Box
+        component="main"
+        sx={{ width: '100%', flex: 1, display: 'flex', flexDirection: 'column' }}>
         <Outlet />
-      </main>
+      </Box>
     </>
   );
 }

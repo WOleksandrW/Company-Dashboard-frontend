@@ -1,9 +1,8 @@
 import React from 'react';
-import { Modal, IconButton, Box } from '@mui/material';
+import { Modal, IconButton } from '@mui/material';
+import { PopupBoxUsage } from '../';
 
 import { MdClose } from 'react-icons/md';
-
-import styles from './ModalUsage.module.scss';
 
 interface IProps {
   open: boolean;
@@ -17,12 +16,14 @@ function ModalUsage({ open, setOpen, children }: IProps) {
       open={open}
       onClose={() => setOpen(false)}
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <Box className={styles['popup']}>
-        <IconButton className={styles['close-btn']} onClick={() => setOpen(false)}>
+      <PopupBoxUsage sx={{ position: 'relative', width: 'min(400px, 100%)' }}>
+        <IconButton
+          onClick={() => setOpen(false)}
+          sx={{ position: 'absolute', top: '4px', right: '4px', fontSize: '2rem' }}>
           <MdClose />
         </IconButton>
         {children}
-      </Box>
+      </PopupBoxUsage>
     </Modal>
   );
 }

@@ -65,11 +65,9 @@ function UserCard({ user, dropDownMenu }: IProps) {
         />
       </CardContent>
       <CardActions sx={{ marginTop: 'auto' }}>
-        <NavLink className="link" to={`/profile/${id}`}>
-          <Button sx={{ typography: 'body1' }} size="small">
-            View
-          </Button>
-        </NavLink>
+        <Button component={NavLink} to={`/profile/${id}`} sx={{ typography: 'body1' }} size="small">
+          View
+        </Button>
       </CardActions>
     </Card>
   );

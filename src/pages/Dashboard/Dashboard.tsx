@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import useQueryCurrUser from '../../hooks/useQueryCurrUser';
 import { ERole } from '../../types/enums';
 import { TabsUsage } from '../../components';
@@ -9,10 +9,10 @@ function Dashboard() {
 
   return (
     <>
-      <h1 className="h1">
+      <Typography variant="h1" sx={{ fontWeight: 'bold' }}>
         <span className="secondary-color">Welcome,</span>{' '}
         <span className="primary-color">{userData!.username}</span>.
-      </h1>
+      </Typography>
       <Box
         sx={{
           flex: 1,

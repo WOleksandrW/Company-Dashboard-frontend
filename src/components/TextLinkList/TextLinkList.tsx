@@ -1,6 +1,5 @@
 import { NavLink } from 'react-router-dom';
-
-import styles from './TextLinkList.module.scss';
+import { Box, Typography } from '@mui/material';
 
 interface IProps {
   list: {
@@ -12,16 +11,20 @@ interface IProps {
 
 function TextLinkList({ list }: IProps) {
   return (
-    <div className={styles['list']}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
       {list.map(({ text, lintText, linkTo }) => (
-        <p className={`p2 ${styles['link-text']}`} key={linkTo}>
+        <Typography key={linkTo} sx={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
           {text}
-          <NavLink className={`link secondary-color ${styles['link']}`} to={linkTo}>
+          <Typography
+            component={NavLink}
+            className="link secondary-color"
+            to={linkTo}
+            sx={{ marginLeft: 'auto' }}>
             {lintText}
-          </NavLink>
-        </p>
+          </Typography>
+        </Typography>
       ))}
-    </div>
+    </Box>
   );
 }
 

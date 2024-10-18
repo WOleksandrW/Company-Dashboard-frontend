@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
-import { Box, Divider, Pagination, Skeleton } from '@mui/material';
+import { Box, Divider, Pagination, Skeleton, Typography } from '@mui/material';
 import api from '../../../../api';
 import { CompanyCard, EmptyMessage, GridListUsage, PieChartUsage } from '../../../../components';
 import { EQueryKeys } from '../../../../types/enums';
@@ -33,8 +33,12 @@ function DashboardContentUser() {
           gap: '32px'
         }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-          <h2 className="h2 primary-color">Chart of companies by capital</h2>
-          {totalCapital && <p className="p2 secondary-color">Total capital = {totalCapital}</p>}
+          <Typography variant="h2" className="primary-color" sx={{ fontWeight: 'bold' }}>
+            Chart of companies by capital
+          </Typography>
+          {totalCapital && (
+            <Typography className="secondary-color">Total capital = {totalCapital}</Typography>
+          )}
         </Box>
         {isLoading ? (
           <Skeleton variant="rectangular" sx={{ width: '250px', height: '250px' }} />
@@ -62,7 +66,9 @@ function DashboardContentUser() {
           alignItems: 'center',
           gap: '20px'
         }}>
-        <h2 className="h2 primary-color">Your companies:</h2>
+        <Typography variant="h2" className="primary-color" sx={{ fontWeight: 'bold' }}>
+          Your companies:
+        </Typography>
         <Box
           sx={{
             flex: 1,
