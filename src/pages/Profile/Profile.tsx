@@ -17,6 +17,7 @@ import getImageFromBuffer from '../../utils/getImageFromBuffer';
 import { EQueryKeys, ERole } from '../../types/enums';
 
 import { FaEdit, FaLock } from 'react-icons/fa';
+import { CompaniesTab } from './components';
 
 function Profile() {
   const { id } = useParams();
@@ -52,6 +53,18 @@ function Profile() {
 
     return false;
   }, [userData, user]);
+
+  const additionalTabs = useMemo(() => {
+    if (user?.role === ERole.USER)
+      return [
+        {
+          label: 'Comanies',
+          children: <CompaniesTab user={user} />
+        }
+      ];
+
+    return [];
+  }, [user]);
 
   if (isLoading)
     return (
@@ -151,6 +164,8 @@ function Profile() {
         <Paper
           sx={{
             flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
             borderRadius: '16px',
             padding: '20px',
             '@media (max-width: 900px)': {
@@ -183,7 +198,8 @@ function Profile() {
                     />
                   </Box>
                 )
-              }
+              },
+              ...additionalTabs
             ]}
           />
         </Paper>

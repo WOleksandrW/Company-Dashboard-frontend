@@ -3,18 +3,20 @@ import { useMutation, useQueryClient } from 'react-query';
 import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
-import api from '../../../../api';
-import useQueryCurrUser from '../../../../hooks/useQueryCurrUser';
-import { FormModalUsage } from '../../../../components';
-import { schemaUpdateCompany } from '../../../../types/schema';
-import { EQueryKeys } from '../../../../types/enums';
+import api from '../../api';
+import useQueryCurrUser from '../../hooks/useQueryCurrUser';
+import { FormModalUsage } from '../';
+import { schemaUpdateCompany } from '../../types/schema';
+import { EQueryKeys } from '../../types/enums';
+import { TUser } from '../../types/TUser';
 
 interface IProps {
   open: boolean;
   setOpen: (value: boolean) => void;
+  userId?: TUser['id'];
 }
 
-function PopupCreateCompany({ open, setOpen }: IProps) {
+function PopupCreateCompany({ open, setOpen, userId }: IProps) {
   const queryClient = useQueryClient();
   const { data: userData } = useQueryCurrUser();
 
@@ -49,12 +51,14 @@ function PopupCreateCompany({ open, setOpen }: IProps) {
         formData.append(key, value);
       });
 
-      formData.append('userId', userData.id.toString());
+      if (userId) {
+        formData.append('userId', userId.toString());
+      }
 
       await mutateAsync(formData);
       setOpen(false);
     },
-    [mutateAsync, userData]
+    [mutateAsync, userData, userId]
   );
 
   useEffect(() => {

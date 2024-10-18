@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Button, Card, CardActions, CardContent, Typography } from '@mui/material';
+import { Button, Card, CardActions, CardContent, SxProps, Theme, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { ImageBlock, MiniDataList, TooltipUsage } from '../';
 import getImageFromBuffer from '../../utils/getImageFromBuffer';
@@ -7,9 +7,10 @@ import { TCompany } from '../../types/TCompany';
 
 interface IProps {
   company: TCompany;
+  sx?: SxProps<Theme>;
 }
 
-function CompanyCard({ company }: IProps) {
+function CompanyCard({ company, sx }: IProps) {
   const { id, image, title, service, address, capital } = company;
 
   const imgSrc = useMemo(() => {
@@ -17,7 +18,7 @@ function CompanyCard({ company }: IProps) {
   }, [image]);
 
   return (
-    <Card sx={{ display: 'flex', flexDirection: 'column', borderRadius: '8px' }}>
+    <Card sx={{ display: 'flex', flexDirection: 'column', borderRadius: '8px', ...sx }}>
       <ImageBlock imgSrc={imgSrc} altText={title} sx={{ height: '260px', marginX: 'auto' }} />
       <CardContent className="content-color">
         <TooltipUsage title={title}>

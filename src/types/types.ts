@@ -17,6 +17,7 @@ export type TSignUpBody = {
 } & TSignInBody;
 
 export type TGetAllCompanies = {
+  user?: TUser['id'];
   titleOrder?: EOrder;
   serviceOrder?: EOrder;
   limit?: number;

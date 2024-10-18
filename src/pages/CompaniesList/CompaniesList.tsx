@@ -9,9 +9,9 @@ import {
   EmptyMessage,
   SelectUsage,
   CompanyCard,
-  GridListUsage
+  GridListUsage,
+  PopupCreateCompany
 } from '../../components';
-import { PopupCreateCompany } from './components';
 import { EOrder, EQueryKeys, ERole } from '../../types/enums';
 import { TGetAllCompanies } from '../../types/types';
 import { limitRecords } from '../../constants/queryParams';

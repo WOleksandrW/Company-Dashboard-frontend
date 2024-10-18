@@ -24,6 +24,7 @@ import PieChartUsage from './PieChartUsage/PieChartUsage';
 import MainDrawerUsage from './MainDrawerUsage/MainDrawerUsage';
 import PopupUpdateUser from './PopupUpdateUser/PopupUpdateUser';
 import PopupChangePasswordUser from './PopupChangePasswordUser/PopupChangePasswordUser';
+import PopupCreateCompany from './PopupCreateCompany/PopupCreateCompany';
 
 export {
   WrapperBoxUsage,
@@ -51,5 +52,6 @@ export {
   PieChartUsage,
   MainDrawerUsage,
   PopupUpdateUser,
-  PopupChangePasswordUser
+  PopupChangePasswordUser,
+  PopupCreateCompany
 };
