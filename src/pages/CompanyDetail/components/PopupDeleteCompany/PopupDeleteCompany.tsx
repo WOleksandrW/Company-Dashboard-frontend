@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import api from '../../../../api';
 import { ConfirmModalUsage } from '../../../../components';
 import { EQueryKeys } from '../../../../enums/queryKeys.enum';
-import { TCompany } from '../../../../types/TCompany';
+import { TCompany } from '../../../../types/company.type';
 
 interface IProps {
   open: boolean;

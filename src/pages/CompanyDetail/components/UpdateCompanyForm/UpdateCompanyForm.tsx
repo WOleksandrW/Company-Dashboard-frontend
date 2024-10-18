@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import getImageFromBuffer from '../../../../utils/getImageFromBuffer';
 import api from '../../../../api';
 import { ImageBlock, TextFieldUsage } from '../../../../components';
-import { TCompany } from '../../../../types/TCompany';
+import { TCompany } from '../../../../types/company.type';
 import { schemaUpdateCompany } from '../../../../types/schema';
 import { EQueryKeys } from '../../../../enums/queryKeys.enum';
 

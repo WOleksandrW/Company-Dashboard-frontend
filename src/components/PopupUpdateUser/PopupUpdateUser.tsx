@@ -7,7 +7,7 @@ import api from '../../api';
 import { AvatarUsage, FormModalUsage } from '../';
 import { EQueryKeys } from '../../enums/queryKeys.enum';
 import { schemaUpdateUser } from '../../types/schema';
-import { TUser } from '../../types/TUser';
+import { TUser } from '../../types/user.type';
 import { Box, Button } from '@mui/material';
 import { MdCloudUpload } from 'react-icons/md';
 import { FaTrashAlt } from 'react-icons/fa';

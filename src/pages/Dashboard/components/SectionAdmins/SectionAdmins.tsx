@@ -13,7 +13,7 @@ import {
 import { PopupCreateUser, PopupDeleteUser } from '../';
 import { EQueryKeys } from '../../../../enums/queryKeys.enum';
 import { ERole } from '../../../../enums/role.enum';
-import { TUser } from '../../../../types/TUser';
+import { TUser } from '../../../../types/user.type';
 import { limitRecords } from '../../../../constants/queryParams';
 
 import { FaEdit, FaLock, FaPlus, FaTrashAlt } from 'react-icons/fa';

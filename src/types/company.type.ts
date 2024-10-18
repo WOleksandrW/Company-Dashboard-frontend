@@ -1,6 +1,6 @@
-import { TBaseDates } from './types';
-import { TUser } from './TUser';
-import { TImage } from './TImage';
+import { TBaseDates } from './base.type';
+import { TUser } from './user.type';
+import { TImage } from './image.type';
 
 export type TCompany = {
   id: number;

@@ -1,6 +1,6 @@
 import { ERole } from '../enums/role.enum';
-import { TBaseDates } from './types';
-import { TImage } from './TImage';
+import { TBaseDates } from './base.type';
+import { TImage } from './image.type';
 
 export type TUser = {
   id: number;

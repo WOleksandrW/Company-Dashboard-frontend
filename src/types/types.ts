@@ -1,12 +1,6 @@
 import { EOrder } from '../enums/order.enum';
 import { ERole } from '../enums/role.enum';
-import { TUser } from './TUser';
-
-export type TBaseDates = {
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: string | null;
-};
+import { TUser } from './user.type';
 
 export type TSignInBody = {
   email: TUser['email'];

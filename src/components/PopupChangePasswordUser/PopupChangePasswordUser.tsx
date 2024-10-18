@@ -7,7 +7,7 @@ import api from '../../api';
 import { FormModalUsage } from '../';
 import { schemaChangePassword } from '../../types/schema';
 import { TPatchUser } from '../../types/types';
-import { TUser } from '../../types/TUser';
+import { TUser } from '../../types/user.type';
 
 interface IFormValues {
   password: string;

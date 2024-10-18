@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Box, Typography } from '@mui/material';
 import { AvatarUsage, ImageBlock, MiniDataList } from '../../../../components';
 import getImageFromBuffer from '../../../../utils/getImageFromBuffer';
-import { TCompany } from '../../../../types/TCompany';
+import { TCompany } from '../../../../types/company.type';
 import { NavLink } from 'react-router-dom';
 
 interface IProps {

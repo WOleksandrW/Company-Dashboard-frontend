@@ -8,7 +8,7 @@ import useQueryCurrUser from '../../hooks/useQueryCurrUser';
 import { FormModalUsage } from '../';
 import { schemaUpdateCompany } from '../../types/schema';
 import { EQueryKeys } from '../../enums/queryKeys.enum';
-import { TUser } from '../../types/TUser';
+import { TUser } from '../../types/user.type';
 
 interface IProps {
   open: boolean;

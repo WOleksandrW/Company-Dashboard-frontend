@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios';
-import { TUser } from '../types/TUser';
+import { TUser } from '../types/user.type';
 import { TGetAllResponse, TGetAllUsers, TPatchUser, TSignUpBody } from '../types/types';
 import { ERole } from '../enums/role.enum';
 

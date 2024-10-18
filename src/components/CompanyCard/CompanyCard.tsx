@@ -3,7 +3,7 @@ import { Button, Card, CardActions, CardContent, SxProps, Theme, Typography } fr
 import { NavLink } from 'react-router-dom';
 import { ImageBlock, MiniDataList, TooltipUsage } from '../';
 import getImageFromBuffer from '../../utils/getImageFromBuffer';
-import { TCompany } from '../../types/TCompany';
+import { TCompany } from '../../types/company.type';
 
 interface IProps {
   company: TCompany;
