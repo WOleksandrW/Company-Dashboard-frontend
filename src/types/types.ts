@@ -2,6 +2,32 @@ import { EOrder } from '../enums/order.enum';
 import { ERole } from '../enums/role.enum';
 import { TUser } from './user.type';
 
+type TGenetalGettAll = {
+  limit?: number;
+  page?: number;
+  createdAt?: string;
+  search?: string;
+};
+
+export type TGetAllCompanies = {
+  user?: TUser['id'];
+  titleOrder?: EOrder;
+  serviceOrder?: EOrder;
+  capitalMin?: number;
+  capitalMax?: number;
+} & TGenetalGettAll;
+
+export type TGetAllUsers = {
+  role?: ERole.USER | ERole.ADMIN;
+} & TGenetalGettAll;
+
+export type TGetAllResponse<T> = {
+  list: T[];
+  totalAmount: number;
+  limit?: number;
+  page?: number;
+};
+
 export type TSignInBody = {
   email: TUser['email'];
   password: string;
@@ -11,36 +37,9 @@ export type TSignUpBody = {
   username: TUser['username'];
 } & TSignInBody;
 
-export type TGetAllCompanies = {
-  user?: TUser['id'];
-  titleOrder?: EOrder;
-  serviceOrder?: EOrder;
-  limit?: number;
-  page?: number;
-  createdAt?: string;
-  capitalMin?: number;
-  capitalMax?: number;
-  search?: string;
-};
-
-export type TGetAllUsers = {
-  limit?: number;
-  page?: number;
-  createdAt?: string;
-  role?: ERole.USER | ERole.ADMIN;
-  search?: string;
-};
-
-export type TGetAllResponse<T> = {
-  list: T[];
-  totalAmount: number;
-  limit?: number;
-  page?: number;
-};
-
 export type TPatchUser = {
   oldPassword?: string;
   password?: string;
-  username?: string;
-  email?: string;
+  username?: TUser['username'];
+  email?: TUser['email'];
 };
