@@ -42,10 +42,17 @@ function CompanyDetail() {
         list={[
           { to: '/', text: 'Home' },
           { to: '/companies', text: 'Companies list' },
-          { text: 'Company' }
+          { text: companyData?.title ?? `Company #${id}` }
         ]}
       />
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
+      <Box
+        sx={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '12px'
+        }}>
         {companyData ? (
           <>
             {!isEdit && canEdit && (
@@ -78,7 +85,7 @@ function CompanyDetail() {
             <PopupDeleteCompany open={open} setOpen={setOpen} {...companyData} />
           </>
         ) : (
-          <EmptyMessage message="No company data" />
+          <EmptyMessage sx={{ flex: 1, justifyContent: 'center' }} message="Ccompany not found" />
         )}
       </Box>
     </>

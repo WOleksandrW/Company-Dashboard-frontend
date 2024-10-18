@@ -1,4 +1,4 @@
-import { Breadcrumbs } from '@mui/material';
+import { Breadcrumbs, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
 interface IProps {
@@ -10,14 +10,16 @@ interface IProps {
 
 function BreadcrumbsUsage({ list }: IProps) {
   return (
-    <Breadcrumbs>
+    <Breadcrumbs maxItems={2} sx={{ maxWidth: '100%' }}>
       {list.map(({ to, text }, idx) =>
         to ? (
           <NavLink className="link" to={to} key={idx}>
             {text}
           </NavLink>
         ) : (
-          <p key={idx}>{text}</p>
+          <Typography key={idx} className="text-ellipsis" sx={{ maxWidth: '150px' }}>
+            {text}
+          </Typography>
         )
       )}
     </Breadcrumbs>
