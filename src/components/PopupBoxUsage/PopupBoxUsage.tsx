@@ -1,23 +1,21 @@
-import { Box, SxProps, Theme } from '@mui/material';
+import { forwardRef } from 'react';
+import { Box, BoxProps } from '@mui/material';
 
-interface IProps {
-  children: React.ReactNode;
-  sx?: SxProps<Theme>;
-}
+const PopupBoxUsage = forwardRef<HTMLDivElement, BoxProps>(({ children, sx, ...rest }, ref) => (
+  <Box
+    ref={ref}
+    className="back1-color"
+    sx={{
+      padding: '20px',
+      borderRadius: '20px',
+      '@media (max-width: 500px)': { padding: '12px', borderRadius: '12px' },
+      ...sx
+    }}
+    {...rest}>
+    {children}
+  </Box>
+));
 
-function PopupBoxUsage({ children, sx }: IProps) {
-  return (
-    <Box
-      className="back1-color"
-      sx={{
-        padding: '20px',
-        borderRadius: '20px',
-        '@media (max-width: 500px)': { padding: '12px', borderRadius: '12px' },
-        ...sx
-      }}>
-      {children}
-    </Box>
-  );
-}
+PopupBoxUsage.displayName = 'PopupBoxUsage';
 
 export default PopupBoxUsage;
