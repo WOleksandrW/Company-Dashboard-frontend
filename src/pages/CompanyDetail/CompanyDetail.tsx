@@ -14,6 +14,7 @@ import mapPlaceholder from '@root/assets/images/map-placeholder.png';
 
 function CompanyDetail() {
   const { id } = useParams();
+  const companyId = Number(id);
 
   const { data: userData } = useQueryCurrUser();
 
@@ -21,9 +22,10 @@ function CompanyDetail() {
   const [open, setOpen] = useState(false);
 
   const { data: companyData } = useQuery(
-    [EQueryKeys.COMPANY, { id: +id! }],
-    () => api.companies.getOne(+id!),
+    [EQueryKeys.COMPANY, { id: companyId }],
+    () => api.companies.getOne(companyId),
     {
+      enabled: !isNaN(companyId),
       select: ({ data }) => data
     }
   );

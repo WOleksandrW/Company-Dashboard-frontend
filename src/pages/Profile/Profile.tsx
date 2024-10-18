@@ -22,12 +22,14 @@ import { CompaniesTab } from './components';
 
 function Profile() {
   const { id } = useParams();
+  const userId = Number(id);
   const { data: userData } = useQueryCurrUser();
 
   const { data: user, isLoading } = useQuery(
-    [EQueryKeys.USER, { id }],
-    () => api.users.getOne(+id!),
+    [EQueryKeys.USER, { id: userId }],
+    () => api.users.getOne(userId),
     {
+      enabled: !isNaN(userId),
       select: ({ data }) => data
     }
   );
