@@ -3,7 +3,8 @@ export enum EQueryKeys {
   ADMINS_LIST = 'admins list',
   CURRENT_USER = 'curr-user',
   COMPANIES_LIST = 'companies list',
-  COMPANY = 'company'
+  COMPANY = 'company',
+  USER = 'user'
 }
 
 export enum ERole {

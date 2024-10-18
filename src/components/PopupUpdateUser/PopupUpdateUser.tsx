@@ -17,7 +17,11 @@ interface IProps {
   open: boolean;
   setOpen: (value: boolean) => void;
   user: TUser;
-  queryKey: EQueryKeys.USERS_LIST | EQueryKeys.ADMINS_LIST | EQueryKeys.CURRENT_USER;
+  queryKey:
+    | EQueryKeys.USERS_LIST
+    | EQueryKeys.ADMINS_LIST
+    | EQueryKeys.CURRENT_USER
+    | EQueryKeys.USER;
   onSuccess?: () => void;
   toastMessage: string;
   popupTitle: string;

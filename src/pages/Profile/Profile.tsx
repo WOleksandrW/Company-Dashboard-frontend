@@ -1,73 +1,127 @@
 import { useMemo, useState } from 'react';
-import { Box, Button, Paper, Typography } from '@mui/material';
+import { useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import { Box, Button, Paper, Skeleton, Typography } from '@mui/material';
+import api from '../../api';
 import useQueryCurrUser from '../../hooks/useQueryCurrUser';
 import {
   AvatarUsage,
   BreadcrumbsUsage,
+  EmptyMessage,
   MiniDataList,
   PopupChangePasswordUser,
   PopupUpdateUser,
   TabsUsage
 } from '../../components';
 import getImageFromBuffer from '../../utils/getImageFromBuffer';
-import { EQueryKeys } from '../../types/enums';
+import { EQueryKeys, ERole } from '../../types/enums';
 
 import { FaEdit, FaLock } from 'react-icons/fa';
 
 function Profile() {
-  const { data: userData, refetch } = useQueryCurrUser();
+  const { id } = useParams();
+  const { data: userData } = useQueryCurrUser();
+
+  const { data: user, isLoading } = useQuery(
+    [EQueryKeys.USER, { id }],
+    () => api.users.getOne(+id!),
+    {
+      select: ({ data }) => data
+    }
+  );
 
   const [openPopupUpdate, setOpenPopupUpdate] = useState(false);
   const [openPopupChangePass, setOpenPopupChangePass] = useState(false);
 
   const srcImage = useMemo(() => {
-    if (userData?.image)
-      return getImageFromBuffer(userData.image.data.data, userData.image.mimeType);
-  }, [userData?.image]);
+    if (user?.image) return getImageFromBuffer(user.image.data.data, user.image.mimeType);
+  }, [user?.image]);
+
+  const isThisYou = useMemo(() => user && userData && user.id === userData.id, [user, userData]);
+  const canEdit = useMemo(() => {
+    if (!userData || !user) return false;
+    const { role: userRole } = user;
+    const { role: currentUserRole } = userData;
+
+    if (currentUserRole === ERole.SUPER) {
+      return userRole !== ERole.SUPER;
+    }
+    if (currentUserRole === ERole.ADMIN) {
+      return userRole !== ERole.SUPER && userRole !== ERole.ADMIN;
+    }
+
+    return false;
+  }, [userData, user]);
+
+  if (isLoading)
+    return (
+      <>
+        <Skeleton variant="rounded" sx={{ height: '36px' }} />
+        <Box
+          sx={{
+            flex: 1,
+            display: 'grid',
+            gridTemplateColumns: '300px 1fr',
+            gap: '20px',
+            '@media (max-width: 900px)': {
+              gridTemplateColumns: '1fr',
+              gridTemplateRows: '1fr 3fr'
+            }
+          }}>
+          <Skeleton variant="rounded" sx={{ width: 'min(300px, 100%)', height: '100%' }} />
+          <Skeleton variant="rounded" sx={{ flex: 1, height: '100%' }} />
+        </Box>
+      </>
+    );
+
+  if (!user)
+    return <EmptyMessage message="User not found" sx={{ flex: 1, justifyContent: 'center' }} />;
 
   return (
     <>
-      <BreadcrumbsUsage list={[{ to: '/', text: 'Home' }, { text: 'Profile' }]} />
-      {userData && (
-        <Box
-          component="section"
+      <BreadcrumbsUsage
+        list={[{ to: '/', text: 'Home' }, { text: `Profile "${user.username}"` }]}
+      />
+      <Box
+        component="section"
+        sx={{
+          flex: 1,
+          display: 'flex',
+          gap: '20px',
+          '@media (max-width: 900px)': {
+            flexDirection: 'column'
+          }
+        }}>
+        <Paper
           sx={{
-            flex: 1,
-            display: 'flex',
-            gap: '20px',
+            width: 'min(300px, 100%)',
+            alignSelf: 'flex-start',
+            padding: '20px',
+            borderRadius: '16px',
+            boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
             '@media (max-width: 900px)': {
-              flexDirection: 'column'
+              padding: '12px',
+              borderRadius: '12px'
             }
           }}>
-          <Paper
+          <AvatarUsage
+            src={srcImage}
+            title={user.username}
             sx={{
-              width: 'min(300px, 100%)',
-              alignSelf: 'flex-start',
-              padding: '20px',
-              borderRadius: '16px',
-              boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-              '@media (max-width: 900px)': {
-                padding: '12px',
-                borderRadius: '12px'
-              }
-            }}>
-            <AvatarUsage
-              src={srcImage}
-              title={userData.username}
-              sx={{
-                height: '120px',
-                width: '120px',
-                margin: 'auto',
-                fontSize: '10rem',
-                marginBottom: '10px'
-              }}
-            />
-            <Typography variant="h6" align="center">
-              {userData.username}
-            </Typography>
-            <Typography variant="body1" align="center" color="textSecondary">
-              {userData.email}
-            </Typography>
+              height: '120px',
+              width: '120px',
+              margin: 'auto',
+              fontSize: '10rem',
+              marginBottom: '10px'
+            }}
+          />
+          <Typography variant="h6" align="center">
+            {user.username}
+          </Typography>
+          <Typography variant="body1" align="center" color="textSecondary">
+            {user.email}
+          </Typography>
+          {(isThisYou || canEdit) && (
             <Box
               sx={{
                 display: 'flex',
@@ -91,66 +145,76 @@ function Profile() {
                 Change password
               </Button>
             </Box>
-          </Paper>
+          )}
+        </Paper>
 
-          <Paper
-            sx={{
-              flex: 1,
-              borderRadius: '16px',
-              padding: '20px',
-              '@media (max-width: 900px)': {
-                padding: '12px',
-                borderRadius: '12px'
+        <Paper
+          sx={{
+            flex: 1,
+            borderRadius: '16px',
+            padding: '20px',
+            '@media (max-width: 900px)': {
+              padding: '12px',
+              borderRadius: '12px'
+            }
+          }}>
+          <TabsUsage
+            tabs={[
+              {
+                label: 'Account Info',
+                children: (
+                  <Box sx={{ padding: '20px', '@media (max-width: 900px)': { padding: '12px' } }}>
+                    <Typography variant="body1">
+                      {isThisYou
+                        ? 'Welcome to your profile. Here, you can view and update your personal information.'
+                        : `Welcome to "${user.username}" profile. Here, you can view "${user.username}" personal information.`}
+                    </Typography>
+                    <MiniDataList
+                      list={[
+                        {
+                          subtitle: 'Created at:',
+                          value: new Date(user.createdAt).toLocaleString()
+                        },
+                        {
+                          subtitle: 'Updated at',
+                          value: new Date(user.updatedAt).toLocaleString()
+                        }
+                      ]}
+                    />
+                  </Box>
+                )
               }
-            }}>
-            <TabsUsage
-              tabs={[
-                {
-                  label: 'Account Info',
-                  children: (
-                    <Box sx={{ padding: '20px', '@media (max-width: 900px)': { padding: '12px' } }}>
-                      <Typography variant="body1">
-                        Welcome to your profile. Here, you can view and update your personal
-                        information.
-                      </Typography>
-                      <MiniDataList
-                        list={[
-                          {
-                            subtitle: 'Created at:',
-                            value: new Date(userData.createdAt).toLocaleString()
-                          },
-                          {
-                            subtitle: 'Updated at',
-                            value: new Date(userData.updatedAt).toLocaleString()
-                          }
-                        ]}
-                      />
-                    </Box>
-                  )
-                }
-              ]}
+            ]}
+          />
+        </Paper>
+        {(isThisYou || canEdit) && (
+          <>
+            <PopupUpdateUser
+              open={openPopupUpdate}
+              setOpen={setOpenPopupUpdate}
+              user={user}
+              queryKey={EQueryKeys.USER}
+              toastMessage={
+                isThisYou
+                  ? 'Your data was updated successfully!'
+                  : `User "${user.username}" data was changed successfully!`
+              }
+              popupTitle={isThisYou ? 'Update your data' : 'Update User data'}
             />
-          </Paper>
-          <PopupUpdateUser
-            open={openPopupUpdate}
-            setOpen={setOpenPopupUpdate}
-            user={userData}
-            queryKey={EQueryKeys.CURRENT_USER}
-            onSuccess={() => {
-              refetch();
-            }}
-            toastMessage="Your data was updated successfully!"
-            popupTitle="Update your data"
-          />
-          <PopupChangePasswordUser
-            open={openPopupChangePass}
-            setOpen={setOpenPopupChangePass}
-            userId={userData.id}
-            toastMessage="Your password was changed successfully!"
-            hasOldPassword
-          />
-        </Box>
-      )}
+            <PopupChangePasswordUser
+              open={openPopupChangePass}
+              setOpen={setOpenPopupChangePass}
+              userId={user.id}
+              toastMessage={
+                isThisYou
+                  ? 'Your password was changed successfully!'
+                  : `Password of user "${user.username}" changed successfully!`
+              }
+              hasOldPassword={isThisYou}
+            />
+          </>
+        )}
+      </Box>
     </>
   );
 }

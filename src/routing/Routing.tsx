@@ -24,7 +24,7 @@ function Routing() {
               <Route path="" element={<Dashboard />} />
               <Route path="companies" element={<CompaniesList />} />
               <Route path="companies/:id" element={<CompanyDetail />} />
-              <Route path="profile" element={<Profile />} />
+              <Route path="profile/:id" element={<Profile />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           ) : (

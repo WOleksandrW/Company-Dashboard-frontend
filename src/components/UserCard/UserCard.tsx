@@ -1,9 +1,10 @@
 import { useMemo } from 'react';
-import { Box, Card, CardContent, Typography } from '@mui/material';
+import { Box, Button, Card, CardActions, CardContent, Typography } from '@mui/material';
 import { AvatarUsage, MenuUsage, MiniDataList } from '../';
 import getImageFromBuffer from '../../utils/getImageFromBuffer';
 import { TUser } from '../../types/TUser';
 import { IconType } from 'react-icons';
+import { NavLink } from 'react-router-dom';
 
 interface IProps {
   user: TUser;
@@ -15,7 +16,7 @@ interface IProps {
 }
 
 function UserCard({ user, dropDownMenu }: IProps) {
-  const { image, username, email, createdAt } = user;
+  const { id, image, username, email, createdAt } = user;
 
   const srcImage = useMemo(() => {
     if (image) return getImageFromBuffer(image.data.data, image.mimeType);
@@ -63,6 +64,13 @@ function UserCard({ user, dropDownMenu }: IProps) {
           sxItem={{ paddingX: 0 }}
         />
       </CardContent>
+      <CardActions sx={{ marginTop: 'auto' }}>
+        <NavLink className="link" to={`/profile/${id}`}>
+          <Button sx={{ typography: 'body1' }} size="small">
+            View
+          </Button>
+        </NavLink>
+      </CardActions>
     </Card>
   );
 }

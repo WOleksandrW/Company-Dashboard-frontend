@@ -48,11 +48,23 @@ function Header() {
   );
 
   const dropDownNavigation = useMemo(
-    () => [
-      { text: 'Profile', to: '/profile', icon: <IoPersonCircleSharp className="h2" /> },
-      { text: 'Logout', to: '/sign-in', icon: <IoLogOutOutline className="h2" />, onClick: logOut }
-    ],
-    [logOut]
+    () =>
+      userData
+        ? [
+            {
+              text: 'Profile',
+              to: `/profile/${userData.id}`,
+              icon: <IoPersonCircleSharp className="h2" />
+            },
+            {
+              text: 'Logout',
+              to: '/sign-in',
+              icon: <IoLogOutOutline className="h2" />,
+              onClick: logOut
+            }
+          ]
+        : [],
+    [logOut, userData]
   );
 
   const drawerNavigation = useMemo(

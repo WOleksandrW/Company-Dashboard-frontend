@@ -3,6 +3,7 @@ import { Box, Typography } from '@mui/material';
 import { AvatarUsage, ImageBlock, MiniDataList } from '../../../../components';
 import getImageFromBuffer from '../../../../utils/getImageFromBuffer';
 import { TCompany } from '../../../../types/TCompany';
+import { NavLink } from 'react-router-dom';
 
 interface IProps {
   company: TCompany;
@@ -89,6 +90,9 @@ function CompanyDataSection({ company }: IProps) {
             Owner:
           </Typography>
           <Box
+            component={NavLink}
+            to={`/profile/${user.id}`}
+            className="link"
             sx={{
               maxWidth: '220px',
               display: 'flex',
