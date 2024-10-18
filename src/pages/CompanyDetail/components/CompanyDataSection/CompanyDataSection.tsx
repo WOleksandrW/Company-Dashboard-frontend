@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { Box, Typography } from '@mui/material';
-import { ImageBlock, MiniDataList } from '../../../../components';
+import { AvatarUsage, ImageBlock, MiniDataList } from '../../../../components';
 import getImageFromBuffer from '../../../../utils/getImageFromBuffer';
 import { TCompany } from '../../../../types/TCompany';
 
@@ -9,11 +9,15 @@ interface IProps {
 }
 
 function CompanyDataSection({ company }: IProps) {
-  const { image, title, service, address, capital, createdAt, updatedAt } = company;
+  const { image, title, service, address, capital, createdAt, updatedAt, user } = company;
 
   const imgSrc = useMemo(() => {
     if (image) return getImageFromBuffer(image.data.data, image.mimeType);
   }, [image]);
+
+  const imgSrcUser = useMemo(() => {
+    if (user.image) return getImageFromBuffer(user.image.data.data, user.image.mimeType);
+  }, [user.image]);
 
   return (
     <Box
@@ -53,10 +57,7 @@ function CompanyDataSection({ company }: IProps) {
           width: 'min(400px, 100%)',
           display: 'flex',
           flexDirection: 'column',
-          gap: '32px',
-          '@media (max-width: 768px)': {
-            gap: '20px'
-          },
+          gap: '20px',
           '@media (max-width: 640px)': {
             gap: '12px'
           }
@@ -76,6 +77,30 @@ function CompanyDataSection({ company }: IProps) {
             { subtitle: 'Updated at:', value: new Date(updatedAt).toLocaleString() }
           ]}
         />
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            columnGap: '20px',
+            padding: '8px 16px'
+          }}>
+          <Typography variant="body1" className="content-dark-color">
+            Owner:
+          </Typography>
+          <Box
+            sx={{
+              maxWidth: '220px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px'
+            }}>
+            <AvatarUsage src={imgSrcUser} title={user.username} sx={{ fontSize: '2.4rem' }} />
+            <Typography variant="h6" className="text-ellipsis">
+              {user.username}
+            </Typography>
+          </Box>
+        </Box>
       </Box>
     </Box>
   );
