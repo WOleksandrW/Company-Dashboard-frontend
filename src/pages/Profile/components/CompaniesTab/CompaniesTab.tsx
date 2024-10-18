@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import api from '../../../../api';
+import api from '@root/api';
 import { Box, Button, List, Pagination, Skeleton } from '@mui/material';
-import { CompanyCard, EmptyMessage, PopupCreateCompany } from '../../../../components';
-import { TUser } from '../../../../types/user.type';
-import { EQueryKeys } from '../../../../enums/queryKeys.enum';
+import { CompanyCard, EmptyMessage, PopupCreateCompany } from '@root/components';
+import { TUser } from '@root/types/user.type';
+import { EQueryKeys } from '@root/enums/queryKeys.enum';
 
 import { FaPlus } from 'react-icons/fa';
 

@@ -4,12 +4,12 @@ import { useMutation } from 'react-query';
 import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
-import api from '../../api';
+import api from '@root/api';
 import { Typography } from '@mui/material';
-import { AuthForm, TextLinkList } from '../../components';
-import { schemaSignIn } from '../../yup/schema';
-import { TSignInBody } from '../../types/types';
-import useQueryCurrUser from '../../hooks/useQueryCurrUser';
+import { AuthForm, TextLinkList } from '@root/components';
+import { schemaSignIn } from '@root/yup/schema';
+import { TSignInBody } from '@root/types/types';
+import useQueryCurrUser from '@root/hooks/useQueryCurrUser';
 
 function SignIn() {
   const navigate = useNavigate();

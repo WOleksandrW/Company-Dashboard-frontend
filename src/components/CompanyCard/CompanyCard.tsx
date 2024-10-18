@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 import { Button, Card, CardActions, CardContent, SxProps, Theme, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { ImageBlock, MiniDataList, TooltipUsage } from '../';
-import getImageFromBuffer from '../../utils/getImageFromBuffer';
-import { TCompany } from '../../types/company.type';
+import getImageFromBuffer from '@root/utils/getImageFromBuffer';
+import { TCompany } from '@root/types/company.type';
 
 interface IProps {
   company: TCompany;

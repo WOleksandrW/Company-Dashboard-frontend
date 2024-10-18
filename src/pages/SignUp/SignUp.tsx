@@ -4,11 +4,11 @@ import { useMutation } from 'react-query';
 import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
-import api from '../../api';
+import api from '@root/api';
 import { Typography } from '@mui/material';
-import { AuthForm, TextLinkList } from '../../components';
-import { schemaSignUp } from '../../yup/schema';
-import { TSignUpBody } from '../../types/types';
+import { AuthForm, TextLinkList } from '@root/components';
+import { schemaSignUp } from '@root/yup/schema';
+import { TSignUpBody } from '@root/types/types';
 
 function SignUp() {
   const navigate = useNavigate();

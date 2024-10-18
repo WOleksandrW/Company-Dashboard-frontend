@@ -4,11 +4,11 @@ import { useMutation } from 'react-query';
 import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
-import api from '../../api';
+import api from '@root/api';
 import { Typography } from '@mui/material';
-import { AuthForm, TextLinkList } from '../../components';
-import { schemaResetPassword } from '../../yup/schema';
-import { TSignInBody } from '../../types/types';
+import { AuthForm, TextLinkList } from '@root/components';
+import { schemaResetPassword } from '@root/yup/schema';
+import { TSignInBody } from '@root/types/types';
 
 function ResetPassword() {
   const navigate = useNavigate();

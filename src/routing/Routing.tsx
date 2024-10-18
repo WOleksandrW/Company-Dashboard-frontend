@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import useQueryCurrUser from '../hooks/useQueryCurrUser';
-import { AuthLayout, MainLayout, NoAuthLayout } from '../layouts';
+import useQueryCurrUser from '@root/hooks/useQueryCurrUser';
+import { AuthLayout, MainLayout, NoAuthLayout } from '@root/layouts';
 import {
   CompaniesList,
   CompanyDetail,
@@ -10,7 +10,7 @@ import {
   ResetPassword,
   SignIn,
   SignUp
-} from '../pages';
+} from '@root/pages';
 
 function Routing() {
   const { data: userData } = useQueryCurrUser();

@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { emailRegexp, passwordRegexp } from '../constants/regexps';
+import { emailRegexp, passwordRegexp } from '@root/constants/regexps';
 
 const username = yup
   .string()

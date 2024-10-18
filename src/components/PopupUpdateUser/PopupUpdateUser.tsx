@@ -3,15 +3,15 @@ import { useMutation, useQueryClient } from 'react-query';
 import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
-import api from '../../api';
+import api from '@root/api';
 import { AvatarUsage, FormModalUsage } from '../';
-import { EQueryKeys } from '../../enums/queryKeys.enum';
-import { schemaUpdateUser } from '../../yup/schema';
-import { TUser } from '../../types/user.type';
+import { EQueryKeys } from '@root/enums/queryKeys.enum';
+import { schemaUpdateUser } from '@root/yup/schema';
+import { TUser } from '@root/types/user.type';
 import { Box, Button } from '@mui/material';
 import { MdCloudUpload } from 'react-icons/md';
 import { FaTrashAlt } from 'react-icons/fa';
-import getImageFromBuffer from '../../utils/getImageFromBuffer';
+import getImageFromBuffer from '@root/utils/getImageFromBuffer';
 
 interface IProps {
   open: boolean;

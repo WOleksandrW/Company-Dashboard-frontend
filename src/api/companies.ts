@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
-import { TCompany } from '../types/company.type';
-import { TGetAllCompanies, TGetAllResponse } from '../types/types';
+import { TCompany } from '@root/types/company.type';
+import { TGetAllCompanies, TGetAllResponse } from '@root/types/types';
 
 export default function (instance: AxiosInstance) {
   return {

@@ -2,8 +2,8 @@ import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { Box, Button, Paper, Skeleton, Typography } from '@mui/material';
-import api from '../../api';
-import useQueryCurrUser from '../../hooks/useQueryCurrUser';
+import api from '@root/api';
+import useQueryCurrUser from '@root/hooks/useQueryCurrUser';
 import {
   AvatarUsage,
   BreadcrumbsUsage,
@@ -12,10 +12,10 @@ import {
   PopupChangePasswordUser,
   PopupUpdateUser,
   TabsUsage
-} from '../../components';
-import getImageFromBuffer from '../../utils/getImageFromBuffer';
-import { EQueryKeys } from '../../enums/queryKeys.enum';
-import { ERole } from '../../enums/role.enum';
+} from '@root/components';
+import getImageFromBuffer from '@root/utils/getImageFromBuffer';
+import { EQueryKeys } from '@root/enums/queryKeys.enum';
+import { ERole } from '@root/enums/role.enum';
 
 import { FaEdit, FaLock } from 'react-icons/fa';
 import { CompaniesTab } from './components';

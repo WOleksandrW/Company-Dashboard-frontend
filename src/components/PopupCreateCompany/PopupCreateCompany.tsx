@@ -3,12 +3,12 @@ import { useMutation, useQueryClient } from 'react-query';
 import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
-import api from '../../api';
-import useQueryCurrUser from '../../hooks/useQueryCurrUser';
+import api from '@root/api';
+import useQueryCurrUser from '@root/hooks/useQueryCurrUser';
 import { FormModalUsage } from '../';
-import { schemaCompany } from '../../yup/schema';
-import { EQueryKeys } from '../../enums/queryKeys.enum';
-import { TUser } from '../../types/user.type';
+import { schemaCompany } from '@root/yup/schema';
+import { EQueryKeys } from '@root/enums/queryKeys.enum';
+import { TUser } from '@root/types/user.type';
 
 interface IProps {
   open: boolean;

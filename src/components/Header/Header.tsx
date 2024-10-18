@@ -2,10 +2,10 @@ import { useCallback, useMemo, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Box, Button, IconButton, Menu, MenuItem, Typography, useMediaQuery } from '@mui/material';
 import { useQueryClient } from 'react-query';
-import useQueryCurrUser from '../../hooks/useQueryCurrUser';
-import getImageFromBuffer from '../../utils/getImageFromBuffer';
+import useQueryCurrUser from '@root/hooks/useQueryCurrUser';
+import getImageFromBuffer from '@root/utils/getImageFromBuffer';
 import { AvatarUsage, MainDrawerUsage, WrapperBoxUsage } from '../';
-import { EQueryKeys } from '../../enums/queryKeys.enum';
+import { EQueryKeys } from '@root/enums/queryKeys.enum';
 
 import { IoLogOutOutline, IoMenu, IoPersonCircleSharp } from 'react-icons/io5';
 

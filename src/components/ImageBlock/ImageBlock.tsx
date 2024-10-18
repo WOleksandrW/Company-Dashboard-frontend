@@ -1,6 +1,6 @@
 import { Box, SxProps, Theme } from '@mui/material';
 
-import imgPlaceholder from '../../assets/images/image-placeholder.png';
+import imgPlaceholder from '@root/assets/images/image-placeholder.png';
 
 interface IProps {
   imgSrc?: string;

@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
-import { TUser } from '../types/user.type';
-import { TSignInBody, TSignUpBody } from '../types/types';
+import { TUser } from '@root/types/user.type';
+import { TSignInBody, TSignUpBody } from '@root/types/types';
 
 export default function (instance: AxiosInstance) {
   return {

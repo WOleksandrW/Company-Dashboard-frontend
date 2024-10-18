@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { PopupBoxUsage, WrapperBoxUsage } from '../../components';
+import { PopupBoxUsage, WrapperBoxUsage } from '@root/components';
 
 import styles from './NoAuthLayout.module.scss';
 

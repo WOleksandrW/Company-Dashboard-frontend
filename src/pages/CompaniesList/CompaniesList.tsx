@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useDebounce } from 'use-debounce';
-import api from '../../api';
+import api from '@root/api';
 import { Box, Button, IconButton, Pagination, Skeleton, TextField } from '@mui/material';
-import useQueryCurrUser from '../../hooks/useQueryCurrUser';
+import useQueryCurrUser from '@root/hooks/useQueryCurrUser';
 import {
   BreadcrumbsUsage,
   EmptyMessage,
@@ -12,12 +12,12 @@ import {
   GridListUsage,
   PopupCreateCompany,
   TextFieldUsage
-} from '../../components';
-import { EOrder } from '../../enums/order.enum';
-import { EQueryKeys } from '../../enums/queryKeys.enum';
-import { ERole } from '../../enums/role.enum';
-import { TGetAllCompanies } from '../../types/types';
-import { limitRecords } from '../../constants/queryParams';
+} from '@root/components';
+import { EOrder } from '@root/enums/order.enum';
+import { EQueryKeys } from '@root/enums/queryKeys.enum';
+import { ERole } from '@root/enums/role.enum';
+import { TGetAllCompanies } from '@root/types/types';
+import { limitRecords } from '@root/constants/queryParams';
 
 import { FaPlus } from 'react-icons/fa';
 import { IoReload } from 'react-icons/io5';

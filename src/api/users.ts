@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
-import { TUser } from '../types/user.type';
-import { TGetAllResponse, TGetAllUsers, TPatchUser, TSignUpBody } from '../types/types';
-import { ERole } from '../enums/role.enum';
+import { TUser } from '@root/types/user.type';
+import { TGetAllResponse, TGetAllUsers, TPatchUser, TSignUpBody } from '@root/types/types';
+import { ERole } from '@root/enums/role.enum';
 
 export default function (instance: AxiosInstance) {
   return {

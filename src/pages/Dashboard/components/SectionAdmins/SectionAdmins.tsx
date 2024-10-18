@@ -2,19 +2,19 @@ import { useEffect, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 import { Box, Button, Pagination, Skeleton, TextField } from '@mui/material';
 import { useDebounce } from 'use-debounce';
-import api from '../../../../api';
+import api from '@root/api';
 import {
   EmptyMessage,
   GridListUsage,
   PopupChangePasswordUser,
   PopupUpdateUser,
   UserCard
-} from '../../../../components';
+} from '@root/components';
 import { PopupCreateUser, PopupDeleteUser } from '../';
-import { EQueryKeys } from '../../../../enums/queryKeys.enum';
-import { ERole } from '../../../../enums/role.enum';
-import { TUser } from '../../../../types/user.type';
-import { limitRecords } from '../../../../constants/queryParams';
+import { EQueryKeys } from '@root/enums/queryKeys.enum';
+import { ERole } from '@root/enums/role.enum';
+import { TUser } from '@root/types/user.type';
+import { limitRecords } from '@root/constants/queryParams';
 
 import { FaEdit, FaLock, FaPlus, FaTrashAlt } from 'react-icons/fa';
 

@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import api from '../../../../api';
-import { ConfirmModalUsage } from '../../../../components';
-import { EQueryKeys } from '../../../../enums/queryKeys.enum';
-import { TUser } from '../../../../types/user.type';
+import api from '@root/api';
+import { ConfirmModalUsage } from '@root/components';
+import { EQueryKeys } from '@root/enums/queryKeys.enum';
+import { TUser } from '@root/types/user.type';
 
 interface IProps {
   open: boolean;

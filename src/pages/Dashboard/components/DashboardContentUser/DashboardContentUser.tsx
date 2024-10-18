@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 import { Box, Divider, Pagination, Skeleton, Typography } from '@mui/material';
-import api from '../../../../api';
-import { CompanyCard, EmptyMessage, GridListUsage, PieChartUsage } from '../../../../components';
-import { EQueryKeys } from '../../../../enums/queryKeys.enum';
-import { limitRecords } from '../../../../constants/queryParams';
+import api from '@root/api';
+import { CompanyCard, EmptyMessage, GridListUsage, PieChartUsage } from '@root/components';
+import { EQueryKeys } from '@root/enums/queryKeys.enum';
+import { limitRecords } from '@root/constants/queryParams';
 
 function DashboardContentUser() {
   const [page, setPage] = useState(1);

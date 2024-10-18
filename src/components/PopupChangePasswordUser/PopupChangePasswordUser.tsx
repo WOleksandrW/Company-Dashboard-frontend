@@ -3,11 +3,11 @@ import { useMutation } from 'react-query';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
-import api from '../../api';
+import api from '@root/api';
 import { FormModalUsage } from '../';
-import { schemaChangePassword } from '../../yup/schema';
-import { TPatchUser } from '../../types/types';
-import { TUser } from '../../types/user.type';
+import { schemaChangePassword } from '@root/yup/schema';
+import { TPatchUser } from '@root/types/types';
+import { TUser } from '@root/types/user.type';
 
 interface IFormValues {
   password: string;

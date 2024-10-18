@@ -1,7 +1,7 @@
-@import "../../scss/variables.scss";
+@import "@root/scss/variables.scss";
 
 .section {
-  background-image: url("../../assets/images/auth-background.png");
+  background-image: url("@root/assets/images/auth-background.png");
   background-color: rgba(0, 0, 0, 0.7);
   background-blend-mode: overlay;
   background-position: center;

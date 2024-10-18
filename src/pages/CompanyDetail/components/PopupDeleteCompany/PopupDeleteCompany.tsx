@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import api from '../../../../api';
-import { ConfirmModalUsage } from '../../../../components';
-import { EQueryKeys } from '../../../../enums/queryKeys.enum';
-import { TCompany } from '../../../../types/company.type';
+import api from '@root/api';
+import { ConfirmModalUsage } from '@root/components';
+import { EQueryKeys } from '@root/enums/queryKeys.enum';
+import { TCompany } from '@root/types/company.type';
 
 interface IProps {
   open: boolean;

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import useQueryCurrUser from '../hooks/useQueryCurrUser';
+import useQueryCurrUser from '@root/hooks/useQueryCurrUser';
 
 interface IProps {
   setIsLoading: (value: boolean) => void;

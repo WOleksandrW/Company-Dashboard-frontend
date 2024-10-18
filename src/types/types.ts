@@ -1,5 +1,5 @@
-import { EOrder } from '../enums/order.enum';
-import { ERole } from '../enums/role.enum';
+import { EOrder } from '@root/enums/order.enum';
+import { ERole } from '@root/enums/role.enum';
 import { TUser } from './user.type';
 
 type TGenetalGettAll = {

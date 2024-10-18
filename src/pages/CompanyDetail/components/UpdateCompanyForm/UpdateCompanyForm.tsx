@@ -4,12 +4,12 @@ import { useMutation, useQueryClient } from 'react-query';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
-import getImageFromBuffer from '../../../../utils/getImageFromBuffer';
-import api from '../../../../api';
-import { ImageBlock, TextFieldUsage } from '../../../../components';
-import { TCompany } from '../../../../types/company.type';
-import { schemaCompany } from '../../../../yup/schema';
-import { EQueryKeys } from '../../../../enums/queryKeys.enum';
+import getImageFromBuffer from '@root/utils/getImageFromBuffer';
+import api from '@root/api';
+import { ImageBlock, TextFieldUsage } from '@root/components';
+import { TCompany } from '@root/types/company.type';
+import { schemaCompany } from '@root/yup/schema';
+import { EQueryKeys } from '@root/enums/queryKeys.enum';
 
 import { FaTrashAlt } from 'react-icons/fa';
 import { MdCancel, MdCloudUpload, MdOutlineDone } from 'react-icons/md';

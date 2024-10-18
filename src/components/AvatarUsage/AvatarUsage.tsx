@@ -1,5 +1,5 @@
 import { Avatar, SxProps, Theme } from '@mui/material';
-import stringAvatar from '../../utils/stringAvatar';
+import stringAvatar from '@root/utils/stringAvatar';
 import { useMemo } from 'react';
 
 interface IProps {

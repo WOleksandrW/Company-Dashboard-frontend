@@ -1,4 +1,4 @@
-import { ERole } from '../enums/role.enum';
+import { ERole } from '@root/enums/role.enum';
 import { TBaseDates } from './base.type';
 import { TImage } from './image.type';
 

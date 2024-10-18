@@ -2,15 +2,15 @@ import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { Box, IconButton, Typography } from '@mui/material';
-import api from '../../api';
-import useQueryCurrUser from '../../hooks/useQueryCurrUser';
-import { BreadcrumbsUsage, EmptyMessage } from '../../components';
+import api from '@root/api';
+import useQueryCurrUser from '@root/hooks/useQueryCurrUser';
+import { BreadcrumbsUsage, EmptyMessage } from '@root/components';
 import { CompanyDataSection, PopupDeleteCompany, UpdateCompanyForm } from './components';
-import { EQueryKeys } from '../../enums/queryKeys.enum';
-import { ERole } from '../../enums/role.enum';
+import { EQueryKeys } from '@root/enums/queryKeys.enum';
+import { ERole } from '@root/enums/role.enum';
 
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
-import mapPlaceholder from '../../assets/images/map-placeholder.png';
+import mapPlaceholder from '@root/assets/images/map-placeholder.png';
 
 function CompanyDetail() {
   const { id } = useParams();

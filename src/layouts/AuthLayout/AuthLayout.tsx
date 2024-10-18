@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { WrapperBoxUsage } from '../../components';
+import { WrapperBoxUsage } from '@root/components';
 
 function AuthLayout() {
   return (

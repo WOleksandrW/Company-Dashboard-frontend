@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import { Box, Button, Card, CardActions, CardContent, Typography } from '@mui/material';
 import { AvatarUsage, MenuUsage, MiniDataList } from '../';
-import getImageFromBuffer from '../../utils/getImageFromBuffer';
-import { TUser } from '../../types/user.type';
+import getImageFromBuffer from '@root/utils/getImageFromBuffer';
+import { TUser } from '@root/types/user.type';
 import { IconType } from 'react-icons';
 import { NavLink } from 'react-router-dom';
 

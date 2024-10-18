@@ -2,13 +2,13 @@ import { useCallback, useEffect } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import api from '../../../../api';
+import api from '@root/api';
 import { toast } from 'react-toastify';
-import { FormModalUsage } from '../../../../components';
-import { EQueryKeys } from '../../../../enums/queryKeys.enum';
-import { ERole } from '../../../../enums/role.enum';
-import { schemaSignUp } from '../../../../yup/schema';
-import { TSignUpBody } from '../../../../types/types';
+import { FormModalUsage } from '@root/components';
+import { EQueryKeys } from '@root/enums/queryKeys.enum';
+import { ERole } from '@root/enums/role.enum';
+import { schemaSignUp } from '@root/yup/schema';
+import { TSignUpBody } from '@root/types/types';
 
 interface IFormValues {
   username: string;
