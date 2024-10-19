@@ -171,7 +171,7 @@ function PopupUpdateUser({
               variant="outlined"
               startIcon={<FaTrashAlt />}
               onClick={() => setValue('file', null)}
-              disabled={watchFile === null || (!watchFile && !image)}>
+              disabled={watchFile === null || (!watchFile?.length && !image)}>
               Remove
             </Button>
           </Box>
