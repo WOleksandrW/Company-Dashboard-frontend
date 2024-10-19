@@ -23,7 +23,7 @@ import { CompaniesTab } from './components';
 function Profile() {
   const { id } = useParams();
   const userId = Number(id);
-  const { data: userData } = useQueryCurrUser();
+  const { data: userData, refetch } = useQueryCurrUser();
 
   const { data: user, isLoading } = useQuery(
     [EQueryKeys.USER, { id: userId }],
@@ -210,6 +210,13 @@ function Profile() {
               setOpen={setOpenPopupUpdate}
               user={user}
               queryKey={EQueryKeys.USER}
+              onSuccess={
+                user.id === userData?.id
+                  ? () => {
+                      refetch();
+                    }
+                  : undefined
+              }
               toastMessage={
                 isThisYou
                   ? 'Your data was updated successfully!'
