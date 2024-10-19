@@ -1,15 +1,18 @@
 import * as yup from 'yup';
-import { emailRegexp, passwordRegexp } from '@root/constants/regexps';
+import { emailRegexp, passwordRegexp, titleRegexp, usernameRegexp } from '@root/constants/regexps';
 
 const username = yup
   .string()
   .trim()
   .required('Username is required')
-  .min(2, 'Username must be at least 2 characters long');
+  .min(3, 'Username must be at least 3 characters long')
+  .max(20, 'Username must not exceed 20 characters')
+  .matches(usernameRegexp, 'Username can only contain letters, numbers, and underscores');
 
 const email = yup
   .string()
   .required('Email is required')
+  .max(254, 'Email must not exceed 254 characters.')
   .matches(emailRegexp, 'Invalid email address');
 
 const password = yup
@@ -30,22 +33,25 @@ const confirmPassword = yup
 const titleCompany = yup
   .string()
   .required('Title is required')
-  .min(4, 'Title must be at least 4 characters long');
+  .min(3, 'Title must be at least 3 characters long')
+  .max(30, 'Title must not exceed 30 characters')
+  .matches(titleRegexp, 'Title can only contain letters, numbers, and spaces');
 
 const serviceCompany = yup
   .string()
   .required('Service is required')
-  .min(4, 'Service must be at least 4 characters long');
+  .min(4, 'Service must be at least 4 characters long')
+  .max(30, 'Service must not exceed 30 characters');
 
 const addressCompany = yup
   .string()
   .required('Address is required')
-  .min(4, 'Address must be at least 4 characters long');
+  .max(100, 'Address must not exceed 100 characters');
 
 const capitalCompany = yup
   .number()
   .required('Capital is required')
-  .min(0, 'Capital must be bigger than 0');
+  .min(1, 'Capital must be bigger than 0');
 
 const file = yup.mixed().nullable();
 
