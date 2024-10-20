@@ -81,7 +81,7 @@ function UpdateCompanyForm({ company, onClose }: IProps) {
           formData.append('file', file[0]);
         }
       } else if (file === null) {
-        formData.append('file', file);
+        formData.append('deleteFile', 'true');
       }
 
       await mutateAsync(formData);
@@ -113,7 +113,14 @@ function UpdateCompanyForm({ company, onClose }: IProps) {
             gap: '20px'
           }
         }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '12px',
+            maxWidth: '300px'
+          }}>
           <ImageBlock
             imgSrc={imgPreview ?? (watchFile !== null ? imgSrc : undefined)}
             altText={title}

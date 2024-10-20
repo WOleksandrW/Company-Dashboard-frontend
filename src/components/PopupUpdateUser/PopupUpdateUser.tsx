@@ -79,7 +79,7 @@ function PopupUpdateUser({
           formData.append('file', file[0]);
         }
       } else if (file === null) {
-        formData.append('file', file);
+        formData.append('deleteFile', 'true');
       }
 
       await mutateAsync(formData);
