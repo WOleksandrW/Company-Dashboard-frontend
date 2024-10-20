@@ -13,10 +13,14 @@ const queryClient = new QueryClient({
     queries: {
       refetchOnWindowFocus: false,
       retry: false,
-      onError: onAxiosError
+      onError: (error) => {
+        onAxiosError(error, queryClient);
+      }
     },
     mutations: {
-      onError: onAxiosError
+      onError: (error) => {
+        onAxiosError(error, queryClient);
+      }
     }
   }
 });
