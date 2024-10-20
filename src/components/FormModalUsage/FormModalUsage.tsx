@@ -12,11 +12,9 @@ interface IProps {
   onCancel?: () => void;
   title: string;
   startChildren?: React.ReactNode;
+  control: Control<any>;
   inputs: {
-    controlParams: {
-      control: Control<any>;
-      name: string;
-    };
+    controlName: string;
     label: string;
     type?: React.HTMLInputTypeAttribute;
     errorMessage?: string;
@@ -28,6 +26,7 @@ function FormModalUsage({
   open,
   setOpen,
   title,
+  control,
   inputs,
   onCancel,
   submitHandler,
@@ -57,11 +56,11 @@ function FormModalUsage({
               alignSelf: 'center'
             }}>
             {startChildren}
-            {inputs.map(({ controlParams, ...rest }) => (
+            {inputs.map(({ controlName, ...rest }) => (
               <Controller
-                key={controlParams.name}
-                name={controlParams.name}
-                control={controlParams.control}
+                key={controlName}
+                name={controlName}
+                control={control}
                 render={({ field }) => <TextFieldUsage {...rest} field={field} />}
               />
             ))}

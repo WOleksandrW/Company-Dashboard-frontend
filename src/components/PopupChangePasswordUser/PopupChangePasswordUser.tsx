@@ -56,7 +56,7 @@ function PopupChangePasswordUser({ open, setOpen, userId, toastMessage, hasOldPa
       hasOldPassword
         ? [
             {
-              controlParams: { control, name: 'oldPassword' },
+              controlName: 'oldPassword',
               label: 'Old password',
               type: 'password',
               autoComplete: 'off',
@@ -76,17 +76,18 @@ function PopupChangePasswordUser({ open, setOpen, userId, toastMessage, hasOldPa
       open={open}
       setOpen={setOpen}
       title="Change password"
+      control={control}
       inputs={[
         ...additionalInputs,
         {
-          controlParams: { control, name: 'password' },
+          controlName: 'password',
           label: 'New password',
           type: 'password',
           autoComplete: 'off',
           errorMessage: errors.password?.message
         },
         {
-          controlParams: { control, name: 'confirm' },
+          controlName: 'confirm',
           label: 'Confirm new password',
           type: 'password',
           autoComplete: 'off',

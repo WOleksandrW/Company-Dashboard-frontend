@@ -68,26 +68,27 @@ function PopupCreateUser({ open, setOpen, queryKey, role, toastMessage, popupTit
       open={open}
       setOpen={setOpen}
       title={popupTitle}
+      control={control}
       inputs={[
         {
-          controlParams: { control, name: 'username' },
+          controlName: 'username',
           label: 'Username',
           errorMessage: errors.username?.message
         },
         {
-          controlParams: { control, name: 'email' },
+          controlName: 'email',
           label: 'Email',
           errorMessage: errors.email?.message
         },
         {
-          controlParams: { control, name: 'password' },
+          controlName: 'password',
           label: 'Password',
           type: 'password',
           autoComplete: 'off',
           errorMessage: errors.password?.message
         },
         {
-          controlParams: { control, name: 'confirm' },
+          controlName: 'confirm',
           label: 'Confirm password',
           type: 'password',
           autoComplete: 'off',

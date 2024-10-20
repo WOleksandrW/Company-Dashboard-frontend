@@ -74,24 +74,25 @@ function PopupCreateCompany({ open, setOpen, userId }: IProps) {
       open={open}
       setOpen={setOpen}
       title="Create Company"
+      control={control}
       inputs={[
         {
-          controlParams: { control, name: 'title' },
+          controlName: 'title',
           label: 'Title',
           errorMessage: errors.title?.message
         },
         {
-          controlParams: { control, name: 'service' },
+          controlName: 'service',
           label: 'Service',
           errorMessage: errors.service?.message
         },
         {
-          controlParams: { control, name: 'address' },
+          controlName: 'address',
           label: 'Address',
           errorMessage: errors.address?.message
         },
         {
-          controlParams: { control, name: 'capital' },
+          controlName: 'capital',
           label: 'Capital',
           type: 'number',
           errorMessage: errors.capital?.message

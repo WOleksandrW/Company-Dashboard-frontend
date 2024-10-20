@@ -119,14 +119,15 @@ function PopupUpdateUser({
       open={open}
       setOpen={setOpen}
       title={popupTitle}
+      control={control}
       inputs={[
         {
-          controlParams: { control, name: 'username' },
+          controlName: 'username',
           label: 'Username',
           errorMessage: errors.username?.message
         },
         {
-          controlParams: { control, name: 'email' },
+          controlName: 'email',
           label: 'Email',
           errorMessage: errors.email?.message
         }
