@@ -4,6 +4,7 @@ import { ModalUsage, TextFieldUsage } from '..';
 import { Box, Button, Typography } from '@mui/material';
 import { MdCancel, MdOutlineDone } from 'react-icons/md';
 import { Control, Controller } from 'react-hook-form';
+import { IGMapAutocompleteProps } from '../GMapAutocomplete/GMapAutocomplete';
 
 interface IProps {
   open: boolean;
@@ -19,6 +20,7 @@ interface IProps {
     type?: React.HTMLInputTypeAttribute;
     errorMessage?: string;
     autoComplete?: string;
+    component?: (props: IGMapAutocompleteProps) => JSX.Element;
   }[];
 }
 
@@ -56,12 +58,18 @@ function FormModalUsage({
               alignSelf: 'center'
             }}>
             {startChildren}
-            {inputs.map(({ controlName, ...rest }) => (
+            {inputs.map(({ controlName, component: Component, ...rest }) => (
               <Controller
                 key={controlName}
                 name={controlName}
                 control={control}
-                render={({ field }) => <TextFieldUsage {...rest} field={field} />}
+                render={({ field }) =>
+                  Component ? (
+                    <Component {...rest} field={field} />
+                  ) : (
+                    <TextFieldUsage {...rest} field={field} />
+                  )
+                }
               />
             ))}
           </Box>

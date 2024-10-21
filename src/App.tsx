@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { ToastContainer } from 'react-toastify';
+import { APIProvider } from '@vis.gl/react-google-maps';
 import Routing from './routing/Routing';
 import { onAxiosError } from './constants/handlers';
 import AuthController from './controllers/AuthController';
@@ -61,16 +62,20 @@ const theme = createTheme({
   }
 });
 
+const apiKey = import.meta.env.VITE_API_KEY;
+
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
-        {isLoading ? <AuthController setIsLoading={setIsLoading} /> : <Routing />}
-      </ThemeProvider>
-      <ToastContainer style={{ fontSize: '16px' }} closeOnClick />
-    </QueryClientProvider>
+    <APIProvider language="en" libraries={['places', 'marker']} apiKey={apiKey}>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          {isLoading ? <AuthController setIsLoading={setIsLoading} /> : <Routing />}
+        </ThemeProvider>
+        <ToastContainer style={{ fontSize: '16px' }} closeOnClick />
+      </QueryClientProvider>
+    </APIProvider>
   );
 }
 

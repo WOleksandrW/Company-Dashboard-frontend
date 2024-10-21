@@ -1,12 +1,13 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { Box, Button } from '@mui/material';
 import { useMutation, useQueryClient } from 'react-query';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
+import { APIProviderContext, APIProviderContextValue } from '@vis.gl/react-google-maps';
 import getImageFromBuffer from '@root/utils/getImageFromBuffer';
 import api from '@root/api';
-import { ImageBlock, TextFieldUsage } from '@root/components';
+import { GMapAutocomplete, ImageBlock, TextFieldUsage } from '@root/components';
 import { TCompany } from '@root/types/company.type';
 import { schemaCompany } from '@root/yup/schema';
 import { EQueryKeys } from '@root/enums/queryKeys.enum';
@@ -21,6 +22,7 @@ interface IProps {
 
 function UpdateCompanyForm({ company, onClose }: IProps) {
   const { id, image, title, service, address, capital } = company;
+  const { status: mapStatus } = useContext(APIProviderContext) as APIProviderContextValue;
   const queryClient = useQueryClient();
 
   const {
@@ -182,17 +184,31 @@ function UpdateCompanyForm({ company, onClose }: IProps) {
               />
             )}
           />
-          <Controller
-            name="address"
-            control={control}
-            render={({ field }) => (
-              <TextFieldUsage
-                label="Address"
-                errorMessage={errors.address?.message}
-                field={field}
-              />
-            )}
-          />
+          {mapStatus === 'LOADED' ? (
+            <Controller
+              name="address"
+              control={control}
+              render={({ field }) => (
+                <GMapAutocomplete
+                  label="Address"
+                  field={field}
+                  errorMessage={errors.address?.message}
+                />
+              )}
+            />
+          ) : (
+            <Controller
+              name="address"
+              control={control}
+              render={({ field }) => (
+                <TextFieldUsage
+                  label="Address"
+                  errorMessage={errors.address?.message}
+                  field={field}
+                />
+              )}
+            />
+          )}
           <Controller
             name="capital"
             control={control}

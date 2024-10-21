@@ -1,11 +1,12 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useContext, useEffect } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
+import { APIProviderContext, APIProviderContextValue } from '@vis.gl/react-google-maps';
 import api from '@root/api';
 import useQueryCurrUser from '@root/hooks/useQueryCurrUser';
-import { FormModalUsage } from '../';
+import { FormModalUsage, GMapAutocomplete } from '../';
 import { schemaCompany } from '@root/yup/schema';
 import { EQueryKeys } from '@root/enums/queryKeys.enum';
 import { TUser } from '@root/types/user.type';
@@ -17,6 +18,7 @@ interface IProps {
 }
 
 function PopupCreateCompany({ open, setOpen, userId }: IProps) {
+  const { status: mapStatus } = useContext(APIProviderContext) as APIProviderContextValue;
   const queryClient = useQueryClient();
   const { data: userData } = useQueryCurrUser();
 
@@ -89,7 +91,8 @@ function PopupCreateCompany({ open, setOpen, userId }: IProps) {
         {
           controlName: 'address',
           label: 'Address',
-          errorMessage: errors.address?.message
+          errorMessage: errors.address?.message,
+          component: mapStatus === 'LOADED' ? GMapAutocomplete : undefined
         },
         {
           controlName: 'capital',

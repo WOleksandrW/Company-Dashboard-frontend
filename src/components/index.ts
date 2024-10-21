@@ -24,3 +24,4 @@ export { default as MainDrawerUsage } from './MainDrawerUsage/MainDrawerUsage';
 export { default as PopupUpdateUser } from './PopupUpdateUser/PopupUpdateUser';
 export { default as PopupChangePasswordUser } from './PopupChangePasswordUser/PopupChangePasswordUser';
 export { default as PopupCreateCompany } from './PopupCreateCompany/PopupCreateCompany';
+export { default as GMapAutocomplete } from './GMapAutocomplete/GMapAutocomplete';
