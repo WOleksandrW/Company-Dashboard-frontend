@@ -44,7 +44,7 @@ function ResetPassword() {
 
   return (
     <>
-      <Typography variant="h2" className="primary-color" sx={{ fontWeight: 'bold' }}>
+      <Typography variant="h2" color="primary" sx={{ fontWeight: 'bold' }}>
         Reset password
       </Typography>
       <AuthForm

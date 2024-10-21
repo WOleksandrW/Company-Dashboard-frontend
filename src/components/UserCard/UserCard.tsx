@@ -49,11 +49,8 @@ function UserCard({ user, dropDownMenu }: IProps) {
           />
         )}
       </Box>
-      <CardContent className="content-color">
-        <Typography
-          variant="h6"
-          className="content-dark-color text-ellipsis"
-          sx={{ textAlign: 'center' }}>
+      <CardContent>
+        <Typography variant="h6" className="text-ellipsis" sx={{ textAlign: 'center' }}>
           {username}
         </Typography>
         <MiniDataList

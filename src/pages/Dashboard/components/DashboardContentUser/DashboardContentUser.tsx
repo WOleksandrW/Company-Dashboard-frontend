@@ -35,11 +35,11 @@ function DashboardContentUser() {
           gap: '32px'
         }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-          <Typography variant="h2" className="primary-color" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h2" color="primary" sx={{ fontWeight: 'bold' }}>
             Chart of companies by capital
           </Typography>
           {totalCapital && (
-            <Typography className="secondary-color">Total capital = {totalCapital}</Typography>
+            <Typography color="secondary">Total capital = {totalCapital}</Typography>
           )}
         </Box>
         {isLoading ? (
@@ -68,7 +68,7 @@ function DashboardContentUser() {
           alignItems: 'center',
           gap: '20px'
         }}>
-        <Typography variant="h2" className="primary-color" sx={{ fontWeight: 'bold' }}>
+        <Typography variant="h2" color="primary" sx={{ fontWeight: 'bold' }}>
           Your companies:
         </Typography>
         <Box

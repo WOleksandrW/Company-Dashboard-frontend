@@ -154,6 +154,7 @@ function UpdateCompanyForm({ company, onClose }: IProps) {
             <Button
               sx={{ typography: 'body1' }}
               variant="outlined"
+              color="error"
               startIcon={<FaTrashAlt />}
               onClick={() => setValue('file', null)}
               disabled={watchFile === null || (!watchFile && !image)}>
@@ -211,6 +212,7 @@ function UpdateCompanyForm({ company, onClose }: IProps) {
           sx={{ typography: 'body1' }}
           variant="outlined"
           type="button"
+          color="error"
           startIcon={<MdCancel />}
           onClick={onClose}>
           Cancel
@@ -219,6 +221,7 @@ function UpdateCompanyForm({ company, onClose }: IProps) {
           sx={{ typography: 'body1' }}
           variant="outlined"
           type="submit"
+          color="success"
           startIcon={<MdOutlineDone />}>
           Save
         </Button>

@@ -26,12 +26,9 @@ function CompanyCard({ company, sx }: IProps) {
   return (
     <Card sx={sxProps}>
       <ImageBlock imgSrc={imgSrc} altText={title} sx={{ height: '260px', marginX: 'auto' }} />
-      <CardContent className="content-color">
+      <CardContent>
         <TooltipUsage title={title}>
-          <Typography
-            variant="h6"
-            className="content-dark-color text-ellipsis"
-            sx={{ textAlign: 'center' }}>
+          <Typography variant="h6" className="text-ellipsis" sx={{ textAlign: 'center' }}>
             {title}
           </Typography>
         </TooltipUsage>

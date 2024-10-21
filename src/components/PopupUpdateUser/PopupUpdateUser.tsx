@@ -170,6 +170,7 @@ function PopupUpdateUser({
             <Button
               sx={{ typography: 'body1' }}
               variant="outlined"
+              color="error"
               startIcon={<FaTrashAlt />}
               onClick={() => setValue('file', null)}
               disabled={watchFile === null || (!watchFile?.length && !image)}>

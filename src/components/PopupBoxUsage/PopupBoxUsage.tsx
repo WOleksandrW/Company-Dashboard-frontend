@@ -1,8 +1,8 @@
 import { forwardRef, useMemo } from 'react';
-import { Box, BoxProps } from '@mui/material';
+import { Paper, PaperProps } from '@mui/material';
 import { merge } from 'lodash';
 
-const PopupBoxUsage = forwardRef<HTMLDivElement, BoxProps>(({ children, sx, ...rest }, ref) => {
+const PopupBoxUsage = forwardRef<HTMLDivElement, PaperProps>(({ children, sx, ...rest }, ref) => {
   const sxProps = useMemo(
     () =>
       merge(
@@ -17,9 +17,9 @@ const PopupBoxUsage = forwardRef<HTMLDivElement, BoxProps>(({ children, sx, ...r
   );
 
   return (
-    <Box ref={ref} className="back1-color" sx={sxProps} {...rest}>
+    <Paper ref={ref} sx={sxProps} {...rest}>
       {children}
-    </Box>
+    </Paper>
   );
 });
 

@@ -67,7 +67,8 @@ function CompanyDataSection({ company }: IProps) {
         }}>
         <Typography
           variant="h2"
-          className="text-ellipsis content-dark-color"
+          className="text-ellipsis"
+          color="textPrimary"
           sx={{ fontWeight: 'bold', textAlign: 'center' }}>
           {title}
         </Typography>
@@ -88,7 +89,7 @@ function CompanyDataSection({ company }: IProps) {
             columnGap: '20px',
             padding: '8px 16px'
           }}>
-          <Typography variant="body1" className="content-dark-color">
+          <Typography variant="body1" color="textPrimary">
             Owner:
           </Typography>
           <Box

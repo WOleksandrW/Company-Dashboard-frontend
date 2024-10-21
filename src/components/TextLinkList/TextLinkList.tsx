@@ -17,8 +17,9 @@ function TextLinkList({ list }: IProps) {
           {text}
           <Typography
             component={NavLink}
-            className="link secondary-color"
+            className="link"
             to={linkTo}
+            color="secondary"
             sx={{ marginLeft: 'auto' }}>
             {lintText}
           </Typography>

@@ -1,6 +1,15 @@
 import { useCallback, useMemo, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Box, Button, IconButton, Menu, MenuItem, Typography, useMediaQuery } from '@mui/material';
+import {
+  Box,
+  Button,
+  IconButton,
+  Menu,
+  MenuItem,
+  Typography,
+  useMediaQuery,
+  useTheme
+} from '@mui/material';
 import { useQueryClient } from 'react-query';
 import useQueryCurrUser from '@root/hooks/useQueryCurrUser';
 import getImageFromBuffer from '@root/utils/getImageFromBuffer';
@@ -10,6 +19,7 @@ import { EQueryKeys } from '@root/enums/queryKeys.enum';
 import { IoLogOutOutline, IoMenu, IoPersonCircleSharp } from 'react-icons/io5';
 
 function Header() {
+  const theme = useTheme();
   const isTablet = useMediaQuery('(max-width: 768px)');
 
   const queryClient = useQueryClient();
@@ -74,7 +84,7 @@ function Header() {
   );
 
   return (
-    <Box component="header" className="back2-color">
+    <Box component="header" sx={{ bgcolor: theme.palette.background.default }}>
       <WrapperBoxUsage
         sx={{
           paddingY: '12px',
@@ -86,7 +96,7 @@ function Header() {
             columnGap: '20px'
           }
         }}>
-        <Typography variant="h2" className="primary-color" sx={{ fontWeight: 'bold' }}>
+        <Typography variant="h2" color="primary" sx={{ fontWeight: 'bold' }}>
           Company Dashboard
         </Typography>
         {!isTablet ? (

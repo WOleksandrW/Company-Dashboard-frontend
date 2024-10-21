@@ -10,8 +10,19 @@ function Dashboard() {
   return (
     <>
       <Typography variant="h1" sx={{ fontWeight: 'bold' }}>
-        <span className="secondary-color">Welcome,</span>{' '}
-        <span className="primary-color">{userData!.username}</span>.
+        <Typography
+          component="span"
+          color="secondary"
+          sx={{ fontSize: 'inherit', fontWeight: 'inherit' }}>
+          Welcome,
+        </Typography>{' '}
+        <Typography
+          component="span"
+          color="primary"
+          sx={{ fontSize: 'inherit', fontWeight: 'inherit' }}>
+          {userData!.username}
+        </Typography>
+        .
       </Typography>
       <Box
         sx={{

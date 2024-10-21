@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Box, SxProps, Theme } from '@mui/material';
+import { Box, SxProps, Theme, useTheme } from '@mui/material';
 import { merge } from 'lodash';
 
 import imgPlaceholder from '@root/assets/images/image-placeholder.png';
@@ -11,6 +11,8 @@ interface IProps {
 }
 
 function ImageBlock({ imgSrc, altText, sx }: IProps) {
+  const theme = useTheme();
+
   const sxProps = useMemo(
     () =>
       merge(
@@ -21,7 +23,8 @@ function ImageBlock({ imgSrc, altText, sx }: IProps) {
           justifyContent: 'center',
           alignItems: 'center',
           borderRadius: '8px',
-          overflow: 'clip'
+          overflow: 'clip',
+          bgcolor: theme.palette.background.default
         },
         sx
       ),
@@ -29,7 +32,7 @@ function ImageBlock({ imgSrc, altText, sx }: IProps) {
   );
 
   return (
-    <Box className="back2-color" sx={sxProps}>
+    <Box sx={sxProps}>
       <Box
         component="img"
         src={imgSrc ?? imgPlaceholder}

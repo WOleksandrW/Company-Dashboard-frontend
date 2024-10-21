@@ -42,6 +42,22 @@ const theme = createTheme({
     body2: {
       fontSize: '1.4rem'
     }
+  },
+  palette: {
+    primary: {
+      main: '#1E3A8A'
+    },
+    secondary: {
+      main: '#60A5FA'
+    },
+    background: {
+      default: '#E5E7EB',
+      paper: '#EFEFEF'
+    },
+    text: {
+      primary: '#121212',
+      secondary: '#6B7280'
+    }
   }
 });
 

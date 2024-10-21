@@ -63,7 +63,7 @@ function CompanyDetail() {
                 <IconButton size="large" onClick={() => setIsEdit(true)}>
                   <FaEdit />
                 </IconButton>
-                <IconButton size="large" onClick={() => setOpen(true)}>
+                <IconButton color="error" size="large" onClick={() => setOpen(true)}>
                   <FaTrashAlt />
                 </IconButton>
               </Box>

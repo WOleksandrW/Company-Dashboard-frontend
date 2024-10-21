@@ -27,7 +27,7 @@ function ConfirmModalUsage({ open, setOpen, title, text, onSubmit, onCancel }: I
   return (
     <ModalUsage open={open} setOpen={setOpen}>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-        <Typography variant="h2" className="primary-color" sx={{ fontWeight: 'bold' }}>
+        <Typography variant="h2" color="primary" sx={{ fontWeight: 'bold' }}>
           {title}
         </Typography>
         <Typography variant="body1">{text}</Typography>
@@ -35,6 +35,7 @@ function ConfirmModalUsage({ open, setOpen, title, text, onSubmit, onCancel }: I
           <Button
             sx={{ typography: 'body1' }}
             variant="outlined"
+            color="error"
             startIcon={<MdCancel />}
             onClick={cancelHandler}>
             Cancel
@@ -42,6 +43,7 @@ function ConfirmModalUsage({ open, setOpen, title, text, onSubmit, onCancel }: I
           <Button
             sx={{ typography: 'body1' }}
             variant="outlined"
+            color="success"
             startIcon={<MdOutlineDone />}
             onClick={submitHandler}>
             Confirm

@@ -40,7 +40,7 @@ function FormModalUsage({
   return (
     <ModalUsage open={open} setOpen={setOpen}>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-        <Typography variant="h2" className="primary-color" sx={{ fontWeight: 'bold' }}>
+        <Typography variant="h2" color="primary" sx={{ fontWeight: 'bold' }}>
           {title}
         </Typography>
         <Box
@@ -70,6 +70,7 @@ function FormModalUsage({
               sx={{ typography: 'body1' }}
               variant="outlined"
               type="button"
+              color="error"
               startIcon={<MdCancel />}
               onClick={cancelHandler}>
               Cancel
@@ -78,6 +79,7 @@ function FormModalUsage({
               sx={{ typography: 'body1' }}
               variant="outlined"
               type="submit"
+              color="success"
               startIcon={<MdOutlineDone />}>
               Submit
             </Button>
