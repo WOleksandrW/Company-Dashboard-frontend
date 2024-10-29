@@ -2,6 +2,8 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import * as path from 'path';
 
+const PORT = parseInt(process.env.PORT || '5137', 10);
+
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/',
@@ -12,13 +14,13 @@ export default defineConfig({
     }
   },
   preview: {
-    port: 8080,
+    port: PORT,
     strictPort: true
   },
   server: {
-    port: 8080,
+    port: PORT,
     strictPort: true,
     host: true,
-    origin: 'http://0.0.0.0:8080'
+    origin: `http://0.0.0.0:${PORT}`
   }
 });
