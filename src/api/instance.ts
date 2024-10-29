@@ -1,8 +1,9 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { EAxiosPaths } from '@root/enums/axiosPaths.enum';
+const backendLink = import.meta.env.VITE_BACKEND_LINK;
 
 const instance = axios.create({
-  baseURL: 'http://localhost:3000'
+  baseURL: backendLink
 });
 
 instance.interceptors.request.use((config) => {
