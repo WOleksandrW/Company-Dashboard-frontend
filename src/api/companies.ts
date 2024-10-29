@@ -1,35 +1,37 @@
 import { AxiosInstance } from 'axios';
 import { TCompany } from '@root/types/company.type';
 import { TGetAllCompanies, TGetAllResponse } from '@root/types/types';
+import { EAxiosPaths } from '@root/enums/axiosPaths.enum';
 
 export default function (instance: AxiosInstance) {
   return {
-    getAll(query?: TGetAllCompanies) {
-      let path = '/companies';
+    getAll(queriesArray?: TGetAllCompanies) {
+      let queries = '';
 
-      if (query) {
-        const queries = Object.entries(query)
-          .filter((entry) => !!entry[1])
-          .map(([key, value]) => `${key}=${value}`)
-          .join('&');
-        path += `?${queries}`;
+      if (queriesArray) {
+        queries =
+          '?' +
+          Object.entries(queriesArray)
+            .filter((entry) => !!entry[1])
+            .map(([key, value]) => `${key}=${value}`)
+            .join('&');
       }
 
-      return instance.get<TGetAllResponse<TCompany>>(path);
+      return instance.get<TGetAllResponse<TCompany>>(EAxiosPaths.COMPANIES + queries);
     },
     getOne(id: number) {
-      return instance.get<TCompany>(`/companies/${id}`);
+      return instance.get<TCompany>(`${EAxiosPaths.COMPANIES}/${id}`);
     },
     create(payload: FormData) {
-      return instance.post<TCompany>('/companies', payload);
+      return instance.post<TCompany>(EAxiosPaths.COMPANIES, payload);
     },
     update(id: number, payload: FormData) {
-      return instance.patch<TCompany>(`/companies/${id}`, payload, {
+      return instance.patch<TCompany>(`${EAxiosPaths.COMPANIES}/${id}`, payload, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
     },
     remove(id: number) {
-      return instance.delete<{ message: string }>(`/companies/${id}`);
+      return instance.delete<{ message: string }>(`${EAxiosPaths.COMPANIES}/${id}`);
     }
   };
 }

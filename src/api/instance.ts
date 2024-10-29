@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
+import { EAxiosPaths } from '@root/enums/axiosPaths.enum';
 
 const instance = axios.create({
   baseURL: 'http://localhost:3000'
@@ -17,7 +18,7 @@ instance.interceptors.response.use(
     if (error.response?.status === 401 && originalRequest) {
       const refreshToken = localStorage.getItem('refreshToken');
       if (refreshToken) {
-        const response = await instance.post<string>('/auth/refresh-token', {
+        const response = await instance.post<string>(EAxiosPaths.REFRESH_TOKEN, {
           token: refreshToken
         });
 

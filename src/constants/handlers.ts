@@ -2,6 +2,7 @@ import { QueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import axios, { AxiosError } from 'axios';
 import { EQueryKeys } from '@root/enums/queryKeys.enum';
+import { EAxiosPaths } from '@root/enums/axiosPaths.enum';
 
 interface IAxiosErrorResponse {
   message?: string;
@@ -12,7 +13,7 @@ export const onAxiosError = (error: unknown, queryClient: QueryClient) => {
     const axiosError = error as AxiosError<IAxiosErrorResponse>;
     const errorMessage = (axiosError.response?.data.message as string) || 'An error occurred';
 
-    if (axiosError.status === 404 && axiosError.config?.url === '/auth/refresh-token') {
+    if (axiosError.status === 404 && axiosError.config?.url === EAxiosPaths.REFRESH_TOKEN) {
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
       queryClient.resetQueries(EQueryKeys.CURRENT_USER);
