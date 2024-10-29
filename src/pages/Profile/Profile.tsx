@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { Box, Button, Paper, Skeleton, Typography } from '@mui/material';
 import api from '@root/api';
-import useQueryCurrUser from '@root/hooks/useQueryCurrUser';
+import useQueryCurrentUser from '@root/hooks/useQueryCurrentUser';
 import {
   AvatarUsage,
   BreadcrumbsUsage,
@@ -24,7 +24,7 @@ import { CompaniesTab } from './components';
 function Profile() {
   const { id } = useParams();
   const userId = Number(id);
-  const { data: userData, refetch } = useQueryCurrUser();
+  const { data: userData, refetch } = useQueryCurrentUser();
 
   const { data: user, isLoading } = useQuery(
     [EQueryKeys.USER, { id: userId }],

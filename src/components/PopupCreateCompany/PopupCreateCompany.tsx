@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import { APIProviderContext, APIProviderContextValue } from '@vis.gl/react-google-maps';
 import api from '@root/api';
-import useQueryCurrUser from '@root/hooks/useQueryCurrUser';
+import useQueryCurrentUser from '@root/hooks/useQueryCurrentUser';
 import { FormModalUsage, GMapAutocomplete } from '../';
 import { schemaCompany } from '@root/yup/schema';
 import { EQueryKeys } from '@root/enums/queryKeys.enum';
@@ -20,7 +20,7 @@ interface IProps {
 function PopupCreateCompany({ open, setOpen, userId }: IProps) {
   const { status: mapStatus } = useContext(APIProviderContext) as APIProviderContextValue;
   const queryClient = useQueryClient();
-  const { data: userData } = useQueryCurrUser();
+  const { data: userData } = useQueryCurrentUser();
 
   const {
     control,

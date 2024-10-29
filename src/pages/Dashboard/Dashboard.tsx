@@ -1,11 +1,11 @@
 import { Box, Typography } from '@mui/material';
-import useQueryCurrUser from '@root/hooks/useQueryCurrUser';
+import useQueryCurrentUser from '@root/hooks/useQueryCurrentUser';
 import { ERole } from '@root/enums/role.enum';
 import { TabsUsage } from '@root/components';
 import { DashboardContentUser, SectionAdmins, SectionCompanies, SectionUsers } from './components';
 
 function Dashboard() {
-  const { data: userData } = useQueryCurrUser();
+  const { data: userData } = useQueryCurrentUser();
 
   return (
     <>

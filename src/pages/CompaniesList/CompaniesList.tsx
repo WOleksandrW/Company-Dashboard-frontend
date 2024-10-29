@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { useDebounce } from 'use-debounce';
 import api from '@root/api';
 import { Box, Button, IconButton, Pagination, Skeleton, TextField } from '@mui/material';
-import useQueryCurrUser from '@root/hooks/useQueryCurrUser';
+import useQueryCurrentUser from '@root/hooks/useQueryCurrentUser';
 import {
   BreadcrumbsUsage,
   EmptyMessage,
@@ -24,7 +24,7 @@ import { FaPlus } from 'react-icons/fa';
 import { IoReload } from 'react-icons/io5';
 
 function CompaniesList() {
-  const { data: userData } = useQueryCurrUser();
+  const { data: userData } = useQueryCurrentUser();
   const [titleOrder, setTitleOrder] = useState<string>('');
   const [serviceOrder, setServiceOrder] = useState<string>('');
   const [createdAt, setCreatedAt] = useState('');

@@ -9,13 +9,13 @@ import { Typography } from '@mui/material';
 import { AuthForm, TextLinkList } from '@root/components';
 import { schemaSignIn } from '@root/yup/schema';
 import { TSignInBody } from '@root/types/types';
-import useQueryCurrUser from '@root/hooks/useQueryCurrUser';
+import useQueryCurrentUser from '@root/hooks/useQueryCurrentUser';
 import { ERouterPaths } from '@root/enums/routerPaths.enum';
 
 function SignIn() {
   const navigate = useNavigate();
 
-  const { refetch } = useQueryCurrUser();
+  const { refetch } = useQueryCurrentUser();
 
   const {
     handleSubmit,

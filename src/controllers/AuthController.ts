@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import useQueryCurrUser from '@root/hooks/useQueryCurrUser';
+import useQueryCurrentUser from '@root/hooks/useQueryCurrentUser';
 
 interface IProps {
   setIsLoading: (value: boolean) => void;
 }
 
 function AuthController({ setIsLoading }: IProps) {
-  const { refetch } = useQueryCurrUser();
+  const { refetch } = useQueryCurrentUser();
 
   useEffect(() => {
     (async () => {

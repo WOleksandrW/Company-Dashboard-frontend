@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { Box, IconButton } from '@mui/material';
 import api from '@root/api';
-import useQueryCurrUser from '@root/hooks/useQueryCurrUser';
+import useQueryCurrentUser from '@root/hooks/useQueryCurrentUser';
 import { BreadcrumbsUsage, EmptyMessage } from '@root/components';
 import {
   CompanyDataSection,
@@ -21,7 +21,7 @@ function CompanyDetail() {
   const { id } = useParams();
   const companyId = Number(id);
 
-  const { data: userData } = useQueryCurrUser();
+  const { data: userData } = useQueryCurrentUser();
 
   const [isEdit, setIsEdit] = useState(false);
   const [open, setOpen] = useState(false);

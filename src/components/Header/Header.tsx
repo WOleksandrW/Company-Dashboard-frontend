@@ -11,7 +11,7 @@ import {
   useTheme
 } from '@mui/material';
 import { useQueryClient } from 'react-query';
-import useQueryCurrUser from '@root/hooks/useQueryCurrUser';
+import useQueryCurrentUser from '@root/hooks/useQueryCurrentUser';
 import getImageFromBuffer from '@root/utils/getImageFromBuffer';
 import { AvatarUsage, MainDrawerUsage, WrapperBoxUsage } from '../';
 import { EQueryKeys } from '@root/enums/queryKeys.enum';
@@ -24,7 +24,7 @@ function Header() {
   const isTablet = useMediaQuery('(max-width: 768px)');
 
   const queryClient = useQueryClient();
-  const { data: userData } = useQueryCurrUser();
+  const { data: userData } = useQueryCurrentUser();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openDrawer, setOpenDrawer] = useState(false);

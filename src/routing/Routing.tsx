@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import useQueryCurrUser from '@root/hooks/useQueryCurrUser';
+import useQueryCurrentUser from '@root/hooks/useQueryCurrentUser';
 import { AuthLayout, MainLayout, NoAuthLayout } from '@root/layouts';
 import {
   CompaniesList,
@@ -14,7 +14,7 @@ import {
 import { ERouterPaths } from '@root/enums/routerPaths.enum';
 
 function Routing() {
-  const { data: userData } = useQueryCurrUser();
+  const { data: userData } = useQueryCurrentUser();
 
   return (
     <BrowserRouter>
