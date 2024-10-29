@@ -1,4 +1,5 @@
 import { Box, Button, Typography } from '@mui/material';
+import { ERouterPaths } from '@root/enums/routerPaths.enum';
 import { NavLink } from 'react-router-dom';
 
 function NotFound() {
@@ -22,7 +23,7 @@ function NotFound() {
         variant="contained"
         color="primary"
         component={NavLink}
-        to="/"
+        to={ERouterPaths.HOME}
         sx={{
           typography: 'body1',
           marginTop: 2,

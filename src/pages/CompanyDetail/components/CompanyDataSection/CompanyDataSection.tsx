@@ -4,6 +4,7 @@ import { AvatarUsage, ImageBlock, MiniDataList } from '@root/components';
 import getImageFromBuffer from '@root/utils/getImageFromBuffer';
 import { TCompany } from '@root/types/company.type';
 import { NavLink } from 'react-router-dom';
+import { ERouterPaths } from '@root/enums/routerPaths.enum';
 
 interface IProps {
   company: TCompany;
@@ -94,7 +95,7 @@ function CompanyDataSection({ company }: IProps) {
           </Typography>
           <Box
             component={NavLink}
-            to={`/profile/${user.id}`}
+            to={`${ERouterPaths.PROFILE}/${user.id}`}
             className="link"
             sx={{
               maxWidth: '220px',

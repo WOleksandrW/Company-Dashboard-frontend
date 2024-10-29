@@ -5,6 +5,7 @@ import api from '@root/api';
 import { ConfirmModalUsage } from '@root/components';
 import { EQueryKeys } from '@root/enums/queryKeys.enum';
 import { TCompany } from '@root/types/company.type';
+import { ERouterPaths } from '@root/enums/routerPaths.enum';
 
 interface IProps {
   open: boolean;
@@ -22,7 +23,7 @@ function PopupDeleteCompany({ id, title, ...rest }: IProps) {
     onSuccess: () => {
       toast.success(`Company "${title}" deleted successfully!`);
       queryClient.setQueryData([EQueryKeys.COMPANY, { id }], { data: null });
-      navigate('/companies');
+      navigate(ERouterPaths.COMPANIES);
     }
   });
 

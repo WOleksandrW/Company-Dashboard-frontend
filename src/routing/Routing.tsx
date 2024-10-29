@@ -11,6 +11,7 @@ import {
   SignIn,
   SignUp
 } from '@root/pages';
+import { ERouterPaths } from '@root/enums/routerPaths.enum';
 
 function Routing() {
   const { data: userData } = useQueryCurrUser();
@@ -21,20 +22,20 @@ function Routing() {
         <Route path="/" element={<MainLayout />}>
           {userData ? (
             <Route path="" element={<AuthLayout />}>
-              <Route path="" element={<Dashboard />} />
-              <Route path="companies" element={<CompaniesList />} />
-              <Route path="companies/:id" element={<CompanyDetail />} />
-              <Route path="profile/:id" element={<Profile />} />
+              <Route path={ERouterPaths.HOME} element={<Dashboard />} />
+              <Route path={ERouterPaths.COMPANIES} element={<CompaniesList />} />
+              <Route path={`${ERouterPaths.COMPANIES}/:id`} element={<CompanyDetail />} />
+              <Route path={`${ERouterPaths.PROFILE}/:id`} element={<Profile />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           ) : (
             <>
-              <Route path="/" element={<Navigate to="sign-in" replace />} />
+              <Route path="/" element={<Navigate to={ERouterPaths.SIGNIN} replace />} />
               <Route path="" element={<NoAuthLayout />}>
-                <Route path="reset" element={<ResetPassword />} />
-                <Route path="sign-in" element={<SignIn />} />
-                <Route path="sign-up" element={<SignUp />} />
-                <Route path="*" element={<Navigate to="sign-in" replace />} />
+                <Route path={ERouterPaths.RESET} element={<ResetPassword />} />
+                <Route path={ERouterPaths.SIGNIN} element={<SignIn />} />
+                <Route path={ERouterPaths.SIGNUP} element={<SignUp />} />
+                <Route path="*" element={<Navigate to={ERouterPaths.SIGNIN} replace />} />
               </Route>
             </>
           )}

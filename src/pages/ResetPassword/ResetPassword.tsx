@@ -9,6 +9,7 @@ import { Typography } from '@mui/material';
 import { AuthForm, TextLinkList } from '@root/components';
 import { schemaResetPassword } from '@root/yup/schema';
 import { TSignInBody } from '@root/types/types';
+import { ERouterPaths } from '@root/enums/routerPaths.enum';
 
 function ResetPassword() {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ function ResetPassword() {
   const { mutateAsync } = useMutation((data: TSignInBody) => api.auth.resetPassword(data), {
     onSuccess: () => {
       toast.success('Password reset successfully!');
-      navigate('/sign-in');
+      navigate(ERouterPaths.SIGNIN);
     }
   });
 
@@ -77,7 +78,13 @@ function ResetPassword() {
         ]}
       />
       <TextLinkList
-        list={[{ text: 'Did you remember your password?', lintText: 'Login', linkTo: '/sign-in' }]}
+        list={[
+          {
+            text: 'Did you remember your password?',
+            lintText: 'Login',
+            linkTo: ERouterPaths.SIGNIN
+          }
+        ]}
       />
     </>
   );

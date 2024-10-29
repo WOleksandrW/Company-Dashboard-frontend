@@ -18,6 +18,7 @@ import { EQueryKeys } from '@root/enums/queryKeys.enum';
 import { ERole } from '@root/enums/role.enum';
 import { TGetAllCompanies } from '@root/types/types';
 import { limitRecords } from '@root/constants/queryParams';
+import { ERouterPaths } from '@root/enums/routerPaths.enum';
 
 import { FaPlus } from 'react-icons/fa';
 import { IoReload } from 'react-icons/io5';
@@ -78,7 +79,9 @@ function CompaniesList() {
 
   return (
     <>
-      <BreadcrumbsUsage list={[{ to: '/', text: 'Home' }, { text: 'Companies list' }]} />
+      <BreadcrumbsUsage
+        list={[{ to: ERouterPaths.HOME, text: 'Home' }, { text: 'Companies list' }]}
+      />
       <Box
         sx={{
           display: 'flex',

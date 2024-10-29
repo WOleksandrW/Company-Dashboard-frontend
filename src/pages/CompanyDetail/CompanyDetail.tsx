@@ -13,6 +13,7 @@ import {
 } from './components';
 import { EQueryKeys } from '@root/enums/queryKeys.enum';
 import { ERole } from '@root/enums/role.enum';
+import { ERouterPaths } from '@root/enums/routerPaths.enum';
 
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 
@@ -47,8 +48,8 @@ function CompanyDetail() {
     <>
       <BreadcrumbsUsage
         list={[
-          { to: '/', text: 'Home' },
-          { to: '/companies', text: 'Companies list' },
+          { to: ERouterPaths.HOME, text: 'Home' },
+          { to: ERouterPaths.COMPANIES, text: 'Companies list' },
           { text: companyData?.title ?? `Company #${id}` }
         ]}
       />

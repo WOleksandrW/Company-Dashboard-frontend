@@ -10,6 +10,7 @@ import { AuthForm, TextLinkList } from '@root/components';
 import { schemaSignIn } from '@root/yup/schema';
 import { TSignInBody } from '@root/types/types';
 import useQueryCurrUser from '@root/hooks/useQueryCurrUser';
+import { ERouterPaths } from '@root/enums/routerPaths.enum';
 
 function SignIn() {
   const navigate = useNavigate();
@@ -76,8 +77,16 @@ function SignIn() {
       />
       <TextLinkList
         list={[
-          { text: 'Did you forget your password?', lintText: 'Reset password', linkTo: '/reset' },
-          { text: 'Don`t have an account yet?', lintText: 'Sign up', linkTo: '/sign-up' }
+          {
+            text: 'Did you forget your password?',
+            lintText: 'Reset password',
+            linkTo: ERouterPaths.RESET
+          },
+          {
+            text: 'Don`t have an account yet?',
+            lintText: 'Sign up',
+            linkTo: ERouterPaths.SIGNUP
+          }
         ]}
       />
     </>

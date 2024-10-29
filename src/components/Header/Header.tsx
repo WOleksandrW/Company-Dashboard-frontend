@@ -15,6 +15,7 @@ import useQueryCurrUser from '@root/hooks/useQueryCurrUser';
 import getImageFromBuffer from '@root/utils/getImageFromBuffer';
 import { AvatarUsage, MainDrawerUsage, WrapperBoxUsage } from '../';
 import { EQueryKeys } from '@root/enums/queryKeys.enum';
+import { ERouterPaths } from '@root/enums/routerPaths.enum';
 
 import { IoLogOutOutline, IoMenu, IoPersonCircleSharp } from 'react-icons/io5';
 
@@ -44,16 +45,16 @@ function Header() {
 
   const authNavigation = useMemo(
     () => [
-      { text: 'Home', to: '/' },
-      { text: 'Companies', to: '/companies' }
+      { text: 'Home', to: ERouterPaths.HOME },
+      { text: 'Companies', to: ERouterPaths.COMPANIES }
     ],
     []
   );
 
   const noAuthNavigation = useMemo(
     () => [
-      { text: 'Log in', to: '/sign-in' },
-      { text: 'Sign up', to: '/sign-up' }
+      { text: 'Log in', to: ERouterPaths.SIGNIN },
+      { text: 'Sign up', to: ERouterPaths.SIGNUP }
     ],
     []
   );
@@ -64,12 +65,12 @@ function Header() {
         ? [
             {
               text: 'Profile',
-              to: `/profile/${userData.id}`,
+              to: `${ERouterPaths.PROFILE}/${userData.id}`,
               icon: <Box component={IoPersonCircleSharp} sx={{ typography: 'h2' }} />
             },
             {
               text: 'Logout',
-              to: '/sign-in',
+              to: ERouterPaths.SIGNIN,
               icon: <Box component={IoLogOutOutline} sx={{ typography: 'h2' }} />,
               onClick: logOut
             }

@@ -5,6 +5,7 @@ import { merge } from 'lodash';
 import { ImageBlock, MiniDataList, TooltipUsage } from '../';
 import getImageFromBuffer from '@root/utils/getImageFromBuffer';
 import { TCompany } from '@root/types/company.type';
+import { ERouterPaths } from '@root/enums/routerPaths.enum';
 
 interface IProps {
   company: TCompany;
@@ -45,7 +46,7 @@ function CompanyCard({ company, sx }: IProps) {
       <CardActions sx={{ marginTop: 'auto' }}>
         <Button
           component={NavLink}
-          to={`/companies/${id}`}
+          to={`${ERouterPaths.COMPANIES}/${id}`}
           sx={{ typography: 'body1' }}
           size="small">
           View

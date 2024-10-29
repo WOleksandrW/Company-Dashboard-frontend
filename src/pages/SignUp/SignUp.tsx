@@ -9,6 +9,7 @@ import { Typography } from '@mui/material';
 import { AuthForm, TextLinkList } from '@root/components';
 import { schemaSignUp } from '@root/yup/schema';
 import { TSignUpBody } from '@root/types/types';
+import { ERouterPaths } from '@root/enums/routerPaths.enum';
 
 function SignUp() {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ function SignUp() {
   const { mutateAsync } = useMutation((data: TSignUpBody) => api.auth.signUp(data), {
     onSuccess: () => {
       toast.success('Account created successfully!');
-      navigate('/sign-in');
+      navigate(ERouterPaths.SIGNIN);
     }
   });
 
@@ -83,7 +84,13 @@ function SignUp() {
         ]}
       />
       <TextLinkList
-        list={[{ text: 'Already have an account?', lintText: 'Login', linkTo: '/sign-in' }]}
+        list={[
+          {
+            text: 'Already have an account?',
+            lintText: 'Login',
+            linkTo: ERouterPaths.SIGNIN
+          }
+        ]}
       />
     </>
   );

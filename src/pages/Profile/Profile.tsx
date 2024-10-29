@@ -16,6 +16,7 @@ import {
 import getImageFromBuffer from '@root/utils/getImageFromBuffer';
 import { EQueryKeys } from '@root/enums/queryKeys.enum';
 import { ERole } from '@root/enums/role.enum';
+import { ERouterPaths } from '@root/enums/routerPaths.enum';
 
 import { FaEdit, FaLock } from 'react-icons/fa';
 import { CompaniesTab } from './components';
@@ -93,7 +94,7 @@ function Profile() {
   return (
     <>
       <BreadcrumbsUsage
-        list={[{ to: '/', text: 'Home' }, { text: `Profile "${user.username}"` }]}
+        list={[{ to: ERouterPaths.HOME, text: 'Home' }, { text: `Profile "${user.username}"` }]}
       />
       <Box
         component="section"

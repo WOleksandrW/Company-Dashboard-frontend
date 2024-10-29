@@ -5,6 +5,7 @@ import getImageFromBuffer from '@root/utils/getImageFromBuffer';
 import { TUser } from '@root/types/user.type';
 import { IconType } from 'react-icons';
 import { NavLink } from 'react-router-dom';
+import { ERouterPaths } from '@root/enums/routerPaths.enum';
 
 interface IProps {
   user: TUser;
@@ -63,7 +64,11 @@ function UserCard({ user, dropDownMenu }: IProps) {
         />
       </CardContent>
       <CardActions sx={{ marginTop: 'auto' }}>
-        <Button component={NavLink} to={`/profile/${id}`} sx={{ typography: 'body1' }} size="small">
+        <Button
+          component={NavLink}
+          to={`${ERouterPaths.PROFILE}/${id}`}
+          sx={{ typography: 'body1' }}
+          size="small">
           View
         </Button>
       </CardActions>
