@@ -7,6 +7,21 @@ Planned technologies:
 - Axios
 - Docker
 
+## Google Maps
+
+This project uses **Google Maps API** with the following services:
+
+- **Maps JavaScript API**  
+- **Places API**  
+- **Geocoding API**
+
+### Configuration
+
+The **Google Maps API key** must be added to the `.env` file as:  
+```env
+VITE_API_KEY=<your-api-key>
+```
+
 ## Docker
 
 ### Create Image
