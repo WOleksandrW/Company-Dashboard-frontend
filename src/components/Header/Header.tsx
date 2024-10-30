@@ -16,6 +16,7 @@ import getImageFromBuffer from '@root/utils/getImageFromBuffer';
 import { AvatarUsage, MainDrawerUsage, WrapperBoxUsage } from '../';
 import { EQueryKeys } from '@root/enums/queryKeys.enum';
 import { ERouterPaths } from '@root/enums/routerPaths.enum';
+import { ELocalStorageKeys } from '@root/enums/localStorageKeys.enum';
 
 import { IoLogOutOutline, IoMenu, IoPersonCircleSharp } from 'react-icons/io5';
 
@@ -39,8 +40,8 @@ function Header() {
 
   const logOut = useCallback(() => {
     queryClient.setQueryData(EQueryKeys.CURRENT_USER, { data: null });
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
+    localStorage.removeItem(ELocalStorageKeys.ACCESS_TOKEN);
+    localStorage.removeItem(ELocalStorageKeys.REFRESH_TOKEN);
   }, [queryClient]);
 
   const authNavigation = useMemo(

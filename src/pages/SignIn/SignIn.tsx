@@ -11,6 +11,7 @@ import { schemaSignIn } from '@root/yup/schema';
 import { TSignInBody } from '@root/types/types';
 import useQueryCurrentUser from '@root/hooks/useQueryCurrentUser';
 import { ERouterPaths } from '@root/enums/routerPaths.enum';
+import { ELocalStorageKeys } from '@root/enums/localStorageKeys.enum';
 
 function SignIn() {
   const navigate = useNavigate();
@@ -33,8 +34,8 @@ function SignIn() {
   const { mutateAsync } = useMutation((data: TSignInBody) => api.auth.login(data), {
     onSuccess: async ({ data }) => {
       toast.success('Logged in successfully!');
-      localStorage.setItem('accessToken', data.access_token);
-      localStorage.setItem('refreshToken', data.refresh_token);
+      localStorage.setItem(ELocalStorageKeys.ACCESS_TOKEN, data.access_token);
+      localStorage.setItem(ELocalStorageKeys.REFRESH_TOKEN, data.refresh_token);
       await refetch();
       navigate('/');
     }
