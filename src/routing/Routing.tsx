@@ -34,10 +34,13 @@ function Routing() {
           </Route>
 
           {/* Public Routes */}
-          <Route element={<NoAuthLayout />}>
-            <Route path={ERouterPaths.RESET} element={<ResetPassword />} />
-            <Route path={ERouterPaths.SIGNIN} element={<SignIn />} />
-            <Route path={ERouterPaths.SIGNUP} element={<SignUp />} />
+          <Route
+            element={<ProtectedRoute isAllowed={!userData} redirectPath={ERouterPaths.HOME} />}>
+            <Route element={<NoAuthLayout />}>
+              <Route path={ERouterPaths.RESET} element={<ResetPassword />} />
+              <Route path={ERouterPaths.SIGNIN} element={<SignIn />} />
+              <Route path={ERouterPaths.SIGNUP} element={<SignUp />} />
+            </Route>
           </Route>
         </Route>
       </Routes>
